@@ -11,6 +11,7 @@ export interface IListing {
   price: number;
   propertyType: string;
   surface?: number;
+  landSurface?: number; // Superficie du terrain (m²)
   rooms?: number;
   bedrooms?: number;
   bathrooms?: number;
@@ -74,8 +75,9 @@ export interface IListing {
   // Diagnostics immobiliers (obligatoires)
   diagnostics?: {
     dpe?: {
-      energyClass: "A" | "B" | "C" | "D" | "E" | "F" | "G"; // Classe énergie
-      gesClass: "A" | "B" | "C" | "D" | "E" | "F" | "G"; // Classe GES
+      status?: "available" | "in_progress" | "not_applicable"; // Statut DPE
+      energyClass?: "A" | "B" | "C" | "D" | "E" | "F" | "G"; // Classe énergie (requis si status=available)
+      gesClass?: "A" | "B" | "C" | "D" | "E" | "F" | "G"; // Classe GES (requis si status=available)
       energyCost?: {
         min: number; // Montant min estimé
         max: number; // Montant max estimé
@@ -94,7 +96,8 @@ export interface IListing {
   // Rénovation & Travaux
   renovation?: {
     level: number; // Niveau de rénovation (1 à 5)
-    requiredWorks?: string[]; // Travaux à prévoir (électricité, plomberie, etc.)
+    requiredWorks?: string[]; // Travaux à prévoir (électricité, plomberie, isolation, etc.)
+    otherWorksText?: string; // Texte libre pour "Autre" travaux
     estimatedBudget?: number; // Budget travaux estimatif
   };
 

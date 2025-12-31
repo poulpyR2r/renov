@@ -10,7 +10,8 @@
     "generate-listings": "node scripts/generate-listings.js",
     "update-agency-id": "node scripts/update-agency-id.js",
     "create-listings": "node scripts/create-listings.js",
-    "migrate-geo": "tsx scripts/migrate-listings-geo.ts"
+    "migrate-geo": "tsx scripts/migrate-listings-geo.ts",
+    "create-initial-legal-documents": "tsx scripts/create-initial-legal-documents.ts"
   },
   "dependencies": {
     "@aws-sdk/credential-providers": "latest",
@@ -43,6 +44,7 @@
     "@radix-ui/react-toggle": "1.1.1",
     "@radix-ui/react-toggle-group": "1.1.1",
     "@radix-ui/react-tooltip": "1.1.6",
+    "@tailwindcss/postcss": "^4.0.0",
     "@types/leaflet": "^1.9.21",
     "@vercel/analytics": "1.3.1",
     "autoprefixer": "^10.4.20",
@@ -60,6 +62,7 @@
     "next": "16.0.10",
     "next-auth": "^5.0.0-beta.25",
     "next-themes": "^0.4.6",
+    "nodemailer": "^7.0.12",
     "react": "^19.0.0",
     "react-day-picker": "^9.4.4",
     "react-dom": "^19.0.0",
@@ -67,8 +70,9 @@
     "react-resizable-panels": "^2.1.7",
     "recharts": "^2.15.0",
     "sonner": "^1.7.1",
+    "swr": "^2.3.8",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "^4.0.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.1"
   },

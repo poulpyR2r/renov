@@ -237,6 +237,7 @@ export default function SubmitPage() {
     price: "",
     propertyType: "",
     surface: "",
+    landSurface: "", // Superficie du terrain
     rooms: "",
     bedrooms: "",
     bathrooms: "",
@@ -255,6 +256,7 @@ export default function SubmitPage() {
     feesPercentage: "",
     feesPaidBy: "seller" as "seller" | "buyer",
     // Diagnostics
+    dpeStatus: "" as "" | "available" | "in_progress" | "not_applicable", // Statut DPE
     dpeEnergyClass: "",
     dpeGesClass: "",
     dpeEnergyCostMin: "",
@@ -270,6 +272,7 @@ export default function SubmitPage() {
     // Rénovation
     renovationLevel: "",
     requiredWorks: [] as string[],
+    otherWorksText: "", // Texte libre pour "Autre" travaux
     estimatedBudget: "",
     // Copropriété
     coproprietySubject: false,
@@ -354,8 +357,21 @@ export default function SubmitPage() {
       toast.error("La ville est obligatoire");
       return;
     }
-    if (!formData.dpeEnergyClass || !formData.dpeGesClass) {
-      toast.error("Les classes DPE (énergie et GES) sont obligatoires");
+    if (!formData.dpeStatus) {
+      toast.error("Le statut du DPE est obligatoire");
+      return;
+    }
+    if (
+      formData.dpeStatus === "available" &&
+      (!formData.dpeEnergyClass || !formData.dpeGesClass)
+    ) {
+      toast.error(
+        "Les classes DPE (énergie et GES) sont obligatoires lorsque le DPE est disponible"
+      );
+      return;
+    }
+    if (formData.propertyType === "land" && !formData.landSurface) {
+      toast.error("La superficie du terrain est obligatoire pour un terrain");
       return;
     }
     if (!formData.renovationLevel) {
@@ -471,6 +487,10 @@ export default function SubmitPage() {
           body: JSON.stringify({
             ...formData,
             transactionType: "sale",
+            surface: formData.surface ? parseInt(formData.surface) : undefined,
+            landSurface: formData.landSurface
+              ? parseInt(formData.landSurface)
+              : undefined,
             location: {
               city: formData.city,
               postalCode: formData.postalCode,
@@ -492,35 +512,45 @@ export default function SubmitPage() {
             currency: "EUR",
             // Diagnostics
             diagnostics: {
-              dpe: {
-                energyClass: formData.dpeEnergyClass as
-                  | "A"
-                  | "B"
-                  | "C"
-                  | "D"
-                  | "E"
-                  | "F"
-                  | "G",
-                gesClass: formData.dpeGesClass as
-                  | "A"
-                  | "B"
-                  | "C"
-                  | "D"
-                  | "E"
-                  | "F"
-                  | "G",
-                energyCost:
-                  formData.dpeEnergyCostMin && formData.dpeEnergyCostMax
-                    ? {
-                        min: parseFloat(formData.dpeEnergyCostMin || "0"),
-                        max: parseFloat(formData.dpeEnergyCostMax || "0"),
-                      }
-                    : undefined,
-                referenceYear: formData.dpeReferenceYear
-                  ? parseInt(formData.dpeReferenceYear)
-                  : undefined,
-                date: formData.dpeDate ? new Date(formData.dpeDate) : undefined,
-              },
+              dpe:
+                formData.dpeStatus === "available"
+                  ? {
+                      status: formData.dpeStatus,
+                      energyClass: formData.dpeEnergyClass as
+                        | "A"
+                        | "B"
+                        | "C"
+                        | "D"
+                        | "E"
+                        | "F"
+                        | "G",
+                      gesClass: formData.dpeGesClass as
+                        | "A"
+                        | "B"
+                        | "C"
+                        | "D"
+                        | "E"
+                        | "F"
+                        | "G",
+                      energyCost:
+                        formData.dpeEnergyCostMin && formData.dpeEnergyCostMax
+                          ? {
+                              min: parseFloat(formData.dpeEnergyCostMin || "0"),
+                              max: parseFloat(formData.dpeEnergyCostMax || "0"),
+                            }
+                          : undefined,
+                      referenceYear: formData.dpeReferenceYear
+                        ? parseInt(formData.dpeReferenceYear)
+                        : undefined,
+                      date: formData.dpeDate
+                        ? new Date(formData.dpeDate)
+                        : undefined,
+                    }
+                  : {
+                      status: formData.dpeStatus as
+                        | "in_progress"
+                        | "not_applicable",
+                    },
               asbestos: formData.asbestos || undefined,
               lead: formData.lead || undefined,
               electricity: formData.electricity || undefined,
@@ -532,6 +562,7 @@ export default function SubmitPage() {
             renovation: {
               level: parseInt(formData.renovationLevel),
               requiredWorks: formData.requiredWorks,
+              otherWorksText: formData.otherWorksText || undefined,
               estimatedBudget: formData.estimatedBudget
                 ? parseFloat(formData.estimatedBudget || "0")
                 : undefined,
@@ -1028,6 +1059,25 @@ export default function SubmitPage() {
     updateField("title", suggestedTitle);
   };
 
+  // Définir le statut DPE par défaut selon le type de bien
+  useEffect(() => {
+    if (!formData.dpeStatus) {
+      // Si c'est un terrain, statut par défaut = not_applicable
+      if (formData.propertyType === "land") {
+        updateField("dpeStatus", "not_applicable");
+      } else if (formData.propertyType && formData.propertyType !== "land") {
+        // Pour les autres types, statut par défaut = available
+        updateField("dpeStatus", "available");
+      }
+    } else if (
+      formData.propertyType === "land" &&
+      formData.dpeStatus !== "not_applicable"
+    ) {
+      // Si le type devient "land", forcer not_applicable
+      updateField("dpeStatus", "not_applicable");
+    }
+  }, [formData.propertyType]);
+
   // Load listing data if in edit mode
   useEffect(() => {
     if (isEditMode && editListingId && session) {
@@ -1043,6 +1093,7 @@ export default function SubmitPage() {
               price: listing.price?.toString() || "",
               propertyType: listing.propertyType || "",
               surface: listing.surface?.toString() || "",
+              landSurface: listing.landSurface?.toString() || "",
               rooms: listing.rooms?.toString() || "",
               bedrooms: listing.bedrooms?.toString() || "",
               bathrooms: listing.bathrooms?.toString() || "",
@@ -1061,6 +1112,13 @@ export default function SubmitPage() {
               feesPercentage: listing.fees?.percentage?.toString() || "",
               feesPaidBy: listing.fees?.paidBy || "seller",
               // Diagnostics
+              dpeStatus:
+                listing.diagnostics?.dpe?.status ||
+                (listing.diagnostics?.dpe?.energyClass
+                  ? "available"
+                  : listing.propertyType === "land"
+                  ? "not_applicable"
+                  : "available"),
               dpeEnergyClass: listing.diagnostics?.dpe?.energyClass || "",
               dpeGesClass: listing.diagnostics?.dpe?.gesClass || "",
               dpeEnergyCostMin:
@@ -1083,6 +1141,7 @@ export default function SubmitPage() {
               // Rénovation
               renovationLevel: listing.renovation?.level?.toString() || "",
               requiredWorks: listing.renovation?.requiredWorks || [],
+              otherWorksText: listing.renovation?.otherWorksText || "",
               estimatedBudget:
                 listing.renovation?.estimatedBudget?.toString() || "",
               // Copropriété
@@ -1448,6 +1507,33 @@ export default function SubmitPage() {
                     </p>
                   </div>
 
+                  {/* Superficie du terrain */}
+                  <div className="space-y-2">
+                    <Label>
+                      Superficie du terrain (m²)
+                      {formData.propertyType === "land" ? " *" : ""}
+                    </Label>
+                    <div className="relative">
+                      <Maximize2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <Input
+                        type="number"
+                        required={formData.propertyType === "land"}
+                        className="pl-9"
+                        placeholder="500"
+                        min="0"
+                        value={formData.landSurface}
+                        onChange={(e) =>
+                          updateField("landSurface", e.target.value)
+                        }
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      {formData.propertyType === "land"
+                        ? "La superficie du terrain est obligatoire pour un terrain."
+                        : "Superficie du terrain (optionnel, pour maisons et immeubles)."}
+                    </p>
+                  </div>
+
                   {/* Rooms */}
                   <div className="grid grid-cols-4 gap-3">
                     <div className="space-y-2">
@@ -1654,6 +1740,15 @@ export default function SubmitPage() {
                           toast.error("La surface habitable est obligatoire");
                           return;
                         }
+                        if (
+                          formData.propertyType === "land" &&
+                          !formData.landSurface
+                        ) {
+                          toast.error(
+                            "La superficie du terrain est obligatoire pour un terrain"
+                          );
+                          return;
+                        }
                         if (!formData.rooms) {
                           toast.error(
                             "Le nombre de pièces principales est obligatoire"
@@ -1823,167 +1918,217 @@ export default function SubmitPage() {
                     <h4 className="font-medium">
                       DPE (Diagnostic de Performance Énergétique)
                     </h4>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label>Classe énergie *</Label>
-                        <Select
-                          value={formData.dpeEnergyClass}
-                          onValueChange={(v) =>
-                            updateField("dpeEnergyClass", v)
+
+                    {/* Statut DPE */}
+                    <div className="space-y-2">
+                      <Label>Statut du DPE *</Label>
+                      <Select
+                        value={formData.dpeStatus}
+                        onValueChange={(
+                          v: "available" | "in_progress" | "not_applicable"
+                        ) => {
+                          updateField("dpeStatus", v);
+                          // Réinitialiser les champs détaillés si on passe à in_progress ou not_applicable
+                          if (v !== "available") {
+                            updateField("dpeEnergyClass", "");
+                            updateField("dpeGesClass", "");
                           }
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Sélectionnez" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="A">
-                              A - Très performant (0-70 kWh/m²/an)
-                            </SelectItem>
-                            <SelectItem value="B">
-                              B - Performant (71-110 kWh/m²/an)
-                            </SelectItem>
-                            <SelectItem value="C">
-                              C - Assez performant (111-180 kWh/m²/an)
-                            </SelectItem>
-                            <SelectItem value="D">
-                              D - Moyennement performant (181-250 kWh/m²/an)
-                            </SelectItem>
-                            <SelectItem value="E">
-                              E - Peu performant (251-330 kWh/m²/an)
-                            </SelectItem>
-                            <SelectItem value="F">
-                              F - Très peu performant (331-450 kWh/m²/an)
-                            </SelectItem>
-                            <SelectItem value="G">
-                              G - Extrêmement peu performant (&gt;450 kWh/m²/an)
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <p className="text-xs text-muted-foreground">
-                          Classe de performance énergétique du bien (de A à G).
-                          Indique la consommation d'énergie primaire pour le
-                          chauffage, l'eau chaude et le refroidissement.
-                        </p>
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Classe GES *</Label>
-                        <Select
-                          value={formData.dpeGesClass}
-                          onValueChange={(v) => updateField("dpeGesClass", v)}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Sélectionnez" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="A">
-                              A - Très faible émission (0-6 kg CO₂/m²/an)
-                            </SelectItem>
-                            <SelectItem value="B">
-                              B - Faible émission (7-11 kg CO₂/m²/an)
-                            </SelectItem>
-                            <SelectItem value="C">
-                              C - Assez faible émission (12-30 kg CO₂/m²/an)
-                            </SelectItem>
-                            <SelectItem value="D">
-                              D - Émission modérée (31-50 kg CO₂/m²/an)
-                            </SelectItem>
-                            <SelectItem value="E">
-                              E - Émission élevée (51-70 kg CO₂/m²/an)
-                            </SelectItem>
-                            <SelectItem value="F">
-                              F - Très élevée émission (71-100 kg CO₂/m²/an)
-                            </SelectItem>
-                            <SelectItem value="G">
-                              G - Extrêmement élevée émission (&gt;100 kg
-                              CO₂/m²/an)
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <p className="text-xs text-muted-foreground">
-                          Classe d'émission de gaz à effet de serre (de A à G).
-                          Indique l'impact du bien sur le changement climatique.
-                        </p>
-                      </div>
+                        }}
+                        disabled={formData.propertyType === "land"}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Sélectionnez" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="available">Disponible</SelectItem>
+                          <SelectItem value="in_progress">
+                            En cours de réalisation
+                          </SelectItem>
+                          <SelectItem value="not_applicable">
+                            Non concerné
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <p className="text-xs text-muted-foreground">
+                        {formData.propertyType === "land"
+                          ? "Un terrain n'est pas concerné par le DPE."
+                          : "Indiquez si le DPE est disponible, en cours ou non applicable."}
+                      </p>
                     </div>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label>Dépenses énergétiques min (€/an)</Label>
-                        <Input
-                          type="text"
-                          placeholder="500"
-                          value={formatPrice(formData.dpeEnergyCostMin)}
-                          onChange={handleEnergyCostMinChange}
-                        />
-                        {errors.dpeEnergyCostMin && (
-                          <p className="text-xs text-destructive">
-                            {errors.dpeEnergyCostMin}
-                          </p>
-                        )}
-                        <p className="text-xs text-muted-foreground">
-                          Coût annuel minimum des dépenses énergétiques
-                          (chauffage, eau chaude, climatisation, etc.) en euros.
-                        </p>
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Dépenses énergétiques max (€/an)</Label>
-                        <Input
-                          type="text"
-                          placeholder="1 500"
-                          value={formatPrice(formData.dpeEnergyCostMax)}
-                          onChange={handleEnergyCostMaxChange}
-                        />
-                        {errors.dpeEnergyCostMax && (
-                          <p className="text-xs text-destructive">
-                            {errors.dpeEnergyCostMax}
-                          </p>
-                        )}
-                        <p className="text-xs text-muted-foreground">
-                          Coût annuel maximum des dépenses énergétiques. Doit
-                          être supérieur ou égal au minimum.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label>Année de référence</Label>
-                        <Input
-                          type="number"
-                          placeholder="2024"
-                          min="2000"
-                          max={new Date().getFullYear()}
-                          value={formData.dpeReferenceYear}
-                          onChange={handleDpeReferenceYearChange}
-                        />
-                        {errors.dpeReferenceYear && (
-                          <p className="text-xs text-destructive">
-                            {errors.dpeReferenceYear}
-                          </p>
-                        )}
-                        <p className="text-xs text-muted-foreground">
-                          Année de référence utilisée pour le calcul du DPE
-                          (généralement l'année de réalisation du diagnostic).
-                        </p>
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Date de réalisation du DPE</Label>
-                        <Input
-                          type="date"
-                          max={new Date().toISOString().split("T")[0]}
-                          value={formData.dpeDate}
-                          onChange={handleDpeDateChange}
-                        />
-                        {errors.dpeDate && (
-                          <p className="text-xs text-destructive">
-                            {errors.dpeDate}
-                          </p>
-                        )}
-                        <p className="text-xs text-muted-foreground">
-                          Date à laquelle le diagnostic de performance
-                          énergétique a été réalisé. Valable 10 ans (5 ans pour
-                          les biens mis en vente depuis 2021).
-                        </p>
-                      </div>
-                    </div>
+
+                    {/* Champs DPE détaillés (seulement si status = available) */}
+                    {formData.dpeStatus === "available" && (
+                      <>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label>Classe énergie *</Label>
+                            <Select
+                              value={formData.dpeEnergyClass}
+                              onValueChange={(v) =>
+                                updateField("dpeEnergyClass", v)
+                              }
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Sélectionnez" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="A">
+                                  A - Très performant (0-70 kWh/m²/an)
+                                </SelectItem>
+                                <SelectItem value="B">
+                                  B - Performant (71-110 kWh/m²/an)
+                                </SelectItem>
+                                <SelectItem value="C">
+                                  C - Assez performant (111-180 kWh/m²/an)
+                                </SelectItem>
+                                <SelectItem value="D">
+                                  D - Moyennement performant (181-250 kWh/m²/an)
+                                </SelectItem>
+                                <SelectItem value="E">
+                                  E - Peu performant (251-330 kWh/m²/an)
+                                </SelectItem>
+                                <SelectItem value="F">
+                                  F - Très peu performant (331-450 kWh/m²/an)
+                                </SelectItem>
+                                <SelectItem value="G">
+                                  G - Extrêmement peu performant (&gt;450
+                                  kWh/m²/an)
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <p className="text-xs text-muted-foreground">
+                              Classe de performance énergétique du bien (de A à
+                              G). Indique la consommation d'énergie primaire
+                              pour le chauffage, l'eau chaude et le
+                              refroidissement.
+                            </p>
+                          </div>
+                          <div className="space-y-2">
+                            <Label>Classe GES *</Label>
+                            <Select
+                              value={formData.dpeGesClass}
+                              onValueChange={(v) =>
+                                updateField("dpeGesClass", v)
+                              }
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Sélectionnez" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="A">
+                                  A - Très faible émission (0-6 kg CO₂/m²/an)
+                                </SelectItem>
+                                <SelectItem value="B">
+                                  B - Faible émission (7-11 kg CO₂/m²/an)
+                                </SelectItem>
+                                <SelectItem value="C">
+                                  C - Assez faible émission (12-30 kg CO₂/m²/an)
+                                </SelectItem>
+                                <SelectItem value="D">
+                                  D - Émission modérée (31-50 kg CO₂/m²/an)
+                                </SelectItem>
+                                <SelectItem value="E">
+                                  E - Émission élevée (51-70 kg CO₂/m²/an)
+                                </SelectItem>
+                                <SelectItem value="F">
+                                  F - Très élevée émission (71-100 kg CO₂/m²/an)
+                                </SelectItem>
+                                <SelectItem value="G">
+                                  G - Extrêmement élevée émission (&gt;100 kg
+                                  CO₂/m²/an)
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <p className="text-xs text-muted-foreground">
+                              Classe d'émission de gaz à effet de serre (de A à
+                              G). Indique l'impact du bien sur le changement
+                              climatique.
+                            </p>
+                          </div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label>Dépenses énergétiques min (€/an)</Label>
+                            <Input
+                              type="text"
+                              placeholder="500"
+                              value={formatPrice(formData.dpeEnergyCostMin)}
+                              onChange={handleEnergyCostMinChange}
+                            />
+                            {errors.dpeEnergyCostMin && (
+                              <p className="text-xs text-destructive">
+                                {errors.dpeEnergyCostMin}
+                              </p>
+                            )}
+                            <p className="text-xs text-muted-foreground">
+                              Coût annuel minimum des dépenses énergétiques
+                              (chauffage, eau chaude, climatisation, etc.) en
+                              euros.
+                            </p>
+                          </div>
+                          <div className="space-y-2">
+                            <Label>Dépenses énergétiques max (€/an)</Label>
+                            <Input
+                              type="text"
+                              placeholder="1 500"
+                              value={formatPrice(formData.dpeEnergyCostMax)}
+                              onChange={handleEnergyCostMaxChange}
+                            />
+                            {errors.dpeEnergyCostMax && (
+                              <p className="text-xs text-destructive">
+                                {errors.dpeEnergyCostMax}
+                              </p>
+                            )}
+                            <p className="text-xs text-muted-foreground">
+                              Coût annuel maximum des dépenses énergétiques.
+                              Doit être supérieur ou égal au minimum.
+                            </p>
+                          </div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label>Année de référence</Label>
+                            <Input
+                              type="number"
+                              placeholder="2024"
+                              min="2000"
+                              max={new Date().getFullYear()}
+                              value={formData.dpeReferenceYear}
+                              onChange={handleDpeReferenceYearChange}
+                            />
+                            {errors.dpeReferenceYear && (
+                              <p className="text-xs text-destructive">
+                                {errors.dpeReferenceYear}
+                              </p>
+                            )}
+                            <p className="text-xs text-muted-foreground">
+                              Année de référence utilisée pour le calcul du DPE
+                              (généralement l'année de réalisation du
+                              diagnostic).
+                            </p>
+                          </div>
+                          <div className="space-y-2">
+                            <Label>Date de réalisation du DPE</Label>
+                            <Input
+                              type="date"
+                              max={new Date().toISOString().split("T")[0]}
+                              value={formData.dpeDate}
+                              onChange={handleDpeDateChange}
+                            />
+                            {errors.dpeDate && (
+                              <p className="text-xs text-destructive">
+                                {errors.dpeDate}
+                              </p>
+                            )}
+                            <p className="text-xs text-muted-foreground">
+                              Date à laquelle le diagnostic de performance
+                              énergétique a été réalisé. Valable 10 ans (5 ans
+                              pour les biens mis en vente depuis 2021).
+                            </p>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   {/* Autres diagnostics */}
@@ -2068,9 +2213,16 @@ export default function SubmitPage() {
                     <Button
                       type="button"
                       onClick={() => {
-                        if (!formData.dpeEnergyClass || !formData.dpeGesClass) {
+                        if (!formData.dpeStatus) {
+                          toast.error("Le statut du DPE est obligatoire");
+                          return;
+                        }
+                        if (
+                          formData.dpeStatus === "available" &&
+                          (!formData.dpeEnergyClass || !formData.dpeGesClass)
+                        ) {
                           toast.error(
-                            "Les classes DPE (énergie et GES) sont obligatoires"
+                            "Les classes DPE (énergie et GES) sont obligatoires lorsque le DPE est disponible"
                           );
                           return;
                         }
@@ -2132,10 +2284,20 @@ export default function SubmitPage() {
                           "électricité",
                           "plomberie",
                           "isolation",
+                          "menuiseries",
+                          "chauffage",
+                          "ventilation",
+                          "toiture",
+                          "façade",
+                          "humidité",
                           "cuisine",
                           "salle de bain",
-                          "sols / murs",
-                          "toiture / structure",
+                          "sols",
+                          "peinture",
+                          "cloisons",
+                          "extension",
+                          "extérieurs",
+                          "autre",
                         ].map((work) => (
                           <label
                             key={work}
@@ -2151,6 +2313,10 @@ export default function SubmitPage() {
                                       (w) => w !== work
                                     );
                                 updateField("requiredWorks", works);
+                                // Si "autre" est décoché, réinitialiser le texte
+                                if (work === "autre" && !e.target.checked) {
+                                  updateField("otherWorksText", "");
+                                }
                               }}
                               className="rounded"
                             />
@@ -2158,6 +2324,20 @@ export default function SubmitPage() {
                           </label>
                         ))}
                       </div>
+                      {formData.requiredWorks.includes("autre") && (
+                        <div className="mt-3">
+                          <Label>Précisez les autres travaux</Label>
+                          <Textarea
+                            placeholder="Décrivez les autres travaux à prévoir..."
+                            rows={3}
+                            value={formData.otherWorksText}
+                            onChange={(e) =>
+                              updateField("otherWorksText", e.target.value)
+                            }
+                            className="mt-1"
+                          />
+                        </div>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label>Budget travaux estimatif (€, optionnel)</Label>

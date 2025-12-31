@@ -1,7 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { Home, Heart } from "lucide-react";
+import { CookiePreferences } from "./cookie-preferences";
 
 export function Footer() {
+  const [cookiePreferencesOpen, setCookiePreferencesOpen] = useState(false);
+
   return (
     <footer className="relative overflow-hidden border-t bg-muted/30">
       {/* Decorative background */}
@@ -70,7 +76,16 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <Link
-                  href="/legal"
+                  href="/legal/cgu"
+                  className="hover:text-primary transition-colors flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  CGU
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/legal/mentions-legales"
                   className="hover:text-primary transition-colors flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -79,7 +94,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/privacy"
+                  href="/legal/politique-confidentialite"
                   className="hover:text-primary transition-colors flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -88,11 +103,29 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/optout"
+                  href="/legal/politique-cookies"
                   className="hover:text-primary transition-colors flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Retirer une annonce
+                  Cookies
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={() => setCookiePreferencesOpen(true)}
+                  className="hover:text-primary transition-colors flex items-center gap-2 group text-left w-full"
+                >
+                  <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  Gestion des cookies
+                </button>
+              </li>
+              <li>
+                <Link
+                  href="/legal/cgv"
+                  className="hover:text-primary transition-colors flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  CGV
                 </Link>
               </li>
             </ul>
@@ -117,6 +150,12 @@ export function Footer() {
           </p>
         </div>
       </div>
+
+      {/* Modale de gestion des cookies */}
+      <CookiePreferences
+        open={cookiePreferencesOpen}
+        onOpenChange={setCookiePreferencesOpen}
+      />
     </footer>
   );
 }

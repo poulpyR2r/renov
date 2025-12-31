@@ -68,6 +68,8 @@ import { ContactAgencyButton } from "@/components/contact-agency-button";
 import { ShareButton } from "@/components/share-button";
 import { getAgencyById } from "@/models/Agency";
 import { auth } from "@/auth";
+import { FranceRenovModule } from "@/components/france-renov-module";
+import { ListingLocationMap } from "@/components/listing-location-map";
 
 function formatPrice(price?: number): string {
   if (!price) return "Prix NC";
@@ -146,6 +148,42 @@ function getDpeClassColor(klass?: string): string {
     G: "bg-red-700 text-white",
   };
   return colors[klass || ""] || "bg-muted text-muted-foreground";
+}
+
+function DpeScale({ currentClass, label }: { currentClass?: string; label: string }) {
+  const classes = ["A", "B", "C", "D", "E", "F", "G"];
+  
+  return (
+    <div className="space-y-2">
+      <p className="text-xs text-muted-foreground font-medium">{label}</p>
+      <div className="flex items-center gap-1">
+        {classes.map((klass) => {
+          const isCurrent = klass === currentClass;
+          const colorClass = getDpeClassColor(klass);
+          return (
+            <div
+              key={klass}
+              className={`flex-1 rounded-md py-2 text-center text-sm font-bold transition-all ${
+                isCurrent
+                  ? colorClass + " ring-2 ring-offset-2 ring-primary scale-105 shadow-md"
+                  : colorClass + " opacity-60"
+              }`}
+            >
+              {klass}
+            </div>
+          );
+        })}
+      </div>
+      {currentClass && (
+        <p className="text-xs text-muted-foreground text-center">
+          Classe actuelle : <span className="font-semibold text-foreground">{currentClass}</span>
+        </p>
+      )}
+      {!currentClass && (
+        <p className="text-xs text-muted-foreground text-center">Non renseigné</p>
+      )}
+    </div>
+  );
 }
 
 function getDiagnosticStatusIcon(status?: string) {
@@ -380,6 +418,17 @@ export default async function ListingDetailPage({
                         </div>
                       </div>
                     )}
+                    {listing.landSurface && (
+                      <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+                        <Maximize2 className="w-5 h-5 text-primary" />
+                        <div>
+                          <p className="text-xs text-muted-foreground">
+                            Superficie du terrain
+                          </p>
+                          <p className="font-semibold">{listing.landSurface} m²</p>
+                        </div>
+                      </div>
+                    )}
                     {listing.rooms && (
                       <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
                         <DoorOpen className="w-5 h-5 text-primary" />
@@ -451,71 +500,82 @@ export default async function ListingDetailPage({
                           <Thermometer className="w-4 h-4" />
                           Diagnostic de Performance Énergétique (DPE)
                         </h3>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="p-4 rounded-lg border">
-                            <p className="text-sm text-muted-foreground mb-2">
-                              Classe Énergie
-                            </p>
-                            <Badge
-                              className={`text-lg px-4 py-2 ${getDpeClassColor(
-                                listing.diagnostics.dpe.energyClass
-                              )}`}
-                            >
-                              {listing.diagnostics.dpe.energyClass || "NC"}
-                            </Badge>
-                          </div>
-                          <div className="p-4 rounded-lg border">
-                            <p className="text-sm text-muted-foreground mb-2">
-                              Classe GES
-                            </p>
-                            <Badge
-                              className={`text-lg px-4 py-2 ${getDpeClassColor(
-                                listing.diagnostics.dpe.gesClass
-                              )}`}
-                            >
-                              {listing.diagnostics.dpe.gesClass || "NC"}
-                            </Badge>
-                          </div>
+                        
+                        {/* Statut DPE */}
+                        <div className="p-4 rounded-lg bg-muted/50">
+                          <p className="text-xs text-muted-foreground mb-1">
+                            Statut
+                          </p>
+                          <p className="font-semibold">
+                            {listing.diagnostics.dpe.status === "available" && "Disponible"}
+                            {listing.diagnostics.dpe.status === "in_progress" && "En cours de réalisation"}
+                            {listing.diagnostics.dpe.status === "not_applicable" && "Non concerné"}
+                            {!listing.diagnostics.dpe.status && "Non spécifié"}
+                          </p>
                         </div>
-                        {listing.diagnostics.dpe.energyCost && (
-                          <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground mb-1">
-                              Dépenses énergétiques estimées
-                            </p>
-                            <p className="font-semibold">
-                              {formatPrice(
-                                listing.diagnostics.dpe.energyCost.min
-                              )}{" "}
-                              à{" "}
-                              {formatPrice(
-                                listing.diagnostics.dpe.energyCost.max
-                              )}
-                              /an
-                            </p>
+
+                        {/* Classes DPE (seulement si disponible) */}
+                        {listing.diagnostics.dpe.status === "available" && listing.diagnostics.dpe.energyClass && listing.diagnostics.dpe.gesClass && (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="p-4 rounded-lg border">
+                              <DpeScale
+                                currentClass={listing.diagnostics.dpe.energyClass}
+                                label="Classe Énergie"
+                              />
+                            </div>
+                            <div className="p-4 rounded-lg border">
+                              <DpeScale
+                                currentClass={listing.diagnostics.dpe.gesClass}
+                                label="Classe GES"
+                              />
+                            </div>
                           </div>
                         )}
-                        <div className="grid grid-cols-2 gap-4 text-sm">
-                          {listing.diagnostics.dpe.referenceYear && (
-                            <div>
-                              <p className="text-muted-foreground">
-                                Année de référence
-                              </p>
-                              <p className="font-medium">
-                                {listing.diagnostics.dpe.referenceYear}
-                              </p>
+                        
+                        {/* Détails DPE (seulement si disponible) */}
+                        {listing.diagnostics.dpe.status === "available" && (
+                          <>
+                            {listing.diagnostics.dpe.energyCost && (
+                              <div className="p-4 rounded-lg bg-muted/50">
+                                <p className="text-sm text-muted-foreground mb-1">
+                                  Dépenses énergétiques estimées
+                                </p>
+                                <p className="font-semibold">
+                                  {formatPrice(
+                                    listing.diagnostics.dpe.energyCost.min
+                                  )}{" "}
+                                  à{" "}
+                                  {formatPrice(
+                                    listing.diagnostics.dpe.energyCost.max
+                                  )}
+                                  /an
+                                </p>
+                              </div>
+                            )}
+                            <div className="grid grid-cols-2 gap-4 text-sm">
+                              {listing.diagnostics.dpe.referenceYear && (
+                                <div>
+                                  <p className="text-muted-foreground">
+                                    Année de référence
+                                  </p>
+                                  <p className="font-medium">
+                                    {listing.diagnostics.dpe.referenceYear}
+                                  </p>
+                                </div>
+                              )}
+                              {listing.diagnostics.dpe.date && (
+                                <div>
+                                  <p className="text-muted-foreground">
+                                    Date du DPE
+                                  </p>
+                                  <p className="font-medium">
+                                    {formatDate(listing.diagnostics.dpe.date)}
+                                  </p>
+                                </div>
+                              )}
                             </div>
-                          )}
-                          {listing.diagnostics.dpe.date && (
-                            <div>
-                              <p className="text-muted-foreground">
-                                Date du DPE
-                              </p>
-                              <p className="font-medium">
-                                {formatDate(listing.diagnostics.dpe.date)}
-                              </p>
-                            </div>
-                          )}
-                        </div>
+                          </>
+                        )}
                       </div>
                     )}
 
@@ -658,6 +718,37 @@ export default async function ListingDetailPage({
                         </p>
                       </div>
                     )}
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Aides à la rénovation (France Rénov') */}
+              <FranceRenovModule
+                postalCode={listing.location?.postalCode}
+                propertyType={listing.propertyType}
+                renovationLevel={listing.renovation?.level}
+                surface={listing.surface}
+              />
+
+              {/* Localisation */}
+              {(listing.location?.coordinates || listing.location?.geo) && (
+                <Card className="border-0 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <MapPin className="w-5 h-5 text-primary" />
+                      Localisation
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ListingLocationMap
+                      listingId={listing._id.toString()}
+                      agencyId={agency?._id?.toString()}
+                      city={listing.location?.city}
+                      postalCode={listing.location?.postalCode}
+                      coordinates={listing.location?.coordinates}
+                      geo={listing.location?.geo}
+                      locationPrecision={listing.locationPrecision}
+                    />
                   </CardContent>
                 </Card>
               )}

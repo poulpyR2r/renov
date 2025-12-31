@@ -107,7 +107,7 @@ export function FavoriteButton({
     <button
       onClick={toggleFavorite}
       disabled={isLoading}
-      className={`p-2 rounded-full bg-white/90 dark:bg-stone-900/90 backdrop-blur shadow-lg hover:scale-110 transition-all disabled:opacity-50 ${className}`}
+      className={`p-2 rounded-full bg-white/90 backdrop-blur shadow-lg hover:scale-110 transition-all disabled:opacity-50 ${className}`}
       aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
     >
       {isLoading ? (

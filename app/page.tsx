@@ -52,7 +52,7 @@ export default async function HomePage() {
         {/* Hero Section */}
         <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
           {/* Background with gradient and pattern */}
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-teal-50 dark:from-stone-900 dark:via-stone-900 dark:to-stone-800" />
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-teal-50" />
           <div className="absolute inset-0 pattern-dots opacity-60" />
 
           {/* Floating decorative elements */}

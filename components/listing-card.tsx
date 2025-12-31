@@ -81,6 +81,25 @@ function getScoreLabel(score?: number | null): string {
   return "Très faible"; // Score 0-19
 }
 
+function getRenovationLevelLabel(level?: number): string {
+  if (!level) return "Non renseigné";
+  const labels: Record<number, string> = {
+    1: "À rénover complètement",
+    2: "Rénovation importante",
+    3: "Rénovation partielle",
+    4: "Bon état",
+    5: "Excellent état",
+  };
+  return labels[level] || "Non renseigné";
+}
+
+function getRenovationLevelColor(level?: number): string {
+  if (!level) return "bg-muted text-muted-foreground";
+  if (level <= 2) return "bg-red-500 text-white";
+  if (level === 3) return "bg-amber-500 text-white";
+  return "bg-emerald-500 text-white";
+}
+
 function formatDate(date?: string | Date): string {
   if (!date) return "";
   const d = new Date(date);
@@ -167,6 +186,15 @@ export function ListingCard({
                     )}`}
                   >
                     {listing.renovationScore}
+                  </div>
+                )}
+                {listing.renovation?.level && (
+                  <div
+                    className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${getRenovationLevelColor(
+                      listing.renovation.level
+                    )}`}
+                  >
+                    {listing.renovation.level}/5
                   </div>
                 )}
               </div>
@@ -307,7 +335,7 @@ export function ListingCard({
                 Sponsorisée
               </Badge>
             )}
-            {typeof listing.renovationScore === "number" && (
+            {/* {typeof listing.renovationScore === "number" && (
               <Badge
                 className={`${getScoreColor(
                   listing.renovationScore
@@ -317,11 +345,31 @@ export function ListingCard({
                 {listing.renovationScore} -{" "}
                 {getScoreLabel(listing.renovationScore)}
               </Badge>
+            )} */}
+            {listing.renovation?.level && (
+              <Badge
+                className={`${getRenovationLevelColor(
+                  listing.renovation.level
+                )} border-0 shadow-lg`}
+              >
+                <TrendingUp className="w-3.5 h-3.5 mr-1" />
+                Score rénovation: {listing.renovation.level}/5
+              </Badge>
+            )}
+
+            {listing.renovation.level && (
+              <Badge
+                className={`${getRenovationLevelColor(
+                  listing.renovation.level
+                )} border-0 shadow-lg`}
+              >
+                {getRenovationLevelLabel(listing.renovation.level)}
+              </Badge>
             )}
           </div>
 
           {/* Titre - hauteur fixe pour 2 lignes */}
-          <h3 className="font-semibold text-base line-clamp-2 group-hover:text-primary transition-colors mb-2 min-h-[2.75rem]">
+          <h3 className="font-semibold text-base line-clamp-2 group-hover:text-primary transition-colors mb-1 min-h-[2.75rem]">
             {listing.title}
           </h3>
 
@@ -353,7 +401,7 @@ export function ListingCard({
           </div>
 
           {/* Description courte - hauteur fixe */}
-          <p className="text-sm text-muted-foreground line-clamp-2 mb-auto min-h-[2.5rem]">
+          <p className="text-sm text-muted-foreground line-clamp-2 mb-2 min-h-[2.5rem]">
             {listing.description || "Aucune description disponible."}
           </p>
 

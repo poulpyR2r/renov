@@ -334,7 +334,7 @@ export default function AgencyDashboardPage() {
                     </p>
                   </div>
                   <Button variant="default" asChild>
-                    <Link href="/agency/billing">Changer de plan</Link>
+                    <Link href="/agency/subscription">Changer de plan</Link>
                   </Button>
                 </div>
               </div>
@@ -393,7 +393,7 @@ export default function AgencyDashboardPage() {
                 </p>
               </div>
               <Button size="sm" asChild variant="outline">
-                <Link href="/agency/billing">Changer de plan</Link>
+                <Link href="/agency/subscription">Changer de plan</Link>
               </Button>
             </div>
           )}
@@ -582,7 +582,7 @@ export default function AgencyDashboardPage() {
                 </div>
               </div>
               <Button variant="outline" size="sm" asChild>
-                <Link href="/agency/billing">
+                <Link href="/agency/cpc">
                   <CreditCard className="w-4 h-4 mr-2" />
                   Gérer le CPC
                 </Link>

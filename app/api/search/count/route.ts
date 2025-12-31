@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     
     const query = searchParams.get("q") || "";
-    const city = (searchParams.get("city") || "").trim();
+    const cities = searchParams.get("cities")?.split(",").filter(Boolean).map(c => c.trim()) || [];
     const postalCode = (searchParams.get("postalCode") || "").trim();
     const propertyTypes = searchParams.get("propertyTypes")?.split(",").filter(Boolean) || [];
     const minPrice = searchParams.get("minPrice");
@@ -56,17 +56,20 @@ export async function GET(request: NextRequest) {
       ];
     }
 
-    if (city) {
-      const soft = city.slice(0, Math.min(5, city.length));
+    if (cities.length > 0) {
+      const cityConditions = cities.flatMap((city) => {
+        const soft = city.slice(0, Math.min(5, city.length));
+        return [
+          { "location.city": { $regex: city, $options: "i" } },
+          ...(soft.length >= 3
+            ? [{ "location.city": { $regex: soft, $options: "i" } }]
+            : []),
+        ];
+      });
       filter.$and = [
         ...(filter.$and || []),
         {
-          $or: [
-            { "location.city": { $regex: city, $options: "i" } },
-            ...(soft.length >= 3
-              ? [{ "location.city": { $regex: soft, $options: "i" } }]
-              : []),
-          ],
+          $or: cityConditions,
         },
       ];
     }

@@ -18,7 +18,7 @@ interface FilterBarProps {
   onOpenPropertyType: () => void;
   onOpenPrice: () => void;
   onOpenFilters: () => void;
-  onRemoveFilter: (filterKey: string) => void;
+  onRemoveFilter: (filterKey: string, value?: string) => void;
   activeFiltersCount: number;
   sortBy: string;
   sortOrder: string;
@@ -70,7 +70,7 @@ export function FilterBar({
     return labels[sortBy] || "Pertinence";
   };
 
-  const hasActiveChips = filters.city || filters.minPrice || filters.maxPrice || filters.propertyTypes.length > 0;
+  const hasActiveChips = filters.cities?.length > 0 || filters.minPrice || filters.maxPrice || filters.propertyTypes.length > 0;
 
   return (
     <div className="sticky top-0 z-40 bg-background border-b">
@@ -94,7 +94,13 @@ export function FilterBar({
             className="rounded-full h-11 px-6 whitespace-nowrap flex-1 min-w-[200px] max-w-[250px]"
           >
             <MapPin className="h-5 w-5 mr-2" />
-            <span className="truncate">{filters.city || "Choisir une localisation"}</span>
+            <span className="truncate">
+              {filters.cities?.length > 0
+                ? filters.cities.length === 1
+                  ? filters.cities[0]
+                  : `${filters.cities.length} villes`
+                : "Choisir une localisation"}
+            </span>
             <ChevronRight className="h-5 w-5 ml-2 shrink-0" />
           </Button>
 
@@ -150,17 +156,21 @@ export function FilterBar({
               <span>Tri : {getSortLabel()}</span>
               <ChevronRight className="h-3 w-3" />
             </div>
-            {filters.city && (
-              <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-sm">
-                <span>{filters.city}</span>
+            {filters.cities?.map((city: string, index: number) => (
+              <div
+                key={index}
+                className="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-sm"
+              >
+                <MapPin className="h-3 w-3" />
+                <span>{city}</span>
                 <button
-                  onClick={() => onRemoveFilter("city")}
+                  onClick={() => onRemoveFilter("city", city)}
                   className="ml-1 hover:bg-primary/20 rounded-full p-0.5"
                 >
                   <X className="h-3 w-3" />
                 </button>
               </div>
-            )}
+            ))}
             {filters.minPrice && (
               <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-sm">
                 <span>Prix: {filters.minPrice}€</span>

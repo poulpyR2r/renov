@@ -42,6 +42,12 @@ interface Listing {
   };
   images?: string[];
   renovationScore?: number;
+  renovation?: {
+    level?: number;
+    requiredWorks?: string[];
+    otherWorksText?: string;
+    estimatedBudget?: number;
+  };
   sourceId?: string;
   sourceName?: string;
   createdAt: string;
@@ -322,11 +328,12 @@ export default function AdminListingsPage() {
                       )}
                     </div>
                     <div className="flex items-center gap-2 mt-2">
-                      {listing.renovationScore !== undefined && (
-                        <span className="px-2 py-0.5 rounded-full text-xs bg-primary/10 text-primary">
-                          Score: {listing.renovationScore}
-                        </span>
-                      )}
+                      {listing.renovation &&
+                        listing.renovation.level !== undefined && (
+                          <span className="px-2 py-0.5 rounded-full text-xs bg-primary/10 text-primary">
+                            Score: {listing.renovation.level}
+                          </span>
+                        )}
                       {listing.sourceName && (
                         <span className="px-2 py-0.5 rounded-full text-xs bg-muted text-muted-foreground">
                           {listing.sourceName}

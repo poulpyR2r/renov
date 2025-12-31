@@ -6,6 +6,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { SessionProvider } from "@/components/session-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NewsletterPopups } from "@/components/newsletter-popups";
+import { CookieBanner } from "@/components/cookie-banner";
+import { ConditionalAnalytics } from "@/components/conditional-analytics";
 import "./globals.css";
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -53,8 +55,12 @@ export default function RootLayout({
             {children}
             <Toaster />
             <NewsletterPopups />
+            <CookieBanner />
+            <ConditionalAnalytics />
           </SessionProvider>
         </ThemeProvider>
+        {/* Analytics Vercel - Note: Vercel Analytics est chargé côté serveur, 
+            pour un contrôle complet du consentement, envisager d'utiliser un composant client-side wrapper */}
         <Analytics />
       </body>
     </html>

@@ -17,6 +17,7 @@ import {
   Loader2,
   Building2,
   MessageSquare,
+  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -55,6 +56,11 @@ const navItems = [
     title: "Feedback",
     href: "/admin/feedback",
     icon: MessageSquare,
+  },
+  {
+    title: "CGU",
+    href: "/admin/tos",
+    icon: FileText,
   },
 ];
 
@@ -188,4 +194,3 @@ export default function AdminLayout({
     </div>
   );
 }
-

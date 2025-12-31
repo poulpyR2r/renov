@@ -29,8 +29,15 @@ import {
   Eye,
   List,
   Map,
+  Bed,
+  Bath,
+  Square,
+  Zap,
 } from "lucide-react";
 import Link from "next/link";
+import { FilterBar } from "@/components/search/filter-bar";
+import { FiltersDrawer } from "@/components/search/filters-drawer";
+import { Badge } from "@/components/ui/badge";
 
 interface Listing {
   _id: string;
@@ -40,6 +47,7 @@ interface Listing {
     city?: string;
     department?: string;
     region?: string;
+    postalCode?: string;
     coordinates?: {
       lat?: number;
       lng?: number;
@@ -48,6 +56,17 @@ interface Listing {
   images?: string[];
   propertyType?: string;
   surface?: number;
+  rooms?: number;
+  bedrooms?: number;
+  bathrooms?: number;
+  renovation?: {
+    level?: number;
+  };
+  diagnostics?: {
+    dpe?: {
+      energyClass?: string;
+    };
+  };
 }
 
 interface GeocodedListing extends Listing {
@@ -55,11 +74,28 @@ interface GeocodedListing extends Listing {
   isApproximate: boolean;
 }
 
-interface MapFilters {
+interface FilterState {
   q: string;
-  propertyType: string;
+  cities: string[];
+  postalCode: string;
+  propertyTypes: string[];
   minPrice: string;
   maxPrice: string;
+  minSurface: string;
+  maxSurface: string;
+  minRooms: string;
+  minRenovationLevel: string;
+  maxRenovationLevel: string;
+  requiredWorks: string[];
+  dpeClasses: string[];
+  gesClasses: string[];
+  minEnergyCost: string;
+  maxEnergyCost: string;
+  coproprietySubject: boolean | undefined;
+  maxCoproprietyCharges: string;
+  coproprietyProcedure: boolean | undefined;
+  sortBy: string;
+  sortOrder: string;
 }
 
 interface ListingsMapProps {
@@ -74,7 +110,7 @@ interface ListingsMapProps {
   zoom?: number;
   onListingClick?: (listing: Listing) => void;
   onClose?: () => void;
-  initialFilters?: MapFilters;
+  initialFilters?: Partial<FilterState>;
 }
 
 const geocodeCache: Record<string, { lat: number; lng: number } | null> = {};
@@ -160,6 +196,25 @@ function getPropertyTypeLabel(type?: string): string {
   }
 }
 
+function getRenovationLevelLabel(level?: number): string {
+  if (!level) return "Non renseigné";
+  const labels: Record<number, string> = {
+    1: "À rénover complètement",
+    2: "Rénovation importante",
+    3: "Rénovation partielle",
+    4: "Bon état",
+    5: "Excellent état",
+  };
+  return labels[level] || "Non renseigné";
+}
+
+function getRenovationLevelColor(level?: number): string {
+  if (!level) return "bg-muted text-muted-foreground";
+  if (level <= 2) return "bg-red-500 text-white";
+  if (level === 3) return "bg-amber-500 text-white";
+  return "bg-emerald-500 text-white";
+}
+
 export function ListingsMap({
   listings,
   onBoundsChange,
@@ -173,6 +228,13 @@ export function ListingsMap({
   const leafletMapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
   const circlesRef = useRef<any[]>([]);
+  const userLocationMarkerRef = useRef<any>(null);
+  const isFirstBoundsChangeRef = useRef<boolean>(true);
+  const [userLocation, setUserLocation] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
+  const [showSearchAreaCTA, setShowSearchAreaCTA] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isGeocoding, setIsGeocoding] = useState(false);
   const [geocodingProgress, setGeocodingProgress] = useState({
@@ -181,19 +243,37 @@ export function ListingsMap({
   });
   const [selectedListing, setSelectedListing] =
     useState<GeocodedListing | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [L, setL] = useState<any>(null);
   const [geocodedListings, setGeocodedListings] = useState<GeocodedListing[]>(
     []
   );
-  const [showFiltersPopup, setShowFiltersPopup] = useState(false);
+  const [showFiltersDrawer, setShowFiltersDrawer] = useState(false);
   // Mobile : sidebar masquée par défaut, Desktop : visible
   const [showSidebar, setShowSidebar] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [filters, setFilters] = useState<MapFilters>({
+  const [filters, setFilters] = useState<FilterState>({
     q: initialFilters?.q || "",
-    propertyType: initialFilters?.propertyType || "all",
+    cities: initialFilters?.cities || [],
+    postalCode: initialFilters?.postalCode || "",
+    propertyTypes: initialFilters?.propertyTypes || [],
     minPrice: initialFilters?.minPrice || "",
     maxPrice: initialFilters?.maxPrice || "",
+    minSurface: initialFilters?.minSurface || "",
+    maxSurface: initialFilters?.maxSurface || "",
+    minRooms: initialFilters?.minRooms || "",
+    minRenovationLevel: initialFilters?.minRenovationLevel || "",
+    maxRenovationLevel: initialFilters?.maxRenovationLevel || "",
+    requiredWorks: initialFilters?.requiredWorks || [],
+    dpeClasses: initialFilters?.dpeClasses || [],
+    gesClasses: initialFilters?.gesClasses || [],
+    minEnergyCost: initialFilters?.minEnergyCost || "",
+    maxEnergyCost: initialFilters?.maxEnergyCost || "",
+    coproprietySubject: initialFilters?.coproprietySubject,
+    maxCoproprietyCharges: initialFilters?.maxCoproprietyCharges || "",
+    coproprietyProcedure: initialFilters?.coproprietyProcedure,
+    sortBy: initialFilters?.sortBy || "date",
+    sortOrder: initialFilters?.sortOrder || "desc",
   });
 
   // Détecter mobile
@@ -211,6 +291,26 @@ export function ListingsMap({
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Formater un nombre avec des espaces (ex: 10000 -> 10 000)
+  const formatPrice = (value: string): string => {
+    const numbers = value.replace(/\s/g, "").replace(/[^0-9]/g, "");
+    if (!numbers) return "";
+    return numbers.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  };
+
+  // Extraire le nombre brut sans espaces
+  const unformatPrice = (value: string): string => {
+    return value.replace(/\s/g, "");
+  };
+
+  // Convertir string en number de manière sûre
+  const parseNumber = (value: string): number | null => {
+    const cleaned = unformatPrice(value);
+    if (!cleaned) return null;
+    const num = Number.parseInt(cleaned, 10);
+    return Number.isNaN(num) ? null : num;
+  };
+
   // Filtrer les annonces
   const filteredListings = useMemo(() => {
     return geocodedListings.filter((listing) => {
@@ -224,18 +324,69 @@ export function ListingsMap({
         if (!matchTitle && !matchCity && !matchDept) return false;
       }
 
-      if (filters.propertyType && filters.propertyType !== "all") {
-        if (listing.propertyType !== filters.propertyType) return false;
+      if (filters.cities.length > 0) {
+        const listingCity = listing.location?.city?.toLowerCase() || "";
+        const matchesCity = filters.cities.some((city) =>
+          listingCity.includes(city.toLowerCase())
+        );
+        if (!matchesCity) return false;
+      }
+
+      if (filters.postalCode) {
+        if (!listing.location?.postalCode?.includes(filters.postalCode))
+          return false;
+      }
+
+      if (filters.propertyTypes.length > 0) {
+        if (
+          !listing.propertyType ||
+          !filters.propertyTypes.includes(listing.propertyType)
+        )
+          return false;
       }
 
       if (filters.minPrice) {
-        const min = parseInt(filters.minPrice.replace(/\s/g, ""));
-        if (!isNaN(min) && (listing.price || 0) < min) return false;
+        const min = parseNumber(filters.minPrice);
+        if (min !== null && (listing.price || 0) < min) return false;
       }
 
       if (filters.maxPrice) {
-        const max = parseInt(filters.maxPrice.replace(/\s/g, ""));
-        if (!isNaN(max) && (listing.price || 0) > max) return false;
+        const max = parseNumber(filters.maxPrice);
+        if (max !== null && (listing.price || 0) > max) return false;
+      }
+
+      if (filters.minSurface) {
+        const min = parseNumber(filters.minSurface);
+        if (min !== null && (listing.surface || 0) < min) return false;
+      }
+
+      if (filters.maxSurface) {
+        const max = parseNumber(filters.maxSurface);
+        if (max !== null && (listing.surface || 0) > max) return false;
+      }
+
+      if (filters.minRooms) {
+        const min = parseNumber(filters.minRooms);
+        if (min !== null) {
+          const rooms = listing.rooms || listing.bedrooms || 0;
+          if (rooms < min) return false;
+        }
+      }
+
+      if (filters.minRenovationLevel) {
+        const min = parseNumber(filters.minRenovationLevel);
+        if (min !== null) {
+          const level = listing.renovation?.level || 0;
+          if (level < min) return false;
+        }
+      }
+
+      if (filters.maxRenovationLevel) {
+        const max = parseNumber(filters.maxRenovationLevel);
+        if (max !== null) {
+          const level = listing.renovation?.level || 0;
+          if (level > max) return false;
+        }
       }
 
       return true;
@@ -393,19 +544,41 @@ export function ListingsMap({
 
     leafletMapRef.current = map;
 
-    if (onBoundsChange) {
-      const handleBoundsChange = () => {
-        const bounds = map.getBounds();
+    const handleBoundsChange = () => {
+      const bounds = map.getBounds();
+      if (onBoundsChange) {
         onBoundsChange({
           north: bounds.getNorth(),
           south: bounds.getSouth(),
           east: bounds.getEast(),
           west: bounds.getWest(),
         });
-      };
-      map.on("moveend", handleBoundsChange);
-      map.on("zoomend", handleBoundsChange);
-      handleBoundsChange();
+      }
+      // Afficher le CTA après le premier déplacement (pas au chargement initial)
+      if (!isFirstBoundsChangeRef.current) {
+        setShowSearchAreaCTA(true);
+      }
+      isFirstBoundsChangeRef.current = false;
+    };
+
+    map.on("moveend", handleBoundsChange);
+    map.on("zoomend", handleBoundsChange);
+    handleBoundsChange();
+
+    // Récupérer la position de l'utilisateur au chargement
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const userPos = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+          };
+          setUserLocation(userPos);
+        },
+        () => {
+          // Erreur de géolocalisation - ignoré silencieusement
+        }
+      );
     }
 
     return () => {
@@ -414,7 +587,49 @@ export function ListingsMap({
         leafletMapRef.current = null;
       }
     };
-  }, [L, center.lat, center.lng, zoom, onBoundsChange, isGeocoding]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [L, center.lat, center.lng, zoom, isGeocoding]);
+
+  // Ajouter le marqueur de localisation utilisateur
+  useEffect(() => {
+    if (!L || !leafletMapRef.current || !userLocation) return;
+
+    // Supprimer l'ancien marqueur s'il existe
+    if (userLocationMarkerRef.current) {
+      userLocationMarkerRef.current.remove();
+    }
+
+    // Créer un marqueur bleu pour la position de l'utilisateur
+    const userIcon = L.divIcon({
+      className: "user-location-marker",
+      html: `
+        <div style="
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #3b82f6;
+          border: 4px solid white;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        "></div>
+      `,
+      iconSize: [20, 20],
+      iconAnchor: [10, 10],
+    });
+
+    const marker = L.marker([userLocation.lat, userLocation.lng], {
+      icon: userIcon,
+      zIndexOffset: 1000, // Au-dessus des autres marqueurs
+    }).addTo(leafletMapRef.current);
+
+    userLocationMarkerRef.current = marker;
+
+    return () => {
+      if (userLocationMarkerRef.current) {
+        userLocationMarkerRef.current.remove();
+        userLocationMarkerRef.current = null;
+      }
+    };
+  }, [L, userLocation]);
 
   // Mettre à jour les marqueurs
   useEffect(() => {
@@ -515,6 +730,11 @@ export function ListingsMap({
     if (!navigator.geolocation || !leafletMapRef.current) return;
     navigator.geolocation.getCurrentPosition(
       (pos) => {
+        const userPos = {
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+        };
+        setUserLocation(userPos);
         leafletMapRef.current.flyTo(
           [pos.coords.latitude, pos.coords.longitude],
           12
@@ -524,34 +744,124 @@ export function ListingsMap({
     );
   };
 
+  const handleSearchInArea = () => {
+    if (!leafletMapRef.current) return;
+    const bounds = leafletMapRef.current.getBounds();
+    if (onBoundsChange) {
+      onBoundsChange({
+        north: bounds.getNorth(),
+        south: bounds.getSouth(),
+        east: bounds.getEast(),
+        west: bounds.getWest(),
+      });
+    }
+    setShowSearchAreaCTA(false);
+  };
+
   const selectListing = (listing: GeocodedListing) => {
     setSelectedListing(listing);
+    setCurrentImageIndex(0); // Réinitialiser l'index d'image quand on change de listing
     leafletMapRef.current?.panTo([listing.coords.lat, listing.coords.lng]);
     leafletMapRef.current?.setZoom(listing.isApproximate ? 12 : 14);
     if (isMobile) setShowSidebar(false);
   };
 
+  // Réinitialiser l'index d'image quand le listing sélectionné change
+  useEffect(() => {
+    if (selectedListing) {
+      setCurrentImageIndex(0);
+    }
+  }, [selectedListing?._id]);
+
+  const nextImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (selectedListing?.images && selectedListing.images.length > 0) {
+      setCurrentImageIndex(
+        (prev) => (prev + 1) % selectedListing.images!.length
+      );
+    }
+  };
+
+  const prevImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (selectedListing?.images && selectedListing.images.length > 0) {
+      setCurrentImageIndex(
+        (prev) =>
+          (prev - 1 + selectedListing.images!.length) %
+          selectedListing.images!.length
+      );
+    }
+  };
+
   const clearFilters = () => {
     setFilters({
       q: "",
-      propertyType: "all",
+      city: "",
+      postalCode: "",
+      propertyTypes: [],
       minPrice: "",
       maxPrice: "",
+      minSurface: "",
+      maxSurface: "",
+      minRooms: "",
+      minRenovationLevel: "",
+      maxRenovationLevel: "",
+      requiredWorks: [],
+      dpeClasses: [],
+      gesClasses: [],
+      minEnergyCost: "",
+      maxEnergyCost: "",
+      coproprietySubject: undefined,
+      maxCoproprietyCharges: "",
+      coproprietyProcedure: undefined,
+      sortBy: "date",
+      sortOrder: "desc",
     });
   };
 
   const hasActiveFilters =
     filters.q ||
-    filters.propertyType !== "all" ||
+    filters.cities.length > 0 ||
+    filters.postalCode ||
+    filters.propertyTypes.length > 0 ||
     filters.minPrice ||
-    filters.maxPrice;
+    filters.maxPrice ||
+    filters.minSurface ||
+    filters.maxSurface ||
+    filters.minRooms ||
+    filters.minRenovationLevel ||
+    filters.maxRenovationLevel ||
+    filters.requiredWorks.length > 0 ||
+    filters.dpeClasses.length > 0 ||
+    filters.gesClasses.length > 0 ||
+    filters.minEnergyCost ||
+    filters.maxEnergyCost ||
+    filters.coproprietySubject !== undefined ||
+    filters.maxCoproprietyCharges ||
+    filters.coproprietyProcedure !== undefined;
 
-  const activeFiltersCount = [
-    filters.q,
-    filters.propertyType !== "all" ? filters.propertyType : "",
-    filters.minPrice,
-    filters.maxPrice,
-  ].filter(Boolean).length;
+  const getActiveFiltersCount = () => {
+    let count = 0;
+    if (filters.cities.length > 0) count += filters.cities.length;
+    if (filters.postalCode) count++;
+    if (filters.propertyTypes.length > 0) count++;
+    if (filters.minPrice || filters.maxPrice) count++;
+    if (filters.minSurface || filters.maxSurface) count++;
+    if (filters.minRooms) count++;
+    if (filters.minRenovationLevel || filters.maxRenovationLevel) count++;
+    if (filters.requiredWorks.length > 0) count++;
+    if (filters.dpeClasses.length > 0) count++;
+    if (filters.gesClasses.length > 0) count++;
+    if (filters.minEnergyCost || filters.maxEnergyCost) count++;
+    if (filters.coproprietySubject !== undefined) count++;
+    if (filters.maxCoproprietyCharges) count++;
+    if (filters.coproprietyProcedure !== undefined) count++;
+    return count;
+  };
+
+  const activeFiltersCount = getActiveFiltersCount();
 
   return (
     <div className="fixed inset-0 z-50 bg-background">
@@ -640,7 +950,7 @@ export function ListingsMap({
                   <Button
                     variant={hasActiveFilters ? "secondary" : "outline"}
                     size="sm"
-                    onClick={() => setShowFiltersPopup(true)}
+                    onClick={() => setShowFiltersDrawer(true)}
                     className="h-8 rounded-lg"
                   >
                     <Filter className="w-4 h-4 mr-1" />
@@ -670,27 +980,27 @@ export function ListingsMap({
                   <button
                     key={listing._id}
                     onClick={() => selectListing(listing)}
-                    className={`w-full p-3 text-left border-b hover:bg-muted/50 transition-colors ${
+                    className={`w-full p-4 text-left border-b hover:bg-muted/50 transition-colors ${
                       selectedListing?._id === listing._id
                         ? "bg-primary/10 border-l-4 border-l-primary"
                         : ""
                     }`}
                   >
-                    <div className="flex gap-3">
+                    <div className="flex gap-4">
                       {listing.images?.[0] ? (
                         <img
                           src={listing.images[0]}
                           alt=""
-                          className="w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover shrink-0"
+                          className="w-28 h-28 md:w-36 md:h-36 rounded-lg object-cover shrink-0"
                         />
                       ) : (
-                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-lg bg-muted flex items-center justify-center shrink-0">
-                          <Home className="w-6 h-6 md:w-8 md:h-8 text-muted-foreground" />
+                        <div className="w-28 h-28 md:w-36 md:h-36 rounded-lg bg-muted flex items-center justify-center shrink-0">
+                          <Home className="w-8 h-8 md:w-10 md:h-10 text-muted-foreground" />
                         </div>
                       )}
                       <div className="min-w-0 flex-1">
                         <div className="flex items-start justify-between gap-2">
-                          <p className="font-medium text-sm line-clamp-2">
+                          <p className="font-semibold text-sm md:text-base line-clamp-3">
                             {listing.title}
                           </p>
                           {listing.isApproximate && (
@@ -699,11 +1009,37 @@ export function ListingsMap({
                             </span>
                           )}
                         </div>
-                        <p className="text-primary font-bold mt-1">
+                        <p className="text-primary font-bold text-lg md:text-xl mt-2">
                           {formatPriceDisplay(listing.price)}
                         </p>
-                        <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
-                          <MapPin className="w-3 h-3" />
+                        <div className="flex items-center gap-3 mt-2 text-sm text-muted-foreground">
+                          {listing.surface && (
+                            <span className="flex items-center gap-1">
+                              <Square className="w-3.5 h-3.5" />
+                              {listing.surface} m²
+                            </span>
+                          )}
+                          {listing.rooms && (
+                            <span className="flex items-center gap-1">
+                              <Home className="w-3.5 h-3.5" />
+                              {listing.rooms} pièces
+                            </span>
+                          )}
+                          {listing.bedrooms && (
+                            <span className="flex items-center gap-1">
+                              <Bed className="w-3.5 h-3.5" />
+                              {listing.bedrooms}
+                            </span>
+                          )}
+                          {listing.bathrooms && (
+                            <span className="flex items-center gap-1">
+                              <Bath className="w-3.5 h-3.5" />
+                              {listing.bathrooms}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1 mt-2">
+                          <MapPin className="w-3.5 h-3.5" />
                           {getCityName(listing)}
                         </p>
                       </div>
@@ -779,6 +1115,19 @@ export function ListingsMap({
           </Button>
         </div>
 
+        {/* CTA Rechercher dans cette zone */}
+        {showSearchAreaCTA && (
+          <div className="absolute top-20 left-1/2 -translate-x-1/2 z-[2500] animate-fade-in-down">
+            <Button
+              onClick={handleSearchInArea}
+              className="shadow-lg bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-2 rounded-full"
+            >
+              <Search className="w-4 h-4 mr-2" />
+              Rechercher dans cette zone
+            </Button>
+          </div>
+        )}
+
         {/* Carte de détail de l'annonce sélectionnée */}
         {selectedListing && (
           <div
@@ -788,127 +1137,200 @@ export function ListingsMap({
                   ? "hidden"
                   : "bottom-3 left-3 right-3"
                 : showSidebar
-                ? "bottom-4 left-[calc(20rem+1rem)] lg:left-[calc(24rem+1rem)] right-4 max-w-[380px]"
-                : "bottom-4 right-4 w-[380px]"
+                ? "bottom-4 left-[calc(20rem+1rem)] lg:left-[calc(24rem+1rem)] right-4 max-w-[480px]"
+                : "bottom-4 right-4 w-[480px]"
             }`}
           >
             <Card className="overflow-hidden shadow-2xl border-0">
-              {/* Contenu compact pour mobile */}
-              <div className={isMobile ? "flex" : ""}>
-                {selectedListing.images?.[0] ? (
-                  <div
-                    className={`relative ${
-                      isMobile ? "w-28 shrink-0" : "h-40"
-                    }`}
-                  >
-                    <img
-                      src={selectedListing.images[0]}
-                      alt={selectedListing.title}
-                      className="w-full h-full object-cover"
-                    />
-                    {selectedListing.isApproximate && (
-                      <div
-                        className={`absolute top-1 left-1 px-1.5 py-0.5 rounded bg-cyan-500/90 text-white text-[10px] font-medium ${
-                          isMobile ? "" : "flex items-center gap-1"
-                        }`}
-                      >
-                        {!isMobile && <MapPin className="w-3 h-3" />}
-                        Zone
-                      </div>
-                    )}
-                    {!isMobile && (
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
-                        <p className="text-white text-xl font-bold">
-                          {formatPriceDisplay(selectedListing.price)}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div
-                    className={`bg-muted flex items-center justify-center ${
-                      isMobile ? "w-28 shrink-0" : "h-28"
-                    }`}
-                  >
-                    <Home className="w-10 h-10 text-muted-foreground" />
-                  </div>
-                )}
+              {/* Carrousel d'images */}
+              {selectedListing.images && selectedListing.images.length > 0 ? (
+                <div className="relative h-64 group">
+                  <img
+                    src={
+                      selectedListing.images[currentImageIndex] ||
+                      selectedListing.images[0]
+                    }
+                    alt={selectedListing.title}
+                    className="w-full h-full object-cover"
+                  />
 
-                <div className={`p-3 flex-1 ${isMobile ? "min-w-0" : ""}`}>
-                  {isMobile && (
-                    <p className="text-primary font-bold text-lg">
+                  {/* Badge Zone */}
+                  {selectedListing.isApproximate && (
+                    <div className="absolute top-2 left-2 px-2 py-1 rounded bg-cyan-500/90 text-white text-xs font-medium flex items-center gap-1 z-10">
+                      <MapPin className="w-3 h-3" />
+                      Zone
+                    </div>
+                  )}
+
+                  {/* Boutons navigation */}
+                  {selectedListing.images.length > 1 && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={prevImage}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full h-8 w-8 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                        aria-label="Image précédente"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={nextImage}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full h-8 w-8 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                        aria-label="Image suivante"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </Button>
+
+                      {/* Indicateurs de position */}
+                      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-1 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm z-10">
+                        {selectedListing.images.slice(0, 5).map((_, idx) => (
+                          <div
+                            key={idx}
+                            className={`w-1.5 h-1.5 rounded-full transition-all ${
+                              idx === currentImageIndex
+                                ? "bg-white w-3"
+                                : "bg-white/50"
+                            }`}
+                          />
+                        ))}
+                        {selectedListing.images.length > 5 && (
+                          <span className="text-white text-[10px] ml-1">
+                            +{selectedListing.images.length - 5}
+                          </span>
+                        )}
+                      </div>
+                    </>
+                  )}
+
+                  {/* Prix en overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                    <p className="text-white text-2xl font-bold">
                       {formatPriceDisplay(selectedListing.price)}
                     </p>
-                  )}
-                  <p
-                    className={`font-medium ${
-                      isMobile
-                        ? "text-sm truncate"
-                        : "text-base line-clamp-2 mb-2"
-                    }`}
-                  >
-                    {selectedListing.title}
-                  </p>
-                  <p className="text-xs text-muted-foreground flex items-center gap-1">
-                    <MapPin className="w-3 h-3 shrink-0" />
-                    <span className="truncate">
-                      {getCityName(selectedListing)}
-                    </span>
-                  </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="h-48 bg-muted flex items-center justify-center">
+                  <Home className="w-16 h-16 text-muted-foreground" />
+                </div>
+              )}
 
-                  {!isMobile && (
-                    <Button
-                      asChild
-                      className="w-full rounded-xl h-10 mt-3"
-                      size="sm"
-                    >
-                      <Link
-                        href={`/l/${selectedListing._id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Eye className="w-4 h-4 mr-2" />
-                        Voir l'annonce
-                      </Link>
-                    </Button>
+              {/* Contenu détaillé */}
+              <div className="p-4">
+                <h3 className="font-bold text-xl mb-2 line-clamp-2">
+                  {selectedListing.title}
+                </h3>
+
+                <p className="text-sm text-muted-foreground flex items-center gap-1 mb-4">
+                  <MapPin className="w-4 h-4 shrink-0" />
+                  <span>{getCityName(selectedListing)}</span>
+                  {selectedListing.location?.postalCode && (
+                    <span> ({selectedListing.location.postalCode})</span>
+                  )}
+                </p>
+
+                {/* Caractéristiques */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                  {selectedListing.surface && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Square className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-medium">
+                        {selectedListing.surface} m²
+                      </span>
+                    </div>
+                  )}
+                  {selectedListing.rooms && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Home className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-medium">
+                        {selectedListing.rooms} pièces
+                      </span>
+                    </div>
+                  )}
+                  {selectedListing.bedrooms && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Bed className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-medium">
+                        {selectedListing.bedrooms} ch.
+                      </span>
+                    </div>
+                  )}
+                  {selectedListing.bathrooms && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Bath className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-medium">
+                        {selectedListing.bathrooms} sdb
+                      </span>
+                    </div>
                   )}
                 </div>
 
-                {/* Actions mobile */}
-                {isMobile && (
-                  <div className="p-2 flex flex-col justify-center gap-1 border-l">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => setSelectedListing(null)}
-                      className="h-7 w-7"
-                    >
-                      <X className="w-4 h-4" />
-                    </Button>
-                    <Button asChild size="icon" className="h-7 w-7">
-                      <Link
-                        href={`/l/${selectedListing._id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                {/* Niveau de rénovation */}
+                {selectedListing.renovation?.level && (
+                  <div className="mb-4 p-3 rounded-lg bg-muted/50">
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Niveau de rénovation
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <p className="font-semibold text-sm">
+                        {getRenovationLevelLabel(
+                          selectedListing.renovation.level
+                        )}
+                      </p>
+                      <Badge
+                        className={getRenovationLevelColor(
+                          selectedListing.renovation.level
+                        )}
                       >
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </Button>
+                        Niveau {selectedListing.renovation.level}/5
+                      </Badge>
+                    </div>
                   </div>
                 )}
+
+                {/* DPE */}
+                {selectedListing.diagnostics?.dpe?.energyClass && (
+                  <div className="mb-4">
+                    <span className="text-xs text-muted-foreground">
+                      Classe énergétique
+                    </span>
+                    <div className="mt-1">
+                      <span className="px-2 py-1 rounded text-sm font-medium bg-primary/10 text-primary">
+                        DPE {selectedListing.diagnostics.dpe.energyClass}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Bouton voir l'annonce */}
+                <Button
+                  asChild
+                  className="w-full rounded-xl h-11 mt-2"
+                  size="lg"
+                >
+                  <Link
+                    href={`/l/${selectedListing._id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Eye className="w-5 h-5 mr-2" />
+                    Voir l'annonce complète
+                  </Link>
+                </Button>
               </div>
 
-              {/* Bouton fermer desktop */}
-              {!isMobile && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setSelectedListing(null)}
-                  className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white rounded-full h-7 w-7"
-                >
-                  <X className="w-4 h-4" />
-                </Button>
-              )}
+              {/* Bouton fermer */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSelectedListing(null)}
+                className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white rounded-full h-8 w-8"
+              >
+                <X className="w-4 h-4" />
+              </Button>
             </Card>
           </div>
         )}
@@ -928,145 +1350,20 @@ export function ListingsMap({
         )}
       </div>
 
-      {/* Popup Filtres */}
-      {showFiltersPopup && (
-        <div
-          className="fixed inset-0 z-[1003] bg-black/50 flex items-end md:items-start justify-center md:pt-20 px-0 md:px-4"
-          onClick={() => setShowFiltersPopup(false)}
-        >
-          <Card
-            className={`w-full shadow-2xl border-0 animate-fade-in-up md:animate-fade-in-down ${
-              isMobile
-                ? "rounded-t-2xl rounded-b-none max-h-[80vh]"
-                : "max-w-md"
-            }`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Handle mobile */}
-            {isMobile && (
-              <div className="flex justify-center py-2">
-                <div className="w-12 h-1 rounded-full bg-muted-foreground/30" />
-              </div>
-            )}
-
-            <div className="p-4 border-b flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <SlidersHorizontal className="w-5 h-5 text-primary" />
-                <h3 className="font-semibold">Filtres</h3>
-              </div>
-              <div className="flex items-center gap-2">
-                {hasActiveFilters && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={clearFilters}
-                    className="text-muted-foreground"
-                  >
-                    Effacer
-                  </Button>
-                )}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setShowFiltersPopup(false)}
-                  className="h-8 w-8"
-                >
-                  <X className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-
-            <CardContent className="p-4 space-y-4 overflow-y-auto">
-              <div className="space-y-2">
-                <label className="text-sm font-medium flex items-center gap-2">
-                  <Search className="w-4 h-4 text-muted-foreground" />
-                  Recherche
-                </label>
-                <Input
-                  placeholder="Ville, mot-clé..."
-                  value={filters.q}
-                  onChange={(e) =>
-                    setFilters({ ...filters, q: e.target.value })
-                  }
-                  className="h-11 rounded-xl"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium flex items-center gap-2">
-                  <Home className="w-4 h-4 text-muted-foreground" />
-                  Type de bien
-                </label>
-                <Select
-                  value={filters.propertyType}
-                  onValueChange={(v) =>
-                    setFilters({ ...filters, propertyType: v })
-                  }
-                >
-                  <SelectTrigger className="h-11 rounded-xl">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Tous les types</SelectItem>
-                    <SelectItem value="house">Maison</SelectItem>
-                    <SelectItem value="apartment">Appartement</SelectItem>
-                    <SelectItem value="building">Immeuble</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Prix min</label>
-                  <div className="relative">
-                    <Input
-                      placeholder="50 000"
-                      value={filters.minPrice}
-                      onChange={(e) =>
-                        setFilters({
-                          ...filters,
-                          minPrice: formatPriceInput(e.target.value),
-                        })
-                      }
-                      className="h-11 rounded-xl pr-8"
-                    />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                      €
-                    </span>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Prix max</label>
-                  <div className="relative">
-                    <Input
-                      placeholder="200 000"
-                      value={filters.maxPrice}
-                      onChange={(e) =>
-                        setFilters({
-                          ...filters,
-                          maxPrice: formatPriceInput(e.target.value),
-                        })
-                      }
-                      className="h-11 rounded-xl pr-8"
-                    />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                      €
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <Button
-                onClick={() => setShowFiltersPopup(false)}
-                className="w-full h-11 rounded-xl"
-              >
-                Voir {filteredListings.length} résultat
-                {filteredListings.length !== 1 ? "s" : ""}
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+      {/* Drawer Filtres */}
+      <FiltersDrawer
+        open={showFiltersDrawer}
+        onOpenChange={setShowFiltersDrawer}
+        filters={filters}
+        onApplyFilters={(newFilters) => {
+          setFilters(newFilters);
+          setShowFiltersDrawer(false);
+        }}
+        onClearFilters={clearFilters}
+        resultsCount={filteredListings.length}
+        formatPrice={formatPrice}
+        unformatPrice={unformatPrice}
+      />
 
       {/* Loading */}
       {(isLoading || isGeocoding) && (

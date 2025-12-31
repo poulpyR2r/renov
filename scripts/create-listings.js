@@ -233,15 +233,20 @@ async function main() {
     `🔑 Token de session détecté (${SESSION_TOKEN.substring(0, 20)}...)\n`
   );
 
-  // Vérifier qu'au moins une annonce a un agencyId valide
+  // Vérifier qu'au moins une annonce a un agencyId valide (ObjectId MongoDB = 24 caractères hex)
+  const agencyId = listings[0]?.agencyId;
   if (
-    listings[0]?.agencyId === "YOUR_AGENCY_ID_HERE" ||
-    !listings[0]?.agencyId
+    !agencyId ||
+    agencyId === "YOUR_AGENCY_ID_HERE" ||
+    !/^[0-9a-fA-F]{24}$/.test(agencyId)
   ) {
     console.error(
-      '❌ Veuillez remplacer "YOUR_AGENCY_ID_HERE" par votre vrai ID d\'agence dans listings_100.json'
+      '❌ Veuillez remplacer "YOUR_AGENCY_ID_HERE" par votre vrai ID d\'agence (24 caractères hex) dans listings_100.json'
     );
-    console.error(`💡 Trouvé: "${listings[0]?.agencyId || "undefined"}"`);
+    console.error(`💡 Trouvé: "${agencyId || "undefined"}"`);
+    console.error(
+      "💡 Utilisez le script: node scripts/update-agency-id.js <VOTRE_AGENCY_ID>"
+    );
     process.exit(1);
   }
 

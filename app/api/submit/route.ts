@@ -54,6 +54,7 @@ export async function POST(request: NextRequest) {
       propertyType,
       transactionType,
       surface,
+      landSurface,
       rooms,
       bedrooms,
       bathrooms,
@@ -97,9 +98,25 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    if (!diagnostics?.dpe?.energyClass || !diagnostics?.dpe?.gesClass) {
+    // Validation DPE selon le statut
+    if (!diagnostics?.dpe?.status) {
       return NextResponse.json(
-        { error: "Les classes DPE (énergie et GES) sont obligatoires" },
+        { error: "Le statut du DPE est obligatoire" },
+        { status: 400 }
+      );
+    }
+    if (diagnostics.dpe.status === "available") {
+      if (!diagnostics.dpe.energyClass || !diagnostics.dpe.gesClass) {
+        return NextResponse.json(
+          { error: "Les classes DPE (énergie et GES) sont obligatoires lorsque le DPE est disponible" },
+          { status: 400 }
+        );
+      }
+    }
+    // Validation terrainSurface pour les terrains
+    if (propertyType === "land" && !landSurface) {
+      return NextResponse.json(
+        { error: "La superficie du terrain est obligatoire pour un terrain" },
         { status: 400 }
       );
     }
@@ -169,6 +186,11 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Générer un externalId unique pour cette annonce
+    const uniqueExternalId = `sub-${Date.now()}-${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
+
     // Création de l'annonce
     const listing = {
       title,
@@ -180,10 +202,13 @@ export async function POST(request: NextRequest) {
         department: location.department || "",
         address: location.address || "",
         region: "",
+        coordinates: location.coordinates || undefined,
+        geo: location.geo || undefined,
       },
       propertyType,
       transactionType: transactionType || "sale",
       surface: surface ? parseInt(surface) : undefined,
+      landSurface: landSurface ? parseInt(landSurface) : undefined,
       rooms: rooms ? parseInt(rooms) : undefined,
       bedrooms: bedrooms ? parseInt(bedrooms) : undefined,
       bathrooms: bathrooms ? parseInt(bathrooms) : undefined,
@@ -193,11 +218,9 @@ export async function POST(request: NextRequest) {
 
       // Source
       sourceId: "agency_submission",
-      sourceName: "Soumission agence",
+      sourceName: "Soumission par l'agence " + agencyInfo?.companyName,
       sourceUrl: externalUrl || "",
-      externalId: `sub-${Date.now()}-${Math.random()
-        .toString(36)
-        .substr(2, 9)}`,
+      externalId: uniqueExternalId,
 
       // Images
       images: images || [],
@@ -233,12 +256,12 @@ export async function POST(request: NextRequest) {
       renovationScore: renovation.score,
       renovationKeywords: renovation.keywords,
 
-      // Déduplication
+      // Déduplication : générer un fingerprint unique basé sur externalId pour éviter les doublons
       fingerprint: generateFingerprint(
-        title,
-        parseInt(price),
-        location.city,
-        surface ? parseInt(surface) : undefined
+        `agency_submission_${uniqueExternalId}_${Date.now()}_${Math.random()}`,
+        0,
+        "",
+        0
       ),
 
       // Statut déterminé selon les règles de validation

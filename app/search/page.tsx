@@ -44,6 +44,8 @@ import {
   Wrench,
   Leaf,
   Building,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 // Import dynamique de la carte pour éviter les erreurs SSR
@@ -78,7 +80,7 @@ const radiusValues = [0, 5, 10, 20, 30, 50, 75, 100];
 // Type pour les filtres
 interface FilterState {
   q: string;
-  city: string;
+  cities: string[];
   postalCode: string;
   propertyTypes: string[];
   minPrice: string;
@@ -103,7 +105,7 @@ interface FilterState {
 // Filtres par défaut
 const DEFAULT_FILTERS: FilterState = {
   q: "",
-  city: "",
+  cities: [],
   postalCode: "",
   propertyTypes: [],
   minPrice: "",
@@ -129,11 +131,14 @@ const DEFAULT_FILTERS: FilterState = {
 const buildSearchParams = (
   filters: FilterState,
   radiusIndex: number,
-  center: { lat?: number; lng?: number }
+  center: { lat?: number; lng?: number },
+  page: number = 1
 ): URLSearchParams => {
   const params = new URLSearchParams();
   if (filters.q?.trim()) params.set("q", filters.q.trim());
-  if (filters.city?.trim()) params.set("city", filters.city.trim());
+  if (filters.cities.length > 0) {
+    params.set("cities", filters.cities.join(","));
+  }
   if (filters.postalCode?.trim())
     params.set("postalCode", filters.postalCode.trim());
   if (filters.propertyTypes.length > 0) {
@@ -187,8 +192,9 @@ const buildSearchParams = (
     params.set("radiusKm", String(radiusKm));
   }
 
-  // Ajouter limit pour plus de résultats (50 au lieu de 20 par défaut)
-  params.set("limit", "50");
+  // Pagination: 9 annonces par page
+  params.set("limit", "9");
+  params.set("page", String(page));
 
   return params;
 };
@@ -197,7 +203,7 @@ const buildSearchParams = (
 const parseFiltersFromURL = (searchParams: URLSearchParams): FilterState => {
   return {
     q: searchParams.get("q") || "",
-    city: searchParams.get("city") || "",
+    cities: searchParams.get("cities")?.split(",").filter(Boolean) || [],
     postalCode: searchParams.get("postalCode") || "",
     propertyTypes:
       searchParams.get("propertyTypes")?.split(",").filter(Boolean) || [],
@@ -228,6 +234,12 @@ const parseFiltersFromURL = (searchParams: URLSearchParams): FilterState => {
     sortBy: searchParams.get("sortBy") || "date",
     sortOrder: searchParams.get("sortOrder") || "desc",
   };
+};
+
+// Parser la page depuis les query params
+const parsePageFromURL = (searchParams: URLSearchParams): number => {
+  const page = Number.parseInt(searchParams.get("page") || "1", 10);
+  return page > 0 ? page : 1;
 };
 
 // Valider les filtres numériques (min <= max)
@@ -267,6 +279,10 @@ export default function SearchPage() {
   const [listings, setListings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalHits, setTotalHits] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(() =>
+    parsePageFromURL(searchParams)
+  );
+  const [totalPages, setTotalPages] = useState<number>(1);
 
   // appliedFilters = source de vérité (reflète l'URL)
   const [appliedFilters, setAppliedFilters] = useState<FilterState>(() =>
@@ -289,9 +305,18 @@ export default function SearchPage() {
 
   // Fetch listings avec les filtres appliqués
   const fetchListings = useCallback(
-    async (filtersToUse: FilterState, signal?: AbortSignal) => {
+    async (
+      filtersToUse: FilterState,
+      pageToUse: number,
+      signal?: AbortSignal
+    ) => {
       try {
-        const params = buildSearchParams(filtersToUse, radiusIndex, center);
+        const params = buildSearchParams(
+          filtersToUse,
+          radiusIndex,
+          center,
+          pageToUse
+        );
         const response = await fetch(`/api/search?${params.toString()}`, {
           signal,
         });
@@ -299,6 +324,7 @@ export default function SearchPage() {
         const data = await response.json();
         setListings(data.listings || []);
         setTotalHits(data.pagination?.total ?? null);
+        setTotalPages(data.pagination?.pages ?? 1);
         setLoading(false);
       } catch (error: any) {
         if (error.name === "AbortError") return;
@@ -313,9 +339,8 @@ export default function SearchPage() {
   const fetchCount = useCallback(
     async (filtersToUse: FilterState, signal?: AbortSignal) => {
       try {
-        const params = buildSearchParams(filtersToUse, radiusIndex, center);
+        const params = buildSearchParams(filtersToUse, radiusIndex, center, 1);
         params.set("limit", "1"); // Demander seulement 1 item pour optimiser
-        params.set("page", "1");
         const response = await fetch(`/api/search?${params.toString()}`, {
           signal,
         });
@@ -331,32 +356,81 @@ export default function SearchPage() {
     [radiusIndex, center]
   );
 
+  // État pour les listings de la map
+  const [mapListings, setMapListings] = useState<any[]>([]);
+  const [mapLoading, setMapLoading] = useState(false);
+
+  // Fetch listings pour la map (sans pagination - tous les résultats)
+  const fetchListingsForMap = useCallback(
+    async (filtersToUse: FilterState, signal?: AbortSignal) => {
+      try {
+        const params = buildSearchParams(filtersToUse, radiusIndex, center, 1);
+        params.set("limit", "500"); // Limite élevée pour avoir tous les résultats
+        params.delete("page"); // Supprimer la pagination
+        const response = await fetch(`/api/search?${params.toString()}`, {
+          signal,
+        });
+        if (signal?.aborted) return [];
+        const data = await response.json();
+        return data.listings || [];
+      } catch (error: any) {
+        if (error.name === "AbortError") return [];
+        console.error("Error fetching listings for map:", error);
+        return [];
+      }
+    },
+    [radiusIndex, center]
+  );
+
+  // Charger les listings pour la map quand elle s'ouvre
+  useEffect(() => {
+    if (showMap) {
+      setMapLoading(true);
+      const controller = new AbortController();
+      fetchListingsForMap(appliedFilters, controller.signal).then(
+        (listings) => {
+          if (!controller.signal.aborted) {
+            setMapListings(listings);
+            setMapLoading(false);
+          }
+        }
+      );
+      return () => controller.abort();
+    }
+  }, [showMap, appliedFilters, fetchListingsForMap]);
+
   // Initial load depuis URL
   useEffect(() => {
     const initialFilters = parseFiltersFromURL(searchParams);
+    const initialPage = parsePageFromURL(searchParams);
     setAppliedFilters(initialFilters);
+    setCurrentPage(initialPage);
     const controller = new AbortController();
-    fetchListings(initialFilters, controller.signal);
+    fetchListings(initialFilters, initialPage, controller.signal);
     return () => controller.abort();
   }, []); // Seulement au mount
 
   // Mettre à jour les filtres appliqués quand l'URL change (back/forward)
   useEffect(() => {
     const urlFilters = parseFiltersFromURL(searchParams);
+    const urlPage = parsePageFromURL(searchParams);
     const urlString = buildSearchParams(
       urlFilters,
       radiusIndex,
-      center
+      center,
+      urlPage
     ).toString();
     const currentString = buildSearchParams(
       appliedFilters,
       radiusIndex,
-      center
+      center,
+      currentPage
     ).toString();
     if (urlString !== currentString) {
       setAppliedFilters(urlFilters);
+      setCurrentPage(urlPage);
       const controller = new AbortController();
-      fetchListings(urlFilters, controller.signal);
+      fetchListings(urlFilters, urlPage, controller.signal);
       return () => controller.abort();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -368,12 +442,16 @@ export default function SearchPage() {
       // Afficher les erreurs si nécessaire
       return;
     }
-    const params = buildSearchParams(appliedFilters, radiusIndex, center);
+    // Réinitialiser à la page 1 lors d'une nouvelle recherche
+    setCurrentPage(1);
+    const params = buildSearchParams(appliedFilters, radiusIndex, center, 1);
     router.push(`/search?${params.toString()}`);
     // Déclencher immédiatement le fetch après la mise à jour de l'URL
     setLoading(true);
     const controller = new AbortController();
-    fetchListings(appliedFilters, controller.signal);
+    fetchListings(appliedFilters, 1, controller.signal);
+    // Scroll vers le haut
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [appliedFilters, radiusIndex, center, router, fetchListings]);
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -462,7 +540,12 @@ export default function SearchPage() {
             data.address?.village ||
             data.address?.municipality ||
             "Position actuelle";
-          setAppliedFilters((prev) => ({ ...prev, city: city }));
+          setAppliedFilters((prev) => ({
+            ...prev,
+            cities: prev.cities.includes(city)
+              ? prev.cities
+              : [...prev.cities, city],
+          }));
         } catch {
           // Ignore error
         }
@@ -487,6 +570,7 @@ export default function SearchPage() {
 
     // Réinitialiser les filtres
     setAppliedFilters(DEFAULT_FILTERS);
+    setCurrentPage(1); // Réinitialiser à la page 1
     setRadiusIndex(0);
     setCenter({});
     setLocationStatus("idle");
@@ -496,12 +580,13 @@ export default function SearchPage() {
 
     // Relancer la recherche avec les filtres par défaut
     const controller = new AbortController();
-    fetchListings(DEFAULT_FILTERS, controller.signal);
+    fetchListings(DEFAULT_FILTERS, 1, controller.signal);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [router, fetchListings]);
 
   const hasActiveFilters =
     appliedFilters.q ||
-    appliedFilters.city ||
+    appliedFilters.cities.length > 0 ||
     appliedFilters.postalCode ||
     appliedFilters.propertyTypes.length > 0 ||
     appliedFilters.minPrice ||
@@ -523,7 +608,7 @@ export default function SearchPage() {
 
   const getActiveFiltersCount = () => {
     let count = 0;
-    if (appliedFilters.city) count++;
+    if (appliedFilters.cities.length > 0) count += appliedFilters.cities.length;
     if (appliedFilters.postalCode) count++;
     if (appliedFilters.propertyTypes.length > 0) count++;
     if (appliedFilters.minPrice || appliedFilters.maxPrice) count++;
@@ -541,10 +626,12 @@ export default function SearchPage() {
     return count;
   };
 
-  const handleRemoveFilter = (filterKey: string) => {
+  const handleRemoveFilter = (filterKey: string, value?: string) => {
     const newFilters = { ...appliedFilters };
-    if (filterKey === "city") {
-      newFilters.city = "";
+    if (filterKey === "city" && value) {
+      newFilters.cities = newFilters.cities.filter((c) => c !== value);
+    } else if (filterKey === "cities") {
+      newFilters.cities = [];
     } else if (filterKey === "minPrice") {
       newFilters.minPrice = "";
     } else if (filterKey === "maxPrice") {
@@ -553,12 +640,14 @@ export default function SearchPage() {
       newFilters.propertyTypes = [];
     }
     setAppliedFilters(newFilters);
-    const params = buildSearchParams(newFilters, radiusIndex, center);
+    setCurrentPage(1); // Réinitialiser à la page 1
+    const params = buildSearchParams(newFilters, radiusIndex, center, 1);
     router.push(`/search?${params.toString()}`);
     // Déclencher immédiatement le fetch après la mise à jour de l'URL
     setLoading(true);
     const controller = new AbortController();
-    fetchListings(newFilters, controller.signal);
+    fetchListings(newFilters, 1, controller.signal);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleApplyFilters = useCallback(
@@ -569,12 +658,14 @@ export default function SearchPage() {
         return;
       }
       setAppliedFilters(newFilters);
-      const params = buildSearchParams(newFilters, radiusIndex, center);
+      setCurrentPage(1); // Réinitialiser à la page 1
+      const params = buildSearchParams(newFilters, radiusIndex, center, 1);
       router.push(`/search?${params.toString()}`);
       // Déclencher immédiatement le fetch après la mise à jour de l'URL
       setLoading(true);
       const controller = new AbortController();
-      fetchListings(newFilters, controller.signal);
+      fetchListings(newFilters, 1, controller.signal);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
     [radiusIndex, center, router, fetchListings]
   );
@@ -586,12 +677,14 @@ export default function SearchPage() {
       sortOrder: newSortOrder,
     };
     setAppliedFilters(newFilters);
-    const params = buildSearchParams(newFilters, radiusIndex, center);
+    setCurrentPage(1); // Réinitialiser à la page 1
+    const params = buildSearchParams(newFilters, radiusIndex, center, 1);
     router.push(`/search?${params.toString()}`);
     // Déclencher immédiatement le fetch après la mise à jour de l'URL
     setLoading(true);
     const controller = new AbortController();
-    fetchListings(newFilters, controller.signal);
+    fetchListings(newFilters, 1, controller.signal);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Gérer l'ouverture du drawer avec scroll vers section
@@ -616,7 +709,7 @@ export default function SearchPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative py-16 px-4 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50/50 to-teal-50/30 dark:from-stone-900 dark:via-stone-900 dark:to-stone-800" />
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50/50 to-teal-50/30" />
           <div className="absolute inset-0 pattern-dots opacity-40" />
 
           {/* Decorative elements */}
@@ -717,23 +810,147 @@ export default function SearchPage() {
                 </p>
               </div>
             ) : listings.length > 0 ? (
-              <div
-                className={
-                  viewMode === "grid"
-                    ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-                    : "flex flex-col gap-4"
-                }
-              >
-                {listings.map((listing, index) => (
-                  <div
-                    key={listing._id}
-                    className="animate-fade-in-up"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                  >
-                    <ListingCard listing={listing} />
+              <>
+                <div
+                  className={
+                    viewMode === "grid"
+                      ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                      : "flex flex-col gap-4"
+                  }
+                >
+                  {listings.map((listing, index) => (
+                    <div
+                      key={listing._id}
+                      className="animate-fade-in-up"
+                      style={{ animationDelay: `${index * 50}ms` }}
+                    >
+                      <ListingCard listing={listing} />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-2 mt-8">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        if (currentPage > 1) {
+                          const newPage = currentPage - 1;
+                          setCurrentPage(newPage);
+                          const params = buildSearchParams(
+                            appliedFilters,
+                            radiusIndex,
+                            center,
+                            newPage
+                          );
+                          router.push(`/search?${params.toString()}`);
+                          setLoading(true);
+                          const controller = new AbortController();
+                          fetchListings(
+                            appliedFilters,
+                            newPage,
+                            controller.signal
+                          );
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }
+                      }}
+                      disabled={currentPage === 1 || loading}
+                      className="rounded-lg"
+                    >
+                      <ChevronLeft className="w-4 h-4 mr-1" />
+                      Précédent
+                    </Button>
+
+                    <div className="flex items-center gap-1">
+                      {Array.from(
+                        { length: Math.min(totalPages, 7) },
+                        (_, i) => {
+                          let pageNum: number;
+                          if (totalPages <= 7) {
+                            pageNum = i + 1;
+                          } else if (currentPage <= 4) {
+                            pageNum = i + 1;
+                          } else if (currentPage >= totalPages - 3) {
+                            pageNum = totalPages - 6 + i;
+                          } else {
+                            pageNum = currentPage - 3 + i;
+                          }
+
+                          return (
+                            <Button
+                              key={pageNum}
+                              variant={
+                                currentPage === pageNum ? "default" : "outline"
+                              }
+                              size="sm"
+                              onClick={() => {
+                                if (currentPage !== pageNum) {
+                                  setCurrentPage(pageNum);
+                                  const params = buildSearchParams(
+                                    appliedFilters,
+                                    radiusIndex,
+                                    center,
+                                    pageNum
+                                  );
+                                  router.push(`/search?${params.toString()}`);
+                                  setLoading(true);
+                                  const controller = new AbortController();
+                                  fetchListings(
+                                    appliedFilters,
+                                    pageNum,
+                                    controller.signal
+                                  );
+                                  window.scrollTo({
+                                    top: 0,
+                                    behavior: "smooth",
+                                  });
+                                }
+                              }}
+                              disabled={loading}
+                              className="rounded-lg min-w-[2.5rem]"
+                            >
+                              {pageNum}
+                            </Button>
+                          );
+                        }
+                      )}
+                    </div>
+
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        if (currentPage < totalPages) {
+                          const newPage = currentPage + 1;
+                          setCurrentPage(newPage);
+                          const params = buildSearchParams(
+                            appliedFilters,
+                            radiusIndex,
+                            center,
+                            newPage
+                          );
+                          router.push(`/search?${params.toString()}`);
+                          setLoading(true);
+                          const controller = new AbortController();
+                          fetchListings(
+                            appliedFilters,
+                            newPage,
+                            controller.signal
+                          );
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }
+                      }}
+                      disabled={currentPage === totalPages || loading}
+                      className="rounded-lg"
+                    >
+                      Suivant
+                      <ChevronRight className="w-4 h-4 ml-1" />
+                    </Button>
                   </div>
-                ))}
-              </div>
+                )}
+              </>
             ) : (
               <Card className="border-dashed border-2">
                 <CardContent className="py-20 text-center">
@@ -782,7 +999,7 @@ export default function SearchPage() {
       {/* Carte en fullscreen */}
       {showMap && (
         <ListingsMap
-          listings={listings}
+          listings={mapLoading ? [] : mapListings}
           onClose={() => setShowMap(false)}
           onListingClick={handleListingClick}
           center={
@@ -790,12 +1007,7 @@ export default function SearchPage() {
               ? { lat: center.lat, lng: center.lng }
               : undefined
           }
-          initialFilters={{
-            q: appliedFilters.q,
-            propertyType: appliedFilters.propertyTypes[0] || "all",
-            minPrice: appliedFilters.minPrice,
-            maxPrice: appliedFilters.maxPrice,
-          }}
+          initialFilters={appliedFilters}
         />
       )}
     </div>

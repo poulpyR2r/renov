@@ -157,7 +157,9 @@ export function FiltersDrawer({
       // Les filtres sont invalides, ne pas appliquer
       return;
     }
-    onApplyFilters(draftFilters);
+    // Exclure cityInput du résultat final
+    const { cityInput, ...filtersToApply } = draftFilters;
+    onApplyFilters(filtersToApply);
     onOpenChange(false);
   };
 
@@ -172,7 +174,7 @@ export function FiltersDrawer({
 
     const clearedFilters = {
       q: "",
-      city: "",
+      cities: [],
       postalCode: "",
       propertyTypes: [],
       minPrice: "",
@@ -274,14 +276,82 @@ export function FiltersDrawer({
             </Label>
             <div className="space-y-3">
               <div className="space-y-2">
-                <Label className="text-xs text-muted-foreground">Ville</Label>
-                <Input
-                  placeholder="Ex: Paris"
-                  value={draftFilters.city}
-                  onChange={(e) =>
-                    setDraftFilters({ ...draftFilters, city: e.target.value })
-                  }
-                />
+                <Label className="text-xs text-muted-foreground">Villes</Label>
+                <div className="flex gap-2">
+                  <Input
+                    placeholder="Ex: Paris"
+                    value={draftFilters.cityInput || ""}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        const cityValue = (e.target as HTMLInputElement).value.trim();
+                        if (
+                          cityValue &&
+                          !draftFilters.cities?.includes(cityValue)
+                        ) {
+                          setDraftFilters({
+                            ...draftFilters,
+                            cities: [...(draftFilters.cities || []), cityValue],
+                            cityInput: "",
+                          });
+                        }
+                      }
+                    }}
+                    onChange={(e) =>
+                      setDraftFilters({
+                        ...draftFilters,
+                        cityInput: e.target.value,
+                      })
+                    }
+                  />
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      const cityValue = draftFilters.cityInput?.trim();
+                      if (
+                        cityValue &&
+                        !draftFilters.cities?.includes(cityValue)
+                      ) {
+                        setDraftFilters({
+                          ...draftFilters,
+                          cities: [...(draftFilters.cities || []), cityValue],
+                          cityInput: "",
+                        });
+                      }
+                    }}
+                    variant="outline"
+                    size="sm"
+                  >
+                    Ajouter
+                  </Button>
+                </div>
+                {draftFilters.cities?.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {draftFilters.cities.map((city: string, index: number) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-sm"
+                      >
+                        <MapPin className="h-3 w-3" />
+                        <span>{city}</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setDraftFilters({
+                              ...draftFilters,
+                              cities: draftFilters.cities.filter(
+                                (c: string) => c !== city
+                              ),
+                            });
+                          }}
+                          className="ml-1 hover:bg-primary/20 rounded-full p-0.5"
+                        >
+                          <X className="h-3 w-3" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="space-y-2">
                 <Label className="text-xs text-muted-foreground">
