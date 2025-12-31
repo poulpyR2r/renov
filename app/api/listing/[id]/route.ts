@@ -5,11 +5,12 @@ import { type NextRequest, NextResponse } from "next/server"
 import { getListingModel } from "@/models/Listing"
 import { ObjectId } from "mongodb"
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const Listing = await getListingModel()
     const listing = await Listing.findOne({
-      _id: new ObjectId(params.id),
+      _id: new ObjectId(id),
       status: "active",
     })
 

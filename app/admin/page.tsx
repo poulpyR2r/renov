@@ -1,129 +1,158 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Header } from "@/components/header"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Loader2, Play } from "lucide-react"
-import { toast } from "sonner"
+import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Users,
+  Home,
+  Bell,
+  Mail,
+  TrendingUp,
+  Calendar,
+  Loader2,
+} from "lucide-react";
 
-export default function AdminPage() {
-  const [loading, setLoading] = useState(false)
-  const [sources, setSources] = useState({
-    leboncoin: true,
-    seloger: true,
-    pap: true,
-  })
-  const [stats, setStats] = useState<any>(null)
+interface Stats {
+  users: {
+    total: number;
+    admins: number;
+    thisMonth: number;
+    thisWeek: number;
+  };
+  listings: {
+    total: number;
+    active: number;
+    thisMonth: number;
+  };
+  alerts: {
+    total: number;
+    active: number;
+  };
+  newsletters: {
+    subscribers: number;
+  };
+}
 
-  const handleScrape = async () => {
-    setLoading(true)
-    setStats(null)
+export default function AdminDashboard() {
+  const [stats, setStats] = useState<Stats | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const fetchStats = async () => {
     try {
-      const selectedSources = Object.entries(sources)
-        .filter(([_, enabled]) => enabled)
-        .map(([name]) => name)
-
-      const response = await fetch("/api/admin/scrape", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sources: selectedSources }),
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setStats(data.stats)
-        toast.success(`Scraping terminé: ${data.stats.added} annonces ajoutées`)
-      } else {
-        toast.error(data.error || "Erreur lors du scraping")
+      const res = await fetch("/api/admin/stats");
+      const data = await res.json();
+      if (data.success) {
+        setStats(data.stats);
       }
     } catch (error) {
-      toast.error("Erreur réseau")
-    } finally {
-      setLoading(false)
+      console.error("Error fetching stats:", error);
     }
+    setIsLoading(false);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
   }
 
+  const statCards = [
+    {
+      title: "Utilisateurs",
+      value: stats?.users.total || 0,
+      subtitle: `+${stats?.users.thisMonth || 0} ce mois`,
+      icon: Users,
+      color: "text-blue-500",
+      bgColor: "bg-blue-500/10",
+    },
+    {
+      title: "Annonces",
+      value: stats?.listings.total || 0,
+      subtitle: `${stats?.listings.active || 0} actives`,
+      icon: Home,
+      color: "text-emerald-500",
+      bgColor: "bg-emerald-500/10",
+    },
+    {
+      title: "Alertes",
+      value: stats?.alerts.total || 0,
+      subtitle: `${stats?.alerts.active || 0} actives`,
+      icon: Bell,
+      color: "text-amber-500",
+      bgColor: "bg-amber-500/10",
+    },
+    {
+      title: "Newsletter",
+      value: stats?.newsletters.subscribers || 0,
+      subtitle: "abonnés",
+      icon: Mail,
+      color: "text-purple-500",
+      bgColor: "bg-purple-500/10",
+    },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-
-      <main className="flex-1 py-8 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <h1 className="text-3xl font-bold mb-8">Panneau d'administration</h1>
-
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle>Lancer le scraping</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Checkbox
-                    id="leboncoin"
-                    checked={sources.leboncoin}
-                    onCheckedChange={(checked) => setSources({ ...sources, leboncoin: !!checked })}
-                  />
-                  <label htmlFor="leboncoin" className="text-sm font-medium">
-                    LeBonCoin
-                  </label>
+    <div className="space-y-6">
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {statCards.map((stat) => (
+          <Card key={stat.title} className="border-0 shadow-md">
+            <CardContent className="p-5">
+              <div className="flex items-start justify-between">
+                <div>
+                  <p className="text-sm text-muted-foreground">{stat.title}</p>
+                  <p className="text-3xl font-bold mt-1">
+                    {stat.value.toLocaleString("fr-FR")}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {stat.subtitle}
+                  </p>
                 </div>
-
-                <div className="flex items-center gap-2">
-                  <Checkbox
-                    id="seloger"
-                    checked={sources.seloger}
-                    onCheckedChange={(checked) => setSources({ ...sources, seloger: !!checked })}
-                  />
-                  <label htmlFor="seloger" className="text-sm font-medium">
-                    SeLoger
-                  </label>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Checkbox
-                    id="pap"
-                    checked={sources.pap}
-                    onCheckedChange={(checked) => setSources({ ...sources, pap: !!checked })}
-                  />
-                  <label htmlFor="pap" className="text-sm font-medium">
-                    PAP (De Particulier à Particulier)
-                  </label>
+                <div className={`p-3 rounded-lg ${stat.bgColor}`}>
+                  <stat.icon className={`w-5 h-5 ${stat.color}`} />
                 </div>
               </div>
-
-              <Button onClick={handleScrape} disabled={loading} size="lg" className="w-full">
-                {loading ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Scraping en cours...
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-4 h-4 mr-2" />
-                    Lancer le scraping
-                  </>
-                )}
-              </Button>
-
-              {stats && (
-                <div className="bg-muted p-4 rounded-lg space-y-2">
-                  <h3 className="font-semibold">Résultats</h3>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>Total analysé: {stats.total}</div>
-                    <div className="text-green-600">Ajouté: {stats.added}</div>
-                    <div className="text-yellow-600">Ignoré (doublon): {stats.skipped}</div>
-                    <div className="text-red-600">Erreurs: {stats.errors}</div>
-                  </div>
-                </div>
-              )}
             </CardContent>
           </Card>
-        </div>
-      </main>
+        ))}
+      </div>
+
+      {/* Quick Actions */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card className="border-0 shadow-md">
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <TrendingUp className="w-5 h-5" />
+              Activité récente
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground text-sm">
+              Les statistiques détaillées seront bientôt disponibles.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="border-0 shadow-md">
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Calendar className="w-5 h-5" />
+              Dernières inscriptions
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground text-sm">
+              {stats?.users.thisWeek || 0} nouveaux utilisateurs cette semaine
+            </p>
+          </CardContent>
+        </Card>
+      </div>
     </div>
-  )
+  );
 }

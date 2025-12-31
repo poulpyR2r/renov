@@ -1,0 +1,6845 @@
+[
+  {
+    "title": "Charmante terrain 6 pièces 174m² - Lyon",
+    "description": "Charmante terrain de 174m² située à Lyon (69001).\n\nCaractéristiques :\n- 6 pièces principales\n- 0 salle de bain\n- Surface : 174m²\n- Année de construction : 1871\n- cheminée\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 22012,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69001",
+      "department": "69",
+      "address": "176 Boulevard de la Paix"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 174,
+    "rooms": 6,
+    "constructionYear": 1871,
+    "contactPhone": "+33768446729",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=1",
+      "https://picsum.photos/800/600?random=2",
+      "https://picsum.photos/800/600?random=3"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 1101,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 1968,
+          "max": 2718
+        },
+        "referenceYear": 2023,
+        "date": "2023-12-20T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 46495
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Calme maison 2 pièces 92m² - Paris",
+    "description": "Calme maison de 92m² située à Paris (75015).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 3 salles de bain\n- Surface : 92m²\n- Année de construction : 1912\n- mezzanine\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 188810,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75015",
+      "department": "75",
+      "address": "188 Avenue de la Paix"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 92,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 3,
+    "constructionYear": 1912,
+    "contactPhone": "+33780674768",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=2",
+      "https://picsum.photos/800/600?random=3",
+      "https://picsum.photos/800/600?random=4"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 9441,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1807,
+          "max": 2011
+        },
+        "referenceYear": 2023,
+        "date": "2023-06-27T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Belle terrain 4 pièces 48m² - Marseille",
+    "description": "Belle terrain de 48m² située à Marseille (13001).\n\nCaractéristiques :\n- 4 pièces principales\n- 0 salle de bain\n- Surface : 48m²\n- Année de construction : 1897\n- terrasse\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 5242,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13001",
+      "department": "13",
+      "address": "46 Avenue Victor Hugo"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 48,
+    "rooms": 4,
+    "constructionYear": 1897,
+    "contactPhone": "+33689023315",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=3",
+      "https://picsum.photos/800/600?random=4",
+      "https://picsum.photos/800/600?random=5"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 262,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1370,
+          "max": 2222
+        },
+        "referenceYear": 2023,
+        "date": "2023-11-10T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "in_progress",
+      "termites": "not_applicable",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Lumineuse autre 3 pièces 110m² - Nantes",
+    "description": "Lumineuse autre de 110m² située à Nantes (44000).\n\nCaractéristiques :\n- 3 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 110m²\n- Année de construction : 1999\n- mezzanine\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 163381,
+    "location": {
+      "city": "Nantes",
+      "postalCode": "44000",
+      "department": "44",
+      "address": "189 Avenue Clemenceau"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 110,
+    "rooms": 3,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1999,
+    "contactPhone": "+33757986098",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=4",
+      "https://picsum.photos/800/600?random=5",
+      "https://picsum.photos/800/600?random=6"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 8169,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 923,
+          "max": 4384
+        },
+        "referenceYear": 2023,
+        "date": "2023-09-02T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "available",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs",
+        "toiture / structure"
+      ],
+      "estimatedBudget": 47140
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Charmante immeuble 2 pièces 86m² - Paris",
+    "description": "Charmante immeuble de 86m² située à Paris (75001).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 86m²\n- Année de construction : 1902\n- parking\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 175561,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75001",
+      "department": "75",
+      "address": "61 Place du Commerce"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 86,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1902,
+    "contactPhone": "+33783826147",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=5",
+      "https://picsum.photos/800/600?random=6",
+      "https://picsum.photos/800/600?random=7"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 8778,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1371,
+          "max": 4247
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-20T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs",
+        "toiture / structure"
+      ],
+      "estimatedBudget": 69110
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle terrain 5 pièces 130m² - Bordeaux",
+    "description": "Exceptionnelle terrain de 130m² située à Bordeaux (33000).\n\nCaractéristiques :\n- 5 pièces principales\n- 0 salle de bain\n- Surface : 130m²\n- Année de construction : 2007\n- exposition sud\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 24690,
+    "location": {
+      "city": "Bordeaux",
+      "postalCode": "33000",
+      "department": "33",
+      "address": "54 Boulevard de la République"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 130,
+    "rooms": 5,
+    "constructionYear": 2007,
+    "contactPhone": "+33610727265",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=6",
+      "https://picsum.photos/800/600?random=7",
+      "https://picsum.photos/800/600?random=8"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 1235,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1763,
+          "max": 3940
+        },
+        "referenceYear": 2023,
+        "date": "2023-06-17T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain"
+      ],
+      "estimatedBudget": 99593
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Lumineuse autre 2 pièces 86m² - Rennes",
+    "description": "Lumineuse autre de 86m² située à Rennes (35000).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 86m²\n- Année de construction : 1874\n- parquet\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 134399,
+    "location": {
+      "city": "Rennes",
+      "postalCode": "35000",
+      "department": "35",
+      "address": "74 Avenue de la République"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 86,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1874,
+    "contactPhone": "+33616293600",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=7",
+      "https://picsum.photos/800/600?random=8",
+      "https://picsum.photos/800/600?random=9"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 6720,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1677,
+          "max": 4902
+        },
+        "referenceYear": 2023,
+        "date": "2023-11-04T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie"
+      ],
+      "estimatedBudget": 21957
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Charmante immeuble 4 pièces 112m² - Saint-Étienne",
+    "description": "Charmante immeuble de 112m² située à Saint-Étienne (42000).\n\nCaractéristiques :\n- 4 pièces principales, 2 chambres\n- 1 salle de bain\n- Surface : 112m²\n- Année de construction : 1913\n- exposition sud\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 188414,
+    "location": {
+      "city": "Saint-Étienne",
+      "postalCode": "42000",
+      "department": "42",
+      "address": "46 Rue de la Paix"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 112,
+    "rooms": 4,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "constructionYear": 1913,
+    "contactPhone": "+33640765719",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=8",
+      "https://picsum.photos/800/600?random=9",
+      "https://picsum.photos/800/600?random=10"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 9421,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 889,
+          "max": 4389
+        },
+        "referenceYear": 2023,
+        "date": "2023-03-13T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "available",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Belle autre 5 pièces 30m² - Toulon",
+    "description": "Belle autre de 30m² située à Toulon (83000).\n\nCaractéristiques :\n- 5 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 30m²\n- Année de construction : 1994\n- parquet\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 50099,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "2 Boulevard Jean Jaurès"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 30,
+    "rooms": 5,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1994,
+    "contactPhone": "+33645579194",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=9",
+      "https://picsum.photos/800/600?random=10",
+      "https://picsum.photos/800/600?random=11"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 2505,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "F",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1287,
+          "max": 3417
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-11T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "in_progress",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain"
+      ],
+      "estimatedBudget": 94992
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Charmante autre 8 pièces 183m² - Toulouse",
+    "description": "Charmante autre de 183m² située à Toulouse (31000).\n\nCaractéristiques :\n- 8 pièces principales, 3 chambres\n- 3 salles de bain\n- Surface : 183m²\n- Année de construction : 2009\n- veranda\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 292196,
+    "location": {
+      "city": "Toulouse",
+      "postalCode": "31000",
+      "department": "31",
+      "address": "32 Rue de la Paix"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 183,
+    "rooms": 8,
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "constructionYear": 2009,
+    "contactPhone": "+33720114911",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=10",
+      "https://picsum.photos/800/600?random=11",
+      "https://picsum.photos/800/600?random=12"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 14610,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1393,
+          "max": 4878
+        },
+        "referenceYear": 2023,
+        "date": "2023-09-05T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Cosy appartement 6 pièces 62m² - Marseille",
+    "description": "Cosy appartement de 62m² située à Marseille (13001).\n\nCaractéristiques :\n- 6 pièces principales, 5 chambres\n- 2 salles de bain\n- Surface : 62m²\n- Année de construction : 1933\n- mezzanine\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 222563,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13001",
+      "department": "13",
+      "address": "162 Avenue Jean Jaurès"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 62,
+    "rooms": 6,
+    "bedrooms": 5,
+    "bathrooms": 2,
+    "constructionYear": 1933,
+    "contactPhone": "+33737356180",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=11",
+      "https://picsum.photos/800/600?random=12",
+      "https://picsum.photos/800/600?random=13"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 11128,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1932,
+          "max": 3059
+        },
+        "referenceYear": 2023,
+        "date": "2023-05-10T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain"
+      ],
+      "estimatedBudget": 32588
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 65,
+      "annualCharges": 2184,
+      "procedureInProgress": true
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Spacieuse immeuble 3 pièces 43m² - Toulouse",
+    "description": "Spacieuse immeuble de 43m² située à Toulouse (31000).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 1 salle de bain\n- Surface : 43m²\n- Année de construction : 1959\n- balcon\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 97100,
+    "location": {
+      "city": "Toulouse",
+      "postalCode": "31000",
+      "department": "31",
+      "address": "178 Place Jean Jaurès"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 43,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "constructionYear": 1959,
+    "contactPhone": "+33742944518",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=12",
+      "https://picsum.photos/800/600?random=13",
+      "https://picsum.photos/800/600?random=14"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 4855,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "F",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 1021,
+          "max": 2679
+        },
+        "referenceYear": 2023,
+        "date": "2023-05-11T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie"
+      ],
+      "estimatedBudget": 24922
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Prestigieuse maison 4 pièces 101m² - Montpellier",
+    "description": "Prestigieuse maison de 101m² située à Montpellier (34000).\n\nCaractéristiques :\n- 4 pièces principales, 3 chambres\n- 1 salle de bain\n- Surface : 101m²\n- Année de construction : 1878\n- jardin\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 309062,
+    "location": {
+      "city": "Montpellier",
+      "postalCode": "34000",
+      "department": "34",
+      "address": "129 Boulevard du Commerce"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 101,
+    "rooms": 4,
+    "bedrooms": 3,
+    "bathrooms": 1,
+    "constructionYear": 1878,
+    "contactPhone": "+33696566848",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=13",
+      "https://picsum.photos/800/600?random=14",
+      "https://picsum.photos/800/600?random=15"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 15453,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1517,
+          "max": 2976
+        },
+        "referenceYear": 2023,
+        "date": "2023-11-22T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Belle autre 4 pièces 115m² - Paris",
+    "description": "Belle autre de 115m² située à Paris (75010).\n\nCaractéristiques :\n- 4 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 115m²\n- Année de construction : 1928\n- parking\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 270643,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75010",
+      "department": "75",
+      "address": "91 Avenue Gambetta"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 115,
+    "rooms": 4,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1928,
+    "contactPhone": "+33782805117",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=14",
+      "https://picsum.photos/800/600?random=15",
+      "https://picsum.photos/800/600?random=16"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 13532,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "E",
+        "energyCost": {
+          "min": 1179,
+          "max": 4621
+        },
+        "referenceYear": 2023,
+        "date": "2023-11-03T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "in_progress",
+      "electricity": "in_progress",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 34442
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Calme appartement 3 pièces 91m² - Le Havre",
+    "description": "Calme appartement de 91m² située à Le Havre (76600).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 3 salles de bain\n- Surface : 91m²\n- Année de construction : 1971\n- parking\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 319414,
+    "location": {
+      "city": "Le Havre",
+      "postalCode": "76600",
+      "department": "76",
+      "address": "102 Avenue Clemenceau"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 91,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "constructionYear": 1971,
+    "contactPhone": "+33648455450",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=15",
+      "https://picsum.photos/800/600?random=16",
+      "https://picsum.photos/800/600?random=17"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 15971,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1188,
+          "max": 2950
+        },
+        "referenceYear": 2023,
+        "date": "2023-05-23T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 22,
+      "annualCharges": 2468,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Authentique terrain 2 pièces 116m² - Lyon",
+    "description": "Authentique terrain de 116m² située à Lyon (69001).\n\nCaractéristiques :\n- 2 pièces principales\n- 0 salle de bain\n- Surface : 116m²\n- Année de construction : 1898\n- cave\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 20686,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69001",
+      "department": "69",
+      "address": "62 Boulevard Jean Jaurès"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 116,
+    "rooms": 2,
+    "constructionYear": 1898,
+    "contactPhone": "+33687915659",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=16",
+      "https://picsum.photos/800/600?random=17",
+      "https://picsum.photos/800/600?random=18"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 1034,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1034,
+          "max": 3927
+        },
+        "referenceYear": 2023,
+        "date": "2023-09-17T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle appartement 2 pièces 181m² - Toulouse",
+    "description": "Exceptionnelle appartement de 181m² située à Toulouse (31000).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 181m²\n- Année de construction : 1950\n- veranda\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 882876,
+    "location": {
+      "city": "Toulouse",
+      "postalCode": "31000",
+      "department": "31",
+      "address": "197 Boulevard Jean Jaurès"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 181,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1950,
+    "contactPhone": "+33636715323",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=17",
+      "https://picsum.photos/800/600?random=18",
+      "https://picsum.photos/800/600?random=19"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 44144,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "E",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1586,
+          "max": 2285
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-08T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 92,
+      "annualCharges": 4054,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Calme maison 7 pièces 117m² - Toulouse",
+    "description": "Calme maison de 117m² située à Toulouse (31000).\n\nCaractéristiques :\n- 7 pièces principales, 3 chambres\n- 3 salles de bain\n- Surface : 117m²\n- Année de construction : 2020\n- jardin\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 259090,
+    "location": {
+      "city": "Toulouse",
+      "postalCode": "31000",
+      "department": "31",
+      "address": "39 Avenue Gambetta"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 117,
+    "rooms": 7,
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "constructionYear": 2020,
+    "contactPhone": "+33630761935",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=18",
+      "https://picsum.photos/800/600?random=19",
+      "https://picsum.photos/800/600?random=20"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 12955,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1620,
+          "max": 3305
+        },
+        "referenceYear": 2023,
+        "date": "2023-04-17T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "not_applicable",
+      "termites": "not_applicable",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Moderne autre 5 pièces 182m² - Paris",
+    "description": "Moderne autre de 182m² située à Paris (75015).\n\nCaractéristiques :\n- 5 pièces principales, 3 chambres\n- 1 salle de bain\n- Surface : 182m²\n- Année de construction : 1926\n- jardin\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 312907,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75015",
+      "department": "75",
+      "address": "24 Rue Victor Hugo"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 182,
+    "rooms": 5,
+    "bedrooms": 3,
+    "bathrooms": 1,
+    "constructionYear": 1926,
+    "contactPhone": "+33622101729",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=19",
+      "https://picsum.photos/800/600?random=20",
+      "https://picsum.photos/800/600?random=21"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 15645,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "F",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1946,
+          "max": 2409
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-11T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain"
+      ],
+      "estimatedBudget": 37990
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle immeuble 8 pièces 198m² - Bordeaux",
+    "description": "Exceptionnelle immeuble de 198m² située à Bordeaux (33000).\n\nCaractéristiques :\n- 8 pièces principales, 4 chambres\n- 3 salles de bain\n- Surface : 198m²\n- Année de construction : 1889\n- parking\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 388129,
+    "location": {
+      "city": "Bordeaux",
+      "postalCode": "33000",
+      "department": "33",
+      "address": "67 Place du Commerce"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 198,
+    "rooms": 8,
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "constructionYear": 1889,
+    "contactPhone": "+33695897702",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=20",
+      "https://picsum.photos/800/600?random=21",
+      "https://picsum.photos/800/600?random=22"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 19406,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "E",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1998,
+          "max": 4725
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-14T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs",
+        "toiture / structure"
+      ],
+      "estimatedBudget": 42891
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Prestigieuse immeuble 3 pièces 46m² - Toulon",
+    "description": "Prestigieuse immeuble de 46m² située à Toulon (83000).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 1 salle de bain\n- Surface : 46m²\n- Année de construction : 1995\n- balcon\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 117270,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "175 Boulevard de la Paix"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 46,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "constructionYear": 1995,
+    "contactPhone": "+33798035403",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=21",
+      "https://picsum.photos/800/600?random=22",
+      "https://picsum.photos/800/600?random=23"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 5864,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1014,
+          "max": 3366
+        },
+        "referenceYear": 2023,
+        "date": "2023-02-02T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Authentique appartement 8 pièces 171m² - Nantes",
+    "description": "Authentique appartement de 171m² située à Nantes (44000).\n\nCaractéristiques :\n- 8 pièces principales, 1 chambres\n- 1 salle de bain\n- Surface : 171m²\n- Année de construction : 1989\n- double vitrage\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 850451,
+    "location": {
+      "city": "Nantes",
+      "postalCode": "44000",
+      "department": "44",
+      "address": "166 Rue Jean Jaurès"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 171,
+    "rooms": 8,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "constructionYear": 1989,
+    "contactPhone": "+33760290339",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=22",
+      "https://picsum.photos/800/600?random=23",
+      "https://picsum.photos/800/600?random=24"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 42523,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 1310,
+          "max": 4161
+        },
+        "referenceYear": 2023,
+        "date": "2023-12-13T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 52,
+      "annualCharges": 3078,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Moderne maison 6 pièces 43m² - Saint-Étienne",
+    "description": "Moderne maison de 43m² située à Saint-Étienne (42000).\n\nCaractéristiques :\n- 6 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 43m²\n- Année de construction : 1983\n- parquet\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 103984,
+    "location": {
+      "city": "Saint-Étienne",
+      "postalCode": "42000",
+      "department": "42",
+      "address": "28 Boulevard Victor Hugo"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 43,
+    "rooms": 6,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1983,
+    "contactPhone": "+33681535422",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=23",
+      "https://picsum.photos/800/600?random=24",
+      "https://picsum.photos/800/600?random=25"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 5199,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1231,
+          "max": 4002
+        },
+        "referenceYear": 2023,
+        "date": "2023-05-09T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "in_progress",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Spacieuse autre 7 pièces 101m² - Bordeaux",
+    "description": "Spacieuse autre de 101m² située à Bordeaux (33000).\n\nCaractéristiques :\n- 7 pièces principales, 4 chambres\n- 2 salles de bain\n- Surface : 101m²\n- Année de construction : 1975\n- terrasse\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 252245,
+    "location": {
+      "city": "Bordeaux",
+      "postalCode": "33000",
+      "department": "33",
+      "address": "125 Boulevard de la République"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 101,
+    "rooms": 7,
+    "bedrooms": 4,
+    "bathrooms": 2,
+    "constructionYear": 1975,
+    "contactPhone": "+33675156595",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=24",
+      "https://picsum.photos/800/600?random=25",
+      "https://picsum.photos/800/600?random=26"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 12612,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "E",
+        "energyCost": {
+          "min": 1749,
+          "max": 2242
+        },
+        "referenceYear": 2023,
+        "date": "2023-09-13T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 50922
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Authentique immeuble 5 pièces 178m² - Paris",
+    "description": "Authentique immeuble de 178m² située à Paris (75015).\n\nCaractéristiques :\n- 5 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 178m²\n- Année de construction : 1860\n- cheminée\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 406180,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75015",
+      "department": "75",
+      "address": "194 Avenue de la République"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 178,
+    "rooms": 5,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1860,
+    "contactPhone": "+33732633595",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=25",
+      "https://picsum.photos/800/600?random=26",
+      "https://picsum.photos/800/600?random=27"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 20309,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1718,
+          "max": 3383
+        },
+        "referenceYear": 2023,
+        "date": "2023-02-26T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain"
+      ],
+      "estimatedBudget": 65334
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Calme maison 8 pièces 141m² - Bordeaux",
+    "description": "Calme maison de 141m² située à Bordeaux (33000).\n\nCaractéristiques :\n- 8 pièces principales, 2 chambres\n- 1 salle de bain\n- Surface : 141m²\n- Année de construction : 1931\n- parquet\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 282200,
+    "location": {
+      "city": "Bordeaux",
+      "postalCode": "33000",
+      "department": "33",
+      "address": "196 Boulevard Clemenceau"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 141,
+    "rooms": 8,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "constructionYear": 1931,
+    "contactPhone": "+33742695550",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=26",
+      "https://picsum.photos/800/600?random=27",
+      "https://picsum.photos/800/600?random=28"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 14110,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1017,
+          "max": 2439
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-18T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "not_applicable",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain"
+      ],
+      "estimatedBudget": 53161
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Belle autre 8 pièces 94m² - Bordeaux",
+    "description": "Belle autre de 94m² située à Bordeaux (33000).\n\nCaractéristiques :\n- 8 pièces principales, 3 chambres\n- 3 salles de bain\n- Surface : 94m²\n- Année de construction : 1881\n- garage\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 188542,
+    "location": {
+      "city": "Bordeaux",
+      "postalCode": "33000",
+      "department": "33",
+      "address": "182 Avenue du Commerce"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 94,
+    "rooms": 8,
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "constructionYear": 1881,
+    "contactPhone": "+33768408576",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=27",
+      "https://picsum.photos/800/600?random=28",
+      "https://picsum.photos/800/600?random=29"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 9427,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1392,
+          "max": 4608
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-15T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Spacieuse terrain 2 pièces 163m² - Paris",
+    "description": "Spacieuse terrain de 163m² située à Paris (75015).\n\nCaractéristiques :\n- 2 pièces principales\n- 0 salle de bain\n- Surface : 163m²\n- Année de construction : 2010\n- cheminée\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 31675,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75015",
+      "department": "75",
+      "address": "65 Place de la République"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 163,
+    "rooms": 2,
+    "constructionYear": 2010,
+    "contactPhone": "+33684267583",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=28",
+      "https://picsum.photos/800/600?random=29",
+      "https://picsum.photos/800/600?random=30"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 1584,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 856,
+          "max": 2932
+        },
+        "referenceYear": 2023,
+        "date": "2023-04-03T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "available",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Spacieuse appartement 2 pièces 123m² - Montpellier",
+    "description": "Spacieuse appartement de 123m² située à Montpellier (34000).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 123m²\n- Année de construction : 1878\n- cave\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 447549,
+    "location": {
+      "city": "Montpellier",
+      "postalCode": "34000",
+      "department": "34",
+      "address": "185 Avenue de la République"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 123,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1878,
+    "contactPhone": "+33628844250",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=29",
+      "https://picsum.photos/800/600?random=30",
+      "https://picsum.photos/800/600?random=31"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 22377,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 815,
+          "max": 4747
+        },
+        "referenceYear": 2023,
+        "date": "2023-09-24T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 72020
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 42,
+      "annualCharges": 2449,
+      "procedureInProgress": true
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Lumineuse immeuble 8 pièces 170m² - Rennes",
+    "description": "Lumineuse immeuble de 170m² située à Rennes (35000).\n\nCaractéristiques :\n- 8 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 170m²\n- Année de construction : 1916\n- parquet\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 281583,
+    "location": {
+      "city": "Rennes",
+      "postalCode": "35000",
+      "department": "35",
+      "address": "11 Rue de la République"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 170,
+    "rooms": 8,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1916,
+    "contactPhone": "+33711715033",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=30",
+      "https://picsum.photos/800/600?random=31",
+      "https://picsum.photos/800/600?random=32"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 14079,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1355,
+          "max": 4305
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-03T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "not_applicable",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs",
+        "toiture / structure"
+      ],
+      "estimatedBudget": 45124
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Belle immeuble 4 pièces 164m² - Marseille",
+    "description": "Belle immeuble de 164m² située à Marseille (13008).\n\nCaractéristiques :\n- 4 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 164m²\n- Année de construction : 1897\n- veranda\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 416526,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13008",
+      "department": "13",
+      "address": "79 Rue Victor Hugo"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 164,
+    "rooms": 4,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1897,
+    "contactPhone": "+33771481350",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=31",
+      "https://picsum.photos/800/600?random=32",
+      "https://picsum.photos/800/600?random=33"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 20826,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "F",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1632,
+          "max": 3250
+        },
+        "referenceYear": 2023,
+        "date": "2023-04-14T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs",
+        "toiture / structure"
+      ],
+      "estimatedBudget": 98457
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle terrain 6 pièces 77m² - Grenoble",
+    "description": "Exceptionnelle terrain de 77m² située à Grenoble (38000).\n\nCaractéristiques :\n- 6 pièces principales\n- 0 salle de bain\n- Surface : 77m²\n- Année de construction : 1957\n- garage\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 9708,
+    "location": {
+      "city": "Grenoble",
+      "postalCode": "38000",
+      "department": "38",
+      "address": "125 Rue du Commerce"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 77,
+    "rooms": 6,
+    "constructionYear": 1957,
+    "contactPhone": "+33733172123",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=32",
+      "https://picsum.photos/800/600?random=33",
+      "https://picsum.photos/800/600?random=34"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 485,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1151,
+          "max": 4995
+        },
+        "referenceYear": 2023,
+        "date": "2023-04-30T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "not_applicable",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 40643
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.959Z"
+    }
+  },
+  {
+    "title": "Charmante appartement 3 pièces 93m² - Bordeaux",
+    "description": "Charmante appartement de 93m² située à Bordeaux (33000).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 93m²\n- Année de construction : 1901\n- exposition sud\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 381871,
+    "location": {
+      "city": "Bordeaux",
+      "postalCode": "33000",
+      "department": "33",
+      "address": "42 Rue de la République"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 93,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1901,
+    "contactPhone": "+33616674810",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=33",
+      "https://picsum.photos/800/600?random=34",
+      "https://picsum.photos/800/600?random=35"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 19094,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "F",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1120,
+          "max": 2161
+        },
+        "referenceYear": 2023,
+        "date": "2023-08-31T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 93104
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 76,
+      "annualCharges": 1085,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Spacieuse autre 2 pièces 103m² - Grenoble",
+    "description": "Spacieuse autre de 103m² située à Grenoble (38000).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 1 salle de bain\n- Surface : 103m²\n- Année de construction : 1853\n- piscine\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 267476,
+    "location": {
+      "city": "Grenoble",
+      "postalCode": "38000",
+      "department": "38",
+      "address": "42 Place Jean Jaurès"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 103,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "constructionYear": 1853,
+    "contactPhone": "+33752764387",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=34",
+      "https://picsum.photos/800/600?random=35",
+      "https://picsum.photos/800/600?random=36"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 13374,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1711,
+          "max": 4745
+        },
+        "referenceYear": 2023,
+        "date": "2023-07-22T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain"
+      ],
+      "estimatedBudget": 31583
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle appartement 5 pièces 76m² - Montpellier",
+    "description": "Exceptionnelle appartement de 76m² située à Montpellier (34000).\n\nCaractéristiques :\n- 5 pièces principales, 3 chambres\n- 2 salles de bain\n- Surface : 76m²\n- Année de construction : 1913\n- cave\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 256475,
+    "location": {
+      "city": "Montpellier",
+      "postalCode": "34000",
+      "department": "34",
+      "address": "136 Avenue de la Paix"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 76,
+    "rooms": 5,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "constructionYear": 1913,
+    "contactPhone": "+33687887790",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=35",
+      "https://picsum.photos/800/600?random=36",
+      "https://picsum.photos/800/600?random=37"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 12824,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1158,
+          "max": 4433
+        },
+        "referenceYear": 2023,
+        "date": "2023-02-06T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "in_progress",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 21,
+      "annualCharges": 1675,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Belle autre 4 pièces 198m² - Toulouse",
+    "description": "Belle autre de 198m² située à Toulouse (31000).\n\nCaractéristiques :\n- 4 pièces principales, 2 chambres\n- 3 salles de bain\n- Surface : 198m²\n- Année de construction : 1902\n- cheminée\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 439185,
+    "location": {
+      "city": "Toulouse",
+      "postalCode": "31000",
+      "department": "31",
+      "address": "98 Rue de la République"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 198,
+    "rooms": 4,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "constructionYear": 1902,
+    "contactPhone": "+33794736819",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=36",
+      "https://picsum.photos/800/600?random=37",
+      "https://picsum.photos/800/600?random=38"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 21959,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 1594,
+          "max": 3109
+        },
+        "referenceYear": 2023,
+        "date": "2023-03-21T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 55021
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Charmante autre 2 pièces 119m² - Montpellier",
+    "description": "Charmante autre de 119m² située à Montpellier (34000).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 1 salle de bain\n- Surface : 119m²\n- Année de construction : 2005\n- cave\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 248134,
+    "location": {
+      "city": "Montpellier",
+      "postalCode": "34000",
+      "department": "34",
+      "address": "182 Boulevard de la République"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 119,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "constructionYear": 2005,
+    "contactPhone": "+33610635708",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=37",
+      "https://picsum.photos/800/600?random=38",
+      "https://picsum.photos/800/600?random=39"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 12407,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 870,
+          "max": 4940
+        },
+        "referenceYear": 2023,
+        "date": "2023-07-19T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "in_progress",
+      "electricity": "available",
+      "gas": "in_progress",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Charmante autre 4 pièces 109m² - Lyon",
+    "description": "Charmante autre de 109m² située à Lyon (69003).\n\nCaractéristiques :\n- 4 pièces principales, 3 chambres\n- 2 salles de bain\n- Surface : 109m²\n- Année de construction : 1975\n- veranda\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 218275,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69003",
+      "department": "69",
+      "address": "11 Rue du Commerce"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 109,
+    "rooms": 4,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "constructionYear": 1975,
+    "contactPhone": "+33635652559",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=38",
+      "https://picsum.photos/800/600?random=39",
+      "https://picsum.photos/800/600?random=40"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 10914,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1723,
+          "max": 3064
+        },
+        "referenceYear": 2023,
+        "date": "2023-08-02T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Cosy autre 8 pièces 157m² - Saint-Étienne",
+    "description": "Cosy autre de 157m² située à Saint-Étienne (42000).\n\nCaractéristiques :\n- 8 pièces principales, 7 chambres\n- 1 salle de bain\n- Surface : 157m²\n- Année de construction : 1942\n- cheminée\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 347314,
+    "location": {
+      "city": "Saint-Étienne",
+      "postalCode": "42000",
+      "department": "42",
+      "address": "147 Boulevard Gambetta"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 157,
+    "rooms": 8,
+    "bedrooms": 7,
+    "bathrooms": 1,
+    "constructionYear": 1942,
+    "contactPhone": "+33715561655",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=39",
+      "https://picsum.photos/800/600?random=40",
+      "https://picsum.photos/800/600?random=41"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 17366,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1588,
+          "max": 2679
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-16T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Authentique appartement 4 pièces 148m² - Lyon",
+    "description": "Authentique appartement de 148m² située à Lyon (69003).\n\nCaractéristiques :\n- 4 pièces principales, 3 chambres\n- 3 salles de bain\n- Surface : 148m²\n- Année de construction : 1956\n- balcon\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 476570,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69003",
+      "department": "69",
+      "address": "119 Boulevard Gambetta"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 148,
+    "rooms": 4,
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "constructionYear": 1956,
+    "contactPhone": "+33640424344",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=40",
+      "https://picsum.photos/800/600?random=41",
+      "https://picsum.photos/800/600?random=42"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 23829,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1496,
+          "max": 4847
+        },
+        "referenceYear": 2023,
+        "date": "2023-08-31T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "available",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 37563
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 26,
+      "annualCharges": 4620,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Belle terrain 8 pièces 91m² - Grenoble",
+    "description": "Belle terrain de 91m² située à Grenoble (38000).\n\nCaractéristiques :\n- 8 pièces principales\n- 0 salle de bain\n- Surface : 91m²\n- Année de construction : 1938\n- parking\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 12885,
+    "location": {
+      "city": "Grenoble",
+      "postalCode": "38000",
+      "department": "38",
+      "address": "132 Boulevard Jean Jaurès"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 91,
+    "rooms": 8,
+    "constructionYear": 1938,
+    "contactPhone": "+33637373704",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=41",
+      "https://picsum.photos/800/600?random=42",
+      "https://picsum.photos/800/600?random=43"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 644,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1574,
+          "max": 2849
+        },
+        "referenceYear": 2023,
+        "date": "2023-04-08T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle autre 4 pièces 36m² - Marseille",
+    "description": "Exceptionnelle autre de 36m² située à Marseille (13008).\n\nCaractéristiques :\n- 4 pièces principales, 2 chambres\n- 3 salles de bain\n- Surface : 36m²\n- Année de construction : 1895\n- parquet\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 77426,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13008",
+      "department": "13",
+      "address": "67 Place de la République"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 36,
+    "rooms": 4,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "constructionYear": 1895,
+    "contactPhone": "+33659556619",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=42",
+      "https://picsum.photos/800/600?random=43",
+      "https://picsum.photos/800/600?random=44"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 3871,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1234,
+          "max": 3527
+        },
+        "referenceYear": 2023,
+        "date": "2023-04-27T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "in_progress",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Moderne immeuble 8 pièces 30m² - Toulon",
+    "description": "Moderne immeuble de 30m² située à Toulon (83000).\n\nCaractéristiques :\n- 8 pièces principales, 4 chambres\n- 2 salles de bain\n- Surface : 30m²\n- Année de construction : 1965\n- balcon\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 47814,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "166 Place Victor Hugo"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 30,
+    "rooms": 8,
+    "bedrooms": 4,
+    "bathrooms": 2,
+    "constructionYear": 1965,
+    "contactPhone": "+33759750150",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=43",
+      "https://picsum.photos/800/600?random=44",
+      "https://picsum.photos/800/600?random=45"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 2391,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 808,
+          "max": 4547
+        },
+        "referenceYear": 2023,
+        "date": "2023-11-05T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 14146
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Moderne immeuble 2 pièces 166m² - Toulon",
+    "description": "Moderne immeuble de 166m² située à Toulon (83000).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 1 salle de bain\n- Surface : 166m²\n- Année de construction : 1860\n- vue dégagée\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 345544,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "75 Rue du Commerce"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 166,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "constructionYear": 1860,
+    "contactPhone": "+33679912424",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=44",
+      "https://picsum.photos/800/600?random=45",
+      "https://picsum.photos/800/600?random=46"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 17277,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 855,
+          "max": 4354
+        },
+        "referenceYear": 2023,
+        "date": "2023-12-10T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs",
+        "toiture / structure"
+      ],
+      "estimatedBudget": 41863
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Lumineuse autre 4 pièces 159m² - Lyon",
+    "description": "Lumineuse autre de 159m² située à Lyon (69001).\n\nCaractéristiques :\n- 4 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 159m²\n- Année de construction : 1976\n- mezzanine\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 363681,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69001",
+      "department": "69",
+      "address": "113 Rue de la République"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 159,
+    "rooms": 4,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1976,
+    "contactPhone": "+33776750808",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=45",
+      "https://picsum.photos/800/600?random=46",
+      "https://picsum.photos/800/600?random=47"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 18184,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "E",
+        "energyCost": {
+          "min": 1063,
+          "max": 4777
+        },
+        "referenceYear": 2023,
+        "date": "2023-04-27T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation"
+      ],
+      "estimatedBudget": 18385
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Moderne immeuble 4 pièces 45m² - Lyon",
+    "description": "Moderne immeuble de 45m² située à Lyon (69001).\n\nCaractéristiques :\n- 4 pièces principales, 2 chambres\n- 3 salles de bain\n- Surface : 45m²\n- Année de construction : 1925\n- parking\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 116225,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69001",
+      "department": "69",
+      "address": "183 Boulevard Gambetta"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 45,
+    "rooms": 4,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "constructionYear": 1925,
+    "contactPhone": "+33663705049",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=46",
+      "https://picsum.photos/800/600?random=47",
+      "https://picsum.photos/800/600?random=48"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 5811,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "F",
+        "gesClass": "E",
+        "energyCost": {
+          "min": 1688,
+          "max": 3671
+        },
+        "referenceYear": 2023,
+        "date": "2023-08-01T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie"
+      ],
+      "estimatedBudget": 27168
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Spacieuse immeuble 4 pièces 89m² - Paris",
+    "description": "Spacieuse immeuble de 89m² située à Paris (75010).\n\nCaractéristiques :\n- 4 pièces principales, 3 chambres\n- 3 salles de bain\n- Surface : 89m²\n- Année de construction : 1938\n- balcon\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 132594,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75010",
+      "department": "75",
+      "address": "53 Rue de la Paix"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 89,
+    "rooms": 4,
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "constructionYear": 1938,
+    "contactPhone": "+33784567198",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=47",
+      "https://picsum.photos/800/600?random=48",
+      "https://picsum.photos/800/600?random=49"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 6630,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 830,
+          "max": 4966
+        },
+        "referenceYear": 2023,
+        "date": "2023-02-20T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "in_progress",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 75142
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Cosy terrain 3 pièces 140m² - Toulon",
+    "description": "Cosy terrain de 140m² située à Toulon (83000).\n\nCaractéristiques :\n- 3 pièces principales\n- 0 salle de bain\n- Surface : 140m²\n- Année de construction : 1918\n- piscine\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 27022,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "183 Boulevard de la République"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 140,
+    "rooms": 3,
+    "constructionYear": 1918,
+    "contactPhone": "+33746076299",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=48",
+      "https://picsum.photos/800/600?random=49",
+      "https://picsum.photos/800/600?random=50"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 1351,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1337,
+          "max": 4659
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-20T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 26256
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Calme immeuble 3 pièces 84m² - Rennes",
+    "description": "Calme immeuble de 84m² située à Rennes (35000).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 1 salle de bain\n- Surface : 84m²\n- Année de construction : 1866\n- balcon\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 123378,
+    "location": {
+      "city": "Rennes",
+      "postalCode": "35000",
+      "department": "35",
+      "address": "140 Rue de la République"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 84,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "constructionYear": 1866,
+    "contactPhone": "+33614372401",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=49",
+      "https://picsum.photos/800/600?random=50",
+      "https://picsum.photos/800/600?random=51"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 6169,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1749,
+          "max": 3559
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-19T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "in_progress",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 99952
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Cosy maison 4 pièces 130m² - Marseille",
+    "description": "Cosy maison de 130m² située à Marseille (13008).\n\nCaractéristiques :\n- 4 pièces principales, 3 chambres\n- 1 salle de bain\n- Surface : 130m²\n- Année de construction : 1893\n- cave\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 293285,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13008",
+      "department": "13",
+      "address": "72 Avenue Clemenceau"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 130,
+    "rooms": 4,
+    "bedrooms": 3,
+    "bathrooms": 1,
+    "constructionYear": 1893,
+    "contactPhone": "+33638360829",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=50",
+      "https://picsum.photos/800/600?random=51",
+      "https://picsum.photos/800/600?random=52"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 14664,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 1078,
+          "max": 4768
+        },
+        "referenceYear": 2023,
+        "date": "2023-07-15T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 30128
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle terrain 6 pièces 196m² - Marseille",
+    "description": "Exceptionnelle terrain de 196m² située à Marseille (13008).\n\nCaractéristiques :\n- 6 pièces principales\n- 0 salle de bain\n- Surface : 196m²\n- Année de construction : 1950\n- balcon\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 34963,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13008",
+      "department": "13",
+      "address": "131 Place de la Paix"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 196,
+    "rooms": 6,
+    "constructionYear": 1950,
+    "contactPhone": "+33797533984",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=51",
+      "https://picsum.photos/800/600?random=52",
+      "https://picsum.photos/800/600?random=53"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 1748,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1854,
+          "max": 2328
+        },
+        "referenceYear": 2023,
+        "date": "2023-09-27T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "in_progress",
+      "termites": "not_applicable",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 44862
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Charmante maison 3 pièces 30m² - Reims",
+    "description": "Charmante maison de 30m² située à Reims (51100).\n\nCaractéristiques :\n- 3 pièces principales, 1 chambres\n- 3 salles de bain\n- Surface : 30m²\n- Année de construction : 1937\n- parquet\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 61249,
+    "location": {
+      "city": "Reims",
+      "postalCode": "51100",
+      "department": "51",
+      "address": "70 Place Gambetta"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 30,
+    "rooms": 3,
+    "bedrooms": 1,
+    "bathrooms": 3,
+    "constructionYear": 1937,
+    "contactPhone": "+33719201156",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=52",
+      "https://picsum.photos/800/600?random=53",
+      "https://picsum.photos/800/600?random=54"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 3062,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1133,
+          "max": 3196
+        },
+        "referenceYear": 2023,
+        "date": "2023-03-21T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "available",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs",
+        "toiture / structure"
+      ],
+      "estimatedBudget": 30346
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Cosy immeuble 8 pièces 103m² - Grenoble",
+    "description": "Cosy immeuble de 103m² située à Grenoble (38000).\n\nCaractéristiques :\n- 8 pièces principales, 3 chambres\n- 2 salles de bain\n- Surface : 103m²\n- Année de construction : 1973\n- mezzanine\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 210395,
+    "location": {
+      "city": "Grenoble",
+      "postalCode": "38000",
+      "department": "38",
+      "address": "141 Avenue Clemenceau"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 103,
+    "rooms": 8,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "constructionYear": 1973,
+    "contactPhone": "+33772837793",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=53",
+      "https://picsum.photos/800/600?random=54",
+      "https://picsum.photos/800/600?random=55"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 10520,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "F",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1290,
+          "max": 3200
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-04T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "in_progress",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Spacieuse terrain 8 pièces 145m² - Marseille",
+    "description": "Spacieuse terrain de 145m² située à Marseille (13001).\n\nCaractéristiques :\n- 8 pièces principales\n- 0 salle de bain\n- Surface : 145m²\n- Année de construction : 1888\n- vue dégagée\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 28051,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13001",
+      "department": "13",
+      "address": "188 Avenue de la Paix"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 145,
+    "rooms": 8,
+    "constructionYear": 1888,
+    "contactPhone": "+33681219968",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=54",
+      "https://picsum.photos/800/600?random=55",
+      "https://picsum.photos/800/600?random=56"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 1403,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1624,
+          "max": 3594
+        },
+        "referenceYear": 2023,
+        "date": "2023-07-10T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 64577
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Lumineuse terrain 3 pièces 117m² - Lyon",
+    "description": "Lumineuse terrain de 117m² située à Lyon (69001).\n\nCaractéristiques :\n- 3 pièces principales\n- 0 salle de bain\n- Surface : 117m²\n- Année de construction : 1924\n- cheminée\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 13772,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69001",
+      "department": "69",
+      "address": "146 Rue de la République"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 117,
+    "rooms": 3,
+    "constructionYear": 1924,
+    "contactPhone": "+33792105352",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=55",
+      "https://picsum.photos/800/600?random=56",
+      "https://picsum.photos/800/600?random=57"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 689,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1064,
+          "max": 4478
+        },
+        "referenceYear": 2023,
+        "date": "2023-03-15T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Authentique autre 4 pièces 112m² - Rennes",
+    "description": "Authentique autre de 112m² située à Rennes (35000).\n\nCaractéristiques :\n- 4 pièces principales, 1 chambres\n- 3 salles de bain\n- Surface : 112m²\n- Année de construction : 1864\n- double vitrage\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 265649,
+    "location": {
+      "city": "Rennes",
+      "postalCode": "35000",
+      "department": "35",
+      "address": "146 Boulevard de la République"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 112,
+    "rooms": 4,
+    "bedrooms": 1,
+    "bathrooms": 3,
+    "constructionYear": 1864,
+    "contactPhone": "+33662054709",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=56",
+      "https://picsum.photos/800/600?random=57",
+      "https://picsum.photos/800/600?random=58"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 13282,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 978,
+          "max": 4767
+        },
+        "referenceYear": 2023,
+        "date": "2023-07-08T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "in_progress",
+      "electricity": "available",
+      "gas": "in_progress",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation"
+      ],
+      "estimatedBudget": 27279
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Calme autre 6 pièces 74m² - Marseille",
+    "description": "Calme autre de 74m² située à Marseille (13001).\n\nCaractéristiques :\n- 6 pièces principales, 3 chambres\n- 2 salles de bain\n- Surface : 74m²\n- Année de construction : 1875\n- cave\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 107020,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13001",
+      "department": "13",
+      "address": "183 Avenue Gambetta"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 74,
+    "rooms": 6,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "constructionYear": 1875,
+    "contactPhone": "+33796299441",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=57",
+      "https://picsum.photos/800/600?random=58",
+      "https://picsum.photos/800/600?random=59"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 5351,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1222,
+          "max": 3429
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-22T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "available",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 98361
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Charmante appartement 7 pièces 155m² - Paris",
+    "description": "Charmante appartement de 155m² située à Paris (75015).\n\nCaractéristiques :\n- 7 pièces principales, 3 chambres\n- 3 salles de bain\n- Surface : 155m²\n- Année de construction : 1989\n- vue dégagée\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 507408,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75015",
+      "department": "75",
+      "address": "174 Rue Clemenceau"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 155,
+    "rooms": 7,
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "constructionYear": 1989,
+    "contactPhone": "+33689182965",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=58",
+      "https://picsum.photos/800/600?random=59",
+      "https://picsum.photos/800/600?random=60"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 25370,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1419,
+          "max": 4490
+        },
+        "referenceYear": 2023,
+        "date": "2023-06-15T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 18,
+      "annualCharges": 1613,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Moderne maison 7 pièces 110m² - Lyon",
+    "description": "Moderne maison de 110m² située à Lyon (69003).\n\nCaractéristiques :\n- 7 pièces principales, 5 chambres\n- 3 salles de bain\n- Surface : 110m²\n- Année de construction : 1967\n- cheminée\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 256842,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69003",
+      "department": "69",
+      "address": "102 Rue du Commerce"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 110,
+    "rooms": 7,
+    "bedrooms": 5,
+    "bathrooms": 3,
+    "constructionYear": 1967,
+    "contactPhone": "+33613533605",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=59",
+      "https://picsum.photos/800/600?random=60",
+      "https://picsum.photos/800/600?random=61"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 12842,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 829,
+          "max": 3009
+        },
+        "referenceYear": 2023,
+        "date": "2023-12-05T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Lumineuse terrain 2 pièces 67m² - Grenoble",
+    "description": "Lumineuse terrain de 67m² située à Grenoble (38000).\n\nCaractéristiques :\n- 2 pièces principales\n- 0 salle de bain\n- Surface : 67m²\n- Année de construction : 1916\n- cheminée\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 11672,
+    "location": {
+      "city": "Grenoble",
+      "postalCode": "38000",
+      "department": "38",
+      "address": "179 Boulevard Victor Hugo"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 67,
+    "rooms": 2,
+    "constructionYear": 1916,
+    "contactPhone": "+33777503991",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=60",
+      "https://picsum.photos/800/600?random=61",
+      "https://picsum.photos/800/600?random=62"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 584,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1072,
+          "max": 2617
+        },
+        "referenceYear": 2023,
+        "date": "2023-04-05T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "in_progress",
+      "electricity": "in_progress",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 50493
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle appartement 2 pièces 91m² - Reims",
+    "description": "Exceptionnelle appartement de 91m² située à Reims (51100).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 3 salles de bain\n- Surface : 91m²\n- Année de construction : 2006\n- double vitrage\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 430440,
+    "location": {
+      "city": "Reims",
+      "postalCode": "51100",
+      "department": "51",
+      "address": "48 Avenue de la Paix"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 91,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 3,
+    "constructionYear": 2006,
+    "contactPhone": "+33624407494",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=61",
+      "https://picsum.photos/800/600?random=62",
+      "https://picsum.photos/800/600?random=63"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 21522,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1839,
+          "max": 3024
+        },
+        "referenceYear": 2023,
+        "date": "2023-06-11T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 34,
+      "annualCharges": 2569,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle terrain 8 pièces 35m² - Rennes",
+    "description": "Exceptionnelle terrain de 35m² située à Rennes (35000).\n\nCaractéristiques :\n- 8 pièces principales\n- 0 salle de bain\n- Surface : 35m²\n- Année de construction : 1977\n- garage\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 6809,
+    "location": {
+      "city": "Rennes",
+      "postalCode": "35000",
+      "department": "35",
+      "address": "88 Rue Jean Jaurès"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 35,
+    "rooms": 8,
+    "constructionYear": 1977,
+    "contactPhone": "+33764012973",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=62",
+      "https://picsum.photos/800/600?random=63",
+      "https://picsum.photos/800/600?random=64"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 340,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1239,
+          "max": 4983
+        },
+        "referenceYear": 2023,
+        "date": "2023-03-16T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 74575
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle maison 8 pièces 143m² - Marseille",
+    "description": "Exceptionnelle maison de 143m² située à Marseille (13008).\n\nCaractéristiques :\n- 8 pièces principales, 1 chambres\n- 1 salle de bain\n- Surface : 143m²\n- Année de construction : 2003\n- veranda\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 329593,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13008",
+      "department": "13",
+      "address": "167 Rue du Commerce"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 143,
+    "rooms": 8,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "constructionYear": 2003,
+    "contactPhone": "+33796580984",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=63",
+      "https://picsum.photos/800/600?random=64",
+      "https://picsum.photos/800/600?random=65"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 16480,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1561,
+          "max": 4815
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-07T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "in_progress",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Lumineuse appartement 5 pièces 198m² - Toulon",
+    "description": "Lumineuse appartement de 198m² située à Toulon (83000).\n\nCaractéristiques :\n- 5 pièces principales, 4 chambres\n- 3 salles de bain\n- Surface : 198m²\n- Année de construction : 1855\n- vue dégagée\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 865711,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "110 Rue Clemenceau"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 198,
+    "rooms": 5,
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "constructionYear": 1855,
+    "contactPhone": "+33698961610",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=64",
+      "https://picsum.photos/800/600?random=65",
+      "https://picsum.photos/800/600?random=66"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 43286,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1379,
+          "max": 3657
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-13T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "not_applicable",
+      "gas": "not_applicable",
+      "termites": "not_applicable",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie"
+      ],
+      "estimatedBudget": 13505
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 21,
+      "annualCharges": 4027,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Belle autre 7 pièces 43m² - Paris",
+    "description": "Belle autre de 43m² située à Paris (75001).\n\nCaractéristiques :\n- 7 pièces principales, 5 chambres\n- 1 salle de bain\n- Surface : 43m²\n- Année de construction : 1893\n- jardin\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 68404,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75001",
+      "department": "75",
+      "address": "88 Place Clemenceau"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 43,
+    "rooms": 7,
+    "bedrooms": 5,
+    "bathrooms": 1,
+    "constructionYear": 1893,
+    "contactPhone": "+33767388338",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=65",
+      "https://picsum.photos/800/600?random=66",
+      "https://picsum.photos/800/600?random=67"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 3420,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "F",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1869,
+          "max": 3814
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-10T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Cosy immeuble 7 pièces 136m² - Marseille",
+    "description": "Cosy immeuble de 136m² située à Marseille (13008).\n\nCaractéristiques :\n- 7 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 136m²\n- Année de construction : 1887\n- balcon\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 280241,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13008",
+      "department": "13",
+      "address": "55 Boulevard Clemenceau"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 136,
+    "rooms": 7,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1887,
+    "contactPhone": "+33619516228",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=66",
+      "https://picsum.photos/800/600?random=67",
+      "https://picsum.photos/800/600?random=68"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 14012,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 854,
+          "max": 3391
+        },
+        "referenceYear": 2023,
+        "date": "2023-06-10T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "available",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 92687
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Belle maison 3 pièces 89m² - Lyon",
+    "description": "Belle maison de 89m² située à Lyon (69001).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 89m²\n- Année de construction : 1939\n- parquet\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 199780,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69001",
+      "department": "69",
+      "address": "39 Rue de la Paix"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 89,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1939,
+    "contactPhone": "+33612698331",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=67",
+      "https://picsum.photos/800/600?random=68",
+      "https://picsum.photos/800/600?random=69"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 9989,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1421,
+          "max": 2764
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-01T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain"
+      ],
+      "estimatedBudget": 86472
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle autre 3 pièces 82m² - Marseille",
+    "description": "Exceptionnelle autre de 82m² située à Marseille (13008).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 82m²\n- Année de construction : 1999\n- piscine\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 201132,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13008",
+      "department": "13",
+      "address": "133 Boulevard du Commerce"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 82,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1999,
+    "contactPhone": "+33634130178",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=68",
+      "https://picsum.photos/800/600?random=69",
+      "https://picsum.photos/800/600?random=70"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 10057,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1213,
+          "max": 2420
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-27T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "available",
+      "electricity": "not_applicable",
+      "gas": "not_applicable",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Lumineuse autre 4 pièces 91m² - Paris",
+    "description": "Lumineuse autre de 91m² située à Paris (75010).\n\nCaractéristiques :\n- 4 pièces principales, 3 chambres\n- 2 salles de bain\n- Surface : 91m²\n- Année de construction : 1865\n- veranda\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 150825,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75010",
+      "department": "75",
+      "address": "133 Place Jean Jaurès"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 91,
+    "rooms": 4,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "constructionYear": 1865,
+    "contactPhone": "+33750771003",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=69",
+      "https://picsum.photos/800/600?random=70",
+      "https://picsum.photos/800/600?random=71"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 7541,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1479,
+          "max": 4121
+        },
+        "referenceYear": 2023,
+        "date": "2023-04-15T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Authentique autre 8 pièces 129m² - Nice",
+    "description": "Authentique autre de 129m² située à Nice (06000).\n\nCaractéristiques :\n- 8 pièces principales, 4 chambres\n- 3 salles de bain\n- Surface : 129m²\n- Année de construction : 1895\n- double vitrage\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 257176,
+    "location": {
+      "city": "Nice",
+      "postalCode": "06000",
+      "department": "06",
+      "address": "176 Boulevard de la Paix"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 129,
+    "rooms": 8,
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "constructionYear": 1895,
+    "contactPhone": "+33651849355",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=70",
+      "https://picsum.photos/800/600?random=71",
+      "https://picsum.photos/800/600?random=72"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 12859,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1622,
+          "max": 2023
+        },
+        "referenceYear": 2023,
+        "date": "2023-09-19T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "available",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 42629
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Moderne immeuble 5 pièces 131m² - Paris",
+    "description": "Moderne immeuble de 131m² située à Paris (75015).\n\nCaractéristiques :\n- 5 pièces principales, 3 chambres\n- 3 salles de bain\n- Surface : 131m²\n- Année de construction : 1899\n- garage\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 247598,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75015",
+      "department": "75",
+      "address": "103 Rue Victor Hugo"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 131,
+    "rooms": 5,
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "constructionYear": 1899,
+    "contactPhone": "+33644319168",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=71",
+      "https://picsum.photos/800/600?random=72",
+      "https://picsum.photos/800/600?random=73"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 12380,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1585,
+          "max": 3374
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-16T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "in_progress",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie"
+      ],
+      "estimatedBudget": 20095
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Moderne maison 3 pièces 101m² - Nice",
+    "description": "Moderne maison de 101m² située à Nice (06000).\n\nCaractéristiques :\n- 3 pièces principales, 1 chambres\n- 3 salles de bain\n- Surface : 101m²\n- Année de construction : 1916\n- jardin\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 237540,
+    "location": {
+      "city": "Nice",
+      "postalCode": "06000",
+      "department": "06",
+      "address": "104 Avenue Jean Jaurès"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 101,
+    "rooms": 3,
+    "bedrooms": 1,
+    "bathrooms": 3,
+    "constructionYear": 1916,
+    "contactPhone": "+33691210505",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=72",
+      "https://picsum.photos/800/600?random=73",
+      "https://picsum.photos/800/600?random=74"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 11877,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1041,
+          "max": 2288
+        },
+        "referenceYear": 2023,
+        "date": "2023-04-05T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "available",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 99354
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Charmante maison 5 pièces 115m² - Lyon",
+    "description": "Charmante maison de 115m² située à Lyon (69001).\n\nCaractéristiques :\n- 5 pièces principales, 4 chambres\n- 2 salles de bain\n- Surface : 115m²\n- Année de construction : 1916\n- cheminée\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 305332,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69001",
+      "department": "69",
+      "address": "25 Boulevard Clemenceau"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 115,
+    "rooms": 5,
+    "bedrooms": 4,
+    "bathrooms": 2,
+    "constructionYear": 1916,
+    "contactPhone": "+33756331939",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=73",
+      "https://picsum.photos/800/600?random=74",
+      "https://picsum.photos/800/600?random=75"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 15267,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 1923,
+          "max": 4655
+        },
+        "referenceYear": 2023,
+        "date": "2023-11-20T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 79532
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Moderne appartement 3 pièces 133m² - Lille",
+    "description": "Moderne appartement de 133m² située à Lille (59000).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 3 salles de bain\n- Surface : 133m²\n- Année de construction : 1902\n- exposition sud\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 390184,
+    "location": {
+      "city": "Lille",
+      "postalCode": "59000",
+      "department": "59",
+      "address": "120 Place Victor Hugo"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 133,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "constructionYear": 1902,
+    "contactPhone": "+33690194398",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=74",
+      "https://picsum.photos/800/600?random=75",
+      "https://picsum.photos/800/600?random=76"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 19509,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "E",
+        "energyCost": {
+          "min": 1129,
+          "max": 4448
+        },
+        "referenceYear": 2023,
+        "date": "2023-08-20T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "in_progress",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 82573
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 29,
+      "annualCharges": 2158,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Prestigieuse terrain 4 pièces 58m² - Lyon",
+    "description": "Prestigieuse terrain de 58m² située à Lyon (69001).\n\nCaractéristiques :\n- 4 pièces principales\n- 0 salle de bain\n- Surface : 58m²\n- Année de construction : 1890\n- balcon\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 9116,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69001",
+      "department": "69",
+      "address": "197 Rue Gambetta"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 58,
+    "rooms": 4,
+    "constructionYear": 1890,
+    "contactPhone": "+33788398764",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=75",
+      "https://picsum.photos/800/600?random=76",
+      "https://picsum.photos/800/600?random=77"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 456,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1798,
+          "max": 4885
+        },
+        "referenceYear": 2023,
+        "date": "2023-09-18T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "in_progress",
+      "electricity": "available",
+      "gas": "in_progress",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Calme maison 5 pièces 175m² - Toulon",
+    "description": "Calme maison de 175m² située à Toulon (83000).\n\nCaractéristiques :\n- 5 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 175m²\n- Année de construction : 1892\n- double vitrage\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 459019,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "200 Boulevard de la République"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 175,
+    "rooms": 5,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1892,
+    "contactPhone": "+33779481887",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=76",
+      "https://picsum.photos/800/600?random=77",
+      "https://picsum.photos/800/600?random=78"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 22951,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1116,
+          "max": 4747
+        },
+        "referenceYear": 2023,
+        "date": "2023-07-22T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "available",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "available",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 87938
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Lumineuse autre 7 pièces 120m² - Paris",
+    "description": "Lumineuse autre de 120m² située à Paris (75010).\n\nCaractéristiques :\n- 7 pièces principales, 2 chambres\n- 1 salle de bain\n- Surface : 120m²\n- Année de construction : 1997\n- garage\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 292151,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75010",
+      "department": "75",
+      "address": "71 Avenue Jean Jaurès"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 120,
+    "rooms": 7,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "constructionYear": 1997,
+    "contactPhone": "+33684793964",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=77",
+      "https://picsum.photos/800/600?random=78",
+      "https://picsum.photos/800/600?random=79"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 14608,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "E",
+        "energyCost": {
+          "min": 1949,
+          "max": 3374
+        },
+        "referenceYear": 2023,
+        "date": "2023-08-03T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "in_progress",
+      "electricity": "in_progress",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs",
+        "toiture / structure"
+      ],
+      "estimatedBudget": 52884
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Spacieuse autre 3 pièces 63m² - Lyon",
+    "description": "Spacieuse autre de 63m² située à Lyon (69003).\n\nCaractéristiques :\n- 3 pièces principales, 1 chambres\n- 1 salle de bain\n- Surface : 63m²\n- Année de construction : 1889\n- mezzanine\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 133117,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69003",
+      "department": "69",
+      "address": "98 Avenue de la République"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 63,
+    "rooms": 3,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "constructionYear": 1889,
+    "contactPhone": "+33768912911",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=78",
+      "https://picsum.photos/800/600?random=79",
+      "https://picsum.photos/800/600?random=80"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 6656,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "E",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1528,
+          "max": 3492
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-01T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Lumineuse maison 3 pièces 30m² - Nantes",
+    "description": "Lumineuse maison de 30m² située à Nantes (44000).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 3 salles de bain\n- Surface : 30m²\n- Année de construction : 1994\n- parquet\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 59174,
+    "location": {
+      "city": "Nantes",
+      "postalCode": "44000",
+      "department": "44",
+      "address": "64 Place Gambetta"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 30,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "constructionYear": 1994,
+    "contactPhone": "+33623380189",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=79",
+      "https://picsum.photos/800/600?random=80",
+      "https://picsum.photos/800/600?random=81"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 2959,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "E",
+        "gesClass": "E",
+        "energyCost": {
+          "min": 1588,
+          "max": 4947
+        },
+        "referenceYear": 2023,
+        "date": "2023-11-23T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "in_progress",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs",
+        "toiture / structure"
+      ],
+      "estimatedBudget": 59016
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Charmante autre 2 pièces 46m² - Saint-Étienne",
+    "description": "Charmante autre de 46m² située à Saint-Étienne (42000).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 3 salles de bain\n- Surface : 46m²\n- Année de construction : 1887\n- garage\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 93900,
+    "location": {
+      "city": "Saint-Étienne",
+      "postalCode": "42000",
+      "department": "42",
+      "address": "189 Rue Clemenceau"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 46,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 3,
+    "constructionYear": 1887,
+    "contactPhone": "+33779318256",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=80",
+      "https://picsum.photos/800/600?random=81",
+      "https://picsum.photos/800/600?random=82"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 4695,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1744,
+          "max": 3477
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-18T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "available",
+      "gas": "available",
+      "termites": "in_progress",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Prestigieuse maison 8 pièces 81m² - Paris",
+    "description": "Prestigieuse maison de 81m² située à Paris (75015).\n\nCaractéristiques :\n- 8 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 81m²\n- Année de construction : 1888\n- veranda\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 172252,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75015",
+      "department": "75",
+      "address": "29 Boulevard de la Paix"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 81,
+    "rooms": 8,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1888,
+    "contactPhone": "+33669694658",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=81",
+      "https://picsum.photos/800/600?random=82",
+      "https://picsum.photos/800/600?random=83"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 8613,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 1065,
+          "max": 3917
+        },
+        "referenceYear": 2023,
+        "date": "2023-01-03T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "not_applicable",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs"
+      ],
+      "estimatedBudget": 73578
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Belle immeuble 5 pièces 146m² - Lyon",
+    "description": "Belle immeuble de 146m² située à Lyon (69003).\n\nCaractéristiques :\n- 5 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 146m²\n- Année de construction : 1980\n- cheminée\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 276158,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69003",
+      "department": "69",
+      "address": "90 Boulevard Jean Jaurès"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 146,
+    "rooms": 5,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1980,
+    "contactPhone": "+33646055961",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=82",
+      "https://picsum.photos/800/600?random=83",
+      "https://picsum.photos/800/600?random=84"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 13808,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1646,
+          "max": 3283
+        },
+        "referenceYear": 2023,
+        "date": "2023-12-07T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine"
+      ],
+      "estimatedBudget": 48458
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Spacieuse appartement 8 pièces 134m² - Toulon",
+    "description": "Spacieuse appartement de 134m² située à Toulon (83000).\n\nCaractéristiques :\n- 8 pièces principales, 6 chambres\n- 1 salle de bain\n- Surface : 134m²\n- Année de construction : 1996\n- vue dégagée\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 579992,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "70 Boulevard de la République"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 134,
+    "rooms": 8,
+    "bedrooms": 6,
+    "bathrooms": 1,
+    "constructionYear": 1996,
+    "contactPhone": "+33629638397",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=83",
+      "https://picsum.photos/800/600?random=84",
+      "https://picsum.photos/800/600?random=85"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 29000,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "F",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1692,
+          "max": 4474
+        },
+        "referenceYear": 2023,
+        "date": "2023-02-15T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 28,
+      "annualCharges": 3514,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Authentique terrain 7 pièces 77m² - Montpellier",
+    "description": "Authentique terrain de 77m² située à Montpellier (34000).\n\nCaractéristiques :\n- 7 pièces principales\n- 0 salle de bain\n- Surface : 77m²\n- Année de construction : 1938\n- parking\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 14732,
+    "location": {
+      "city": "Montpellier",
+      "postalCode": "34000",
+      "department": "34",
+      "address": "197 Rue Victor Hugo"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 77,
+    "rooms": 7,
+    "constructionYear": 1938,
+    "contactPhone": "+33769499528",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=84",
+      "https://picsum.photos/800/600?random=85",
+      "https://picsum.photos/800/600?random=86"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 737,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1366,
+          "max": 2229
+        },
+        "referenceYear": 2023,
+        "date": "2023-11-18T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Calme immeuble 4 pièces 149m² - Lyon",
+    "description": "Calme immeuble de 149m² située à Lyon (69001).\n\nCaractéristiques :\n- 4 pièces principales, 1 chambres\n- 1 salle de bain\n- Surface : 149m²\n- Année de construction : 1870\n- double vitrage\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 350775,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69001",
+      "department": "69",
+      "address": "96 Boulevard Gambetta"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 149,
+    "rooms": 4,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "constructionYear": 1870,
+    "contactPhone": "+33626918651",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=85",
+      "https://picsum.photos/800/600?random=86",
+      "https://picsum.photos/800/600?random=87"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 17539,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "E",
+        "energyCost": {
+          "min": 1403,
+          "max": 2722
+        },
+        "referenceYear": 2023,
+        "date": "2023-03-13T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "not_applicable",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Charmante terrain 3 pièces 198m² - Toulon",
+    "description": "Charmante terrain de 198m² située à Toulon (83000).\n\nCaractéristiques :\n- 3 pièces principales\n- 0 salle de bain\n- Surface : 198m²\n- Année de construction : 1974\n- parquet\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 31892,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "192 Place Clemenceau"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 198,
+    "rooms": 3,
+    "constructionYear": 1974,
+    "contactPhone": "+33688375802",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=86",
+      "https://picsum.photos/800/600?random=87",
+      "https://picsum.photos/800/600?random=88"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 1595,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "D",
+        "energyCost": {
+          "min": 974,
+          "max": 2446
+        },
+        "referenceYear": 2023,
+        "date": "2023-12-17T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle appartement 5 pièces 91m² - Paris",
+    "description": "Exceptionnelle appartement de 91m² située à Paris (75010).\n\nCaractéristiques :\n- 5 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 91m²\n- Année de construction : 1968\n- double vitrage\n\nÉtat : Rénovation importante\n\nDiagnostics disponibles.",
+    "price": 334771,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75010",
+      "department": "75",
+      "address": "22 Place de la Paix"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 91,
+    "rooms": 5,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1968,
+    "contactPhone": "+33696909263",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=87",
+      "https://picsum.photos/800/600?random=88",
+      "https://picsum.photos/800/600?random=89"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 16739,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "G",
+        "energyCost": {
+          "min": 1466,
+          "max": 3421
+        },
+        "referenceYear": 2023,
+        "date": "2023-02-17T23:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 2,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain"
+      ],
+      "estimatedBudget": 72942
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 50,
+      "annualCharges": 3007,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle appartement 8 pièces 140m² - Reims",
+    "description": "Exceptionnelle appartement de 140m² située à Reims (51100).\n\nCaractéristiques :\n- 8 pièces principales, 2 chambres\n- 2 salles de bain\n- Surface : 140m²\n- Année de construction : 1999\n- parking\n\nÉtat : Bon état\n\nDiagnostics disponibles.",
+    "price": 681098,
+    "location": {
+      "city": "Reims",
+      "postalCode": "51100",
+      "department": "51",
+      "address": "104 Place du Commerce"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 140,
+    "rooms": 8,
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "constructionYear": 1999,
+    "contactPhone": "+33711231918",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=88",
+      "https://picsum.photos/800/600?random=89",
+      "https://picsum.photos/800/600?random=90"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 34055,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1340,
+          "max": 4038
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-14T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "in_progress",
+      "gas": "in_progress",
+      "termites": "available",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 4
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 81,
+      "annualCharges": 3437,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Cosy appartement 5 pièces 116m² - Nice",
+    "description": "Cosy appartement de 116m² située à Nice (06000).\n\nCaractéristiques :\n- 5 pièces principales, 4 chambres\n- 3 salles de bain\n- Surface : 116m²\n- Année de construction : 1898\n- terrasse\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 457218,
+    "location": {
+      "city": "Nice",
+      "postalCode": "06000",
+      "department": "06",
+      "address": "109 Rue du Commerce"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 116,
+    "rooms": 5,
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "constructionYear": 1898,
+    "contactPhone": "+33630346796",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=89",
+      "https://picsum.photos/800/600?random=90",
+      "https://picsum.photos/800/600?random=91"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 22861,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1045,
+          "max": 3161
+        },
+        "referenceYear": 2023,
+        "date": "2023-11-24T23:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 13,
+      "annualCharges": 1938,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Lumineuse terrain 3 pièces 183m² - Toulon",
+    "description": "Lumineuse terrain de 183m² située à Toulon (83000).\n\nCaractéristiques :\n- 3 pièces principales\n- 0 salle de bain\n- Surface : 183m²\n- Année de construction : 1964\n- mezzanine\n\nÉtat : À rénover entièrement\n\nDiagnostics disponibles.",
+    "price": 19592,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "54 Avenue Gambetta"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 183,
+    "rooms": 3,
+    "constructionYear": 1964,
+    "contactPhone": "+33746632055",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=90",
+      "https://picsum.photos/800/600?random=91",
+      "https://picsum.photos/800/600?random=92"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 980,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1788,
+          "max": 3491
+        },
+        "referenceYear": 2023,
+        "date": "2023-06-21T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "in_progress",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 1,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation",
+        "cuisine",
+        "salle de bain",
+        "sols / murs",
+        "toiture / structure"
+      ],
+      "estimatedBudget": 75254
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Prestigieuse autre 8 pièces 154m² - Lyon",
+    "description": "Prestigieuse autre de 154m² située à Lyon (69003).\n\nCaractéristiques :\n- 8 pièces principales, 6 chambres\n- 3 salles de bain\n- Surface : 154m²\n- Année de construction : 1976\n- parquet\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 219957,
+    "location": {
+      "city": "Lyon",
+      "postalCode": "69003",
+      "department": "69",
+      "address": "49 Boulevard Jean Jaurès"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 154,
+    "rooms": 8,
+    "bedrooms": 6,
+    "bathrooms": 3,
+    "constructionYear": 1976,
+    "contactPhone": "+33734180044",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=91",
+      "https://picsum.photos/800/600?random=92",
+      "https://picsum.photos/800/600?random=93"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 10998,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 1049,
+          "max": 4124
+        },
+        "referenceYear": 2023,
+        "date": "2023-12-05T23:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "in_progress",
+      "gas": "in_progress",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation"
+      ],
+      "estimatedBudget": 20655
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Calme maison 4 pièces 72m² - Nice",
+    "description": "Calme maison de 72m² située à Nice (06000).\n\nCaractéristiques :\n- 4 pièces principales, 2 chambres\n- 3 salles de bain\n- Surface : 72m²\n- Année de construction : 1934\n- garage\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 210461,
+    "location": {
+      "city": "Nice",
+      "postalCode": "06000",
+      "department": "06",
+      "address": "179 Boulevard Gambetta"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 72,
+    "rooms": 4,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "constructionYear": 1934,
+    "contactPhone": "+33652252037",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=92",
+      "https://picsum.photos/800/600?random=93",
+      "https://picsum.photos/800/600?random=94"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 10523,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "C",
+        "energyCost": {
+          "min": 1169,
+          "max": 3060
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-04T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "not_applicable",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation"
+      ],
+      "estimatedBudget": 15489
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Belle maison 3 pièces 179m² - Saint-Étienne",
+    "description": "Belle maison de 179m² située à Saint-Étienne (42000).\n\nCaractéristiques :\n- 3 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 179m²\n- Année de construction : 1978\n- exposition sud\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 422511,
+    "location": {
+      "city": "Saint-Étienne",
+      "postalCode": "42000",
+      "department": "42",
+      "address": "128 Avenue Clemenceau"
+    },
+    "propertyType": "house",
+    "transactionType": "sale",
+    "surface": 179,
+    "rooms": 3,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1978,
+    "contactPhone": "+33627777625",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=93",
+      "https://picsum.photos/800/600?random=94",
+      "https://picsum.photos/800/600?random=95"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 21126,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1627,
+          "max": 4860
+        },
+        "referenceYear": 2023,
+        "date": "2023-09-16T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "available",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Prestigieuse appartement 3 pièces 46m² - Paris",
+    "description": "Prestigieuse appartement de 46m² située à Paris (75010).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 1 salle de bain\n- Surface : 46m²\n- Année de construction : 1890\n- terrasse\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 173032,
+    "location": {
+      "city": "Paris",
+      "postalCode": "75010",
+      "department": "75",
+      "address": "192 Rue du Commerce"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 46,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "constructionYear": 1890,
+    "contactPhone": "+33729081409",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=94",
+      "https://picsum.photos/800/600?random=95",
+      "https://picsum.photos/800/600?random=96"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 8652,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "A",
+        "gesClass": "A",
+        "energyCost": {
+          "min": 1117,
+          "max": 4403
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-18T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "available",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 43,
+      "annualCharges": 1877,
+      "procedureInProgress": true
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Cosy immeuble 6 pièces 178m² - Marseille",
+    "description": "Cosy immeuble de 178m² située à Marseille (13008).\n\nCaractéristiques :\n- 6 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 178m²\n- Année de construction : 2010\n- cheminée\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 360398,
+    "location": {
+      "city": "Marseille",
+      "postalCode": "13008",
+      "department": "13",
+      "address": "104 Place de la Paix"
+    },
+    "propertyType": "building",
+    "transactionType": "sale",
+    "surface": 178,
+    "rooms": 6,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 2010,
+    "contactPhone": "+33728902205",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=95",
+      "https://picsum.photos/800/600?random=96",
+      "https://picsum.photos/800/600?random=97"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 18020,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "B",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 913,
+          "max": 2265
+        },
+        "referenceYear": 2023,
+        "date": "2023-05-05T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "not_applicable",
+      "electricity": "in_progress",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Moderne appartement 7 pièces 32m² - Nantes",
+    "description": "Moderne appartement de 32m² située à Nantes (44000).\n\nCaractéristiques :\n- 7 pièces principales, 5 chambres\n- 2 salles de bain\n- Surface : 32m²\n- Année de construction : 1880\n- piscine\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 107108,
+    "location": {
+      "city": "Nantes",
+      "postalCode": "44000",
+      "department": "44",
+      "address": "156 Rue Gambetta"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 32,
+    "rooms": 7,
+    "bedrooms": 5,
+    "bathrooms": 2,
+    "constructionYear": 1880,
+    "contactPhone": "+33628374921",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=96",
+      "https://picsum.photos/800/600?random=97",
+      "https://picsum.photos/800/600?random=98"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": false,
+      "amount": 5355,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "F",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1021,
+          "max": 2559
+        },
+        "referenceYear": 2023,
+        "date": "2023-08-05T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "available",
+      "electricity": "available",
+      "gas": "available",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 67,
+      "annualCharges": 4774,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Calme terrain 8 pièces 48m² - Nantes",
+    "description": "Calme terrain de 48m² située à Nantes (44000).\n\nCaractéristiques :\n- 8 pièces principales\n- 0 salle de bain\n- Surface : 48m²\n- Année de construction : 1897\n- mezzanine\n\nÉtat : Excellent état\n\nDiagnostics disponibles.",
+    "price": 9115,
+    "location": {
+      "city": "Nantes",
+      "postalCode": "44000",
+      "department": "44",
+      "address": "33 Rue de la Paix"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 48,
+    "rooms": 8,
+    "constructionYear": 1897,
+    "contactPhone": "+33663306137",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=97",
+      "https://picsum.photos/800/600?random=98",
+      "https://picsum.photos/800/600?random=99"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 456,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "F",
+        "energyCost": {
+          "min": 849,
+          "max": 2893
+        },
+        "referenceYear": 2023,
+        "date": "2023-10-13T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "not_applicable",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "in_progress"
+    },
+    "renovation": {
+      "level": 5
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle appartement 2 pièces 56m² - Grenoble",
+    "description": "Exceptionnelle appartement de 56m² située à Grenoble (38000).\n\nCaractéristiques :\n- 2 pièces principales, 1 chambres\n- 2 salles de bain\n- Surface : 56m²\n- Année de construction : 1898\n- garage\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 253445,
+    "location": {
+      "city": "Grenoble",
+      "postalCode": "38000",
+      "department": "38",
+      "address": "65 Rue de la République"
+    },
+    "propertyType": "apartment",
+    "transactionType": "sale",
+    "surface": 56,
+    "rooms": 2,
+    "bedrooms": 1,
+    "bathrooms": 2,
+    "constructionYear": 1898,
+    "contactPhone": "+33653116311",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=98",
+      "https://picsum.photos/800/600?random=99",
+      "https://picsum.photos/800/600?random=100"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 12672,
+      "percentage": 5,
+      "paidBy": "seller"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "D",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1330,
+          "max": 2260
+        },
+        "referenceYear": 2023,
+        "date": "2023-05-17T22:00:00.000Z"
+      },
+      "asbestos": "available",
+      "lead": "in_progress",
+      "electricity": "available",
+      "gas": "not_applicable",
+      "termites": "available",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation"
+      ],
+      "estimatedBudget": 14976
+    },
+    "copropriety": {
+      "isSubject": true,
+      "lotsCount": 35,
+      "annualCharges": 2295,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle terrain 8 pièces 186m² - Toulon",
+    "description": "Exceptionnelle terrain de 186m² située à Toulon (83000).\n\nCaractéristiques :\n- 8 pièces principales\n- 0 salle de bain\n- Surface : 186m²\n- Année de construction : 1920\n- piscine\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 25395,
+    "location": {
+      "city": "Toulon",
+      "postalCode": "83000",
+      "department": "83",
+      "address": "116 Place de la République"
+    },
+    "propertyType": "land",
+    "transactionType": "sale",
+    "surface": 186,
+    "rooms": 8,
+    "constructionYear": 1920,
+    "contactPhone": "+33633705538",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=99",
+      "https://picsum.photos/800/600?random=100",
+      "https://picsum.photos/800/600?random=101"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 1270,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "C",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 1671,
+          "max": 3330
+        },
+        "referenceYear": 2023,
+        "date": "2023-06-11T22:00:00.000Z"
+      },
+      "asbestos": "in_progress",
+      "lead": "in_progress",
+      "electricity": "available",
+      "gas": "available",
+      "termites": "in_progress",
+      "erp": "not_applicable"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation"
+      ],
+      "estimatedBudget": 14728
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  },
+  {
+    "title": "Exceptionnelle autre 3 pièces 95m² - Saint-Étienne",
+    "description": "Exceptionnelle autre de 95m² située à Saint-Étienne (42000).\n\nCaractéristiques :\n- 3 pièces principales, 2 chambres\n- 1 salle de bain\n- Surface : 95m²\n- Année de construction : 1926\n- cheminée\n\nÉtat : Rénovation partielle\n\nDiagnostics disponibles.",
+    "price": 194752,
+    "location": {
+      "city": "Saint-Étienne",
+      "postalCode": "42000",
+      "department": "42",
+      "address": "138 Boulevard du Commerce"
+    },
+    "propertyType": "other",
+    "transactionType": "sale",
+    "surface": 95,
+    "rooms": 3,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "constructionYear": 1926,
+    "contactPhone": "+33752237638",
+    "hidePhone": false,
+    "acceptTerms": true,
+    "acceptDataProcessing": true,
+    "images": [
+      "https://picsum.photos/800/600?random=100",
+      "https://picsum.photos/800/600?random=101",
+      "https://picsum.photos/800/600?random=102"
+    ],
+    "agencyId": "694f23dbca40c50d289a4d3f",
+    "fees": {
+      "included": true,
+      "amount": 9738,
+      "percentage": 5,
+      "paidBy": "buyer"
+    },
+    "currency": "EUR",
+    "diagnostics": {
+      "dpe": {
+        "energyClass": "G",
+        "gesClass": "B",
+        "energyCost": {
+          "min": 858,
+          "max": 2985
+        },
+        "referenceYear": 2023,
+        "date": "2023-03-26T22:00:00.000Z"
+      },
+      "asbestos": "not_applicable",
+      "lead": "in_progress",
+      "electricity": "not_applicable",
+      "gas": "in_progress",
+      "termites": "not_applicable",
+      "erp": "available"
+    },
+    "renovation": {
+      "level": 3,
+      "requiredWorks": [
+        "électricité",
+        "plomberie",
+        "isolation"
+      ],
+      "estimatedBudget": 13901
+    },
+    "copropriety": {
+      "isSubject": false,
+      "procedureInProgress": false
+    },
+    "agencyCertification": {
+      "certified": true,
+      "certifiedAt": "2025-12-30T11:39:44.960Z"
+    }
+  }
+]

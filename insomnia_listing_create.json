@@ -1,0 +1,84 @@
+{
+  "title": "Belle maison à rénover - 5 pièces 120m²",
+  "description": "Maison de caractère à rénover entièrement, située dans un quartier calme. Grand potentiel avec jardin, cave et garage. Idéal pour projet de rénovation. Tous les diagnostics disponibles.",
+  "price": 180000,
+  "location": {
+    "city": "Paris",
+    "postalCode": "75015",
+    "department": "75",
+    "address": "123 Rue de la République"
+  },
+  "propertyType": "house",
+  "transactionType": "sale",
+  "surface": 120,
+  "rooms": 5,
+  "bedrooms": 3,
+  "bathrooms": 1,
+  "constructionYear": 1950,
+  "externalUrl": "https://example.com/listing",
+  "contactPhone": "+33612345678",
+  "hidePhone": false,
+  "acceptTerms": true,
+  "acceptDataProcessing": true,
+  "submittedBy": "user_id_here",
+  "submitterEmail": "agency@example.com",
+  "images": [
+    "https://example.com/image1.jpg",
+    "https://example.com/image2.jpg"
+  ],
+  "agencyId": "agency_id_here",
+  "fees": {
+    "included": false,
+    "amount": 10000,
+    "percentage": 5,
+    "paidBy": "buyer"
+  },
+  "currency": "EUR",
+  "diagnostics": {
+    "dpe": {
+      "energyClass": "E",
+      "gesClass": "D",
+      "energyCost": {
+        "min": 2000,
+        "max": 3000
+      },
+      "referenceYear": 2023,
+      "date": "2023-06-15T00:00:00.000Z"
+    },
+    "asbestos": "available",
+    "lead": "available",
+    "electricity": "available",
+    "gas": "in_progress",
+    "termites": "not_applicable",
+    "erp": "not_applicable"
+  },
+  "renovation": {
+    "level": 2,
+    "requiredWorks": [
+      "électricité",
+      "plomberie",
+      "isolation",
+      "cuisine",
+      "salle de bain"
+    ],
+    "estimatedBudget": 50000
+  },
+  "copropriety": {
+    "isSubject": false,
+    "lotsCount": null,
+    "annualCharges": null,
+    "procedureInProgress": false
+  },
+  "agencyInfo": {
+    "companyName": "Agence Immobilière Example",
+    "cardNumber": "123456789",
+    "cardPrefecture": "Paris",
+    "rcpProvider": "AXA Assurance",
+    "rcpPolicyNumber": "POL-123456"
+  },
+  "agencyCertification": {
+    "certified": true,
+    "certifiedAt": "2024-01-15T10:00:00.000Z"
+  }
+}
+
