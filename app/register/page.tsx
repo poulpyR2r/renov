@@ -130,7 +130,7 @@ export default function RegisterPage() {
                 </div>
                 <h1 className="text-3xl font-bold mb-2">Créer un compte</h1>
                 <p className="text-white/90 text-base">
-                  Rejoignez RenovScout et sauvegardez vos favoris
+                  Rejoignez Maisons à Rénover et sauvegardez vos favoris
                 </p>
               </div>
 

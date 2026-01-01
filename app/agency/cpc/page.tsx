@@ -3,17 +3,13 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  CreditCard,
-  Loader2,
-  Zap,
-  Euro,
-  Info,
-} from "lucide-react";
+import { CreditCard, Loader2, Info } from "lucide-react";
 import { toast } from "sonner";
 
 interface CpcData {
+  subscription: {
+    plan: string;
+  };
   cpc: {
     balance: number;
     totalSpent: number;
@@ -23,12 +19,18 @@ interface CpcData {
   };
 }
 
-const rechargeAmounts = [20, 50, 100, 200];
+// Packs CPC disponibles (doivent correspondre aux Price IDs Stripe)
+const CPC_PACKS = [
+  { id: "pack20", label: "Pack 20€", amount: 20 },
+  { id: "pack50", label: "Pack 50€", amount: 50 },
+  { id: "pack100", label: "Pack 100€", amount: 100 },
+  { id: "pack200", label: "Pack 200€", amount: 200 },
+] as const;
 
 export default function AgencyCpcPage() {
   const [data, setData] = useState<CpcData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [rechargeAmount, setRechargeAmount] = useState<number>(50);
+  const [selectedPack, setSelectedPack] = useState<string>("pack20");
   const [isRecharging, setIsRecharging] = useState(false);
 
   useEffect(() => {
@@ -40,7 +42,10 @@ export default function AgencyCpcPage() {
       const res = await fetch("/api/agency/billing");
       const result = await res.json();
       if (result.success) {
-        setData({ cpc: result.data.cpc });
+        setData({
+          subscription: result.data.subscription,
+          cpc: result.data.cpc,
+        });
       }
     } catch (error) {
       console.error("Error fetching CPC data:", error);
@@ -49,31 +54,30 @@ export default function AgencyCpcPage() {
   };
 
   const handleRecharge = async () => {
-    if (rechargeAmount < 10) {
-      toast.error("Montant minimum: 10€");
-      return;
-    }
-
     setIsRecharging(true);
     try {
-      const res = await fetch("/api/agency/billing/recharge", {
+      const res = await fetch("/api/stripe/cpc/checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: rechargeAmount }),
+        body: JSON.stringify({ pack: selectedPack }),
       });
 
       const result = await res.json();
 
-      if (res.ok) {
-        toast.success(`${rechargeAmount}€ ajoutés à votre budget CPC`);
-        fetchCpcData();
+      if (res.ok && result.success && result.checkoutUrl) {
+        // Rediriger vers Stripe Checkout
+        window.location.href = result.checkoutUrl;
       } else {
-        toast.error(result.error);
+        toast.error(
+          result.error || "Erreur lors de la création de la session de paiement"
+        );
+        setIsRecharging(false);
       }
     } catch (error) {
-      toast.error("Erreur lors du rechargement");
+      console.error("Error creating checkout session:", error);
+      toast.error("Erreur lors de la création de la session de paiement");
+      setIsRecharging(false);
     }
-    setIsRecharging(false);
   };
 
   if (isLoading) {
@@ -108,14 +112,14 @@ export default function AgencyCpcPage() {
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Explication */}
             <div className="space-y-4">
-              <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800">
+              <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
                 <div className="flex items-start gap-3">
-                  <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <Info className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                    <h4 className="font-semibold text-blue-900 mb-2">
                       Comment fonctionne le CPC ?
                     </h4>
-                    <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-200">
+                    <ul className="space-y-2 text-sm text-blue-800">
                       <li className="flex items-start gap-2">
                         <span className="font-bold">•</span>
                         <span>
@@ -158,6 +162,14 @@ export default function AgencyCpcPage() {
                   <p className="text-2xl font-bold">
                     {data.cpc.costPerClick.toFixed(2)}€
                   </p>
+                  {(data.subscription.plan === "pro" ||
+                    data.subscription.plan === "enterprise") && (
+                    <p className="text-xs text-emerald-600 mt-1">
+                      {data.subscription.plan === "pro" ? "-20%" : "-30%"} grâce
+                      à votre plan{" "}
+                      {data.subscription.plan === "pro" ? "Pro" : "Enterprise"}
+                    </p>
+                  )}
                 </div>
                 <div className="p-4 rounded-lg bg-muted/50">
                   <p className="text-sm text-muted-foreground mb-1">
@@ -175,7 +187,7 @@ export default function AgencyCpcPage() {
                     {data.cpc.totalSpent.toFixed(2)}€
                   </p>
                 </div>
-                <div className="p-4 rounded-lg bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-800">
+                <div className="p-4 rounded-lg bg-orange-50 border border-orange-200">
                   <p className="text-sm text-muted-foreground mb-1">
                     Solde actuel
                   </p>
@@ -196,57 +208,43 @@ export default function AgencyCpcPage() {
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-2">
-                {rechargeAmounts.map((amount) => (
+              <div className="grid grid-cols-2 gap-3">
+                {CPC_PACKS.map((pack) => (
                   <Button
-                    key={amount}
-                    variant={rechargeAmount === amount ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setRechargeAmount(amount)}
+                    key={pack.id}
+                    variant={selectedPack === pack.id ? "default" : "outline"}
                     className={
-                      rechargeAmount === amount
+                      selectedPack === pack.id
                         ? "bg-orange-500 hover:bg-orange-600"
                         : ""
                     }
+                    onClick={() => setSelectedPack(pack.id)}
                   >
-                    {amount}€
+                    {pack.label}
                   </Button>
                 ))}
-                <div className="relative">
-                  <Euro className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    type="number"
-                    placeholder="Autre"
-                    className="w-24 pl-8"
-                    value={
-                      rechargeAmounts.includes(rechargeAmount)
-                        ? ""
-                        : rechargeAmount
-                    }
-                    onChange={(e) =>
-                      setRechargeAmount(parseInt(e.target.value) || 0)
-                    }
-                  />
-                </div>
               </div>
 
               <Button
                 onClick={handleRecharge}
-                disabled={isRecharging || rechargeAmount < 10}
+                disabled={isRecharging}
                 className="w-full bg-orange-500 hover:bg-orange-600"
               >
                 {isRecharging ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                    Redirection vers le paiement...
+                  </>
                 ) : (
                   <>
                     <CreditCard className="w-4 h-4 mr-2" />
-                    Recharger {rechargeAmount}€
+                    Payer avec Stripe
                   </>
                 )}
               </Button>
 
               <p className="text-xs text-muted-foreground text-center">
-                Mode démo - Pas de paiement réel
+                Paiement sécurisé via Stripe
               </p>
             </div>
           </div>
@@ -255,4 +253,3 @@ export default function AgencyCpcPage() {
     </div>
   );
 }
-

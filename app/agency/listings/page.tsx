@@ -339,25 +339,25 @@ export default function AgencyListingsPage() {
     switch (status) {
       case "active":
         return (
-          <span className="px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+          <span className="px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-700">
             Active
           </span>
         );
       case "pending":
         return (
-          <span className="px-2 py-0.5 rounded text-xs bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+          <span className="px-2 py-0.5 rounded text-xs bg-amber-100 text-amber-700">
             En attente
           </span>
         );
       case "inactive":
         return (
-          <span className="px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-400">
+          <span className="px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-700">
             Inactive
           </span>
         );
       case "sold":
         return (
-          <span className="px-2 py-0.5 rounded text-xs bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+          <span className="px-2 py-0.5 rounded text-xs bg-blue-100 text-blue-700">
             Vendu
           </span>
         );
@@ -437,7 +437,7 @@ export default function AgencyListingsPage() {
                               {listing.title}
                             </h3>
                             {listing.isSponsored && (
-                              <span className="px-2 py-0.5 rounded text-xs bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 flex items-center gap-1">
+                              <span className="px-2 py-0.5 rounded text-xs bg-orange-100 text-orange-700 flex items-center gap-1">
                                 <Zap className="w-3 h-3" />
                                 CPC
                               </span>
@@ -598,13 +598,13 @@ export default function AgencyListingsPage() {
           {cpcInfo?.hasEnoughCredits ? (
             <>
               <div className="space-y-4">
-                <div className="flex items-center gap-3 p-4 rounded-lg bg-orange-50 dark:bg-orange-950/30">
+                <div className="flex items-center gap-3 p-4 rounded-lg bg-orange-50">
                   <Zap className="w-6 h-6 text-orange-600" />
                   <div>
-                    <h3 className="font-semibold text-orange-900 dark:text-orange-100">
+                    <h3 className="font-semibold text-orange-900">
                       Sponsoriser cette annonce
                     </h3>
-                    <p className="text-sm text-orange-700 dark:text-orange-300">
+                    <p className="text-sm text-orange-700">
                       Votre annonce sera mise en avant dans les résultats de
                       recherche
                     </p>
@@ -658,13 +658,13 @@ export default function AgencyListingsPage() {
           ) : (
             <>
               <div className="space-y-4">
-                <div className="flex items-center gap-3 p-4 rounded-lg bg-amber-50 dark:bg-amber-950/30">
+                <div className="flex items-center gap-3 p-4 rounded-lg bg-amber-50">
                   <Info className="w-6 h-6 text-amber-600" />
                   <div>
-                    <h3 className="font-semibold text-amber-900 dark:text-amber-100">
+                    <h3 className="font-semibold text-amber-900">
                       Crédits CPC insuffisants
                     </h3>
-                    <p className="text-sm text-amber-700 dark:text-amber-300">
+                    <p className="text-sm text-amber-700">
                       Vous devez recharger votre budget CPC pour sponsoriser une
                       annonce
                     </p>
@@ -775,8 +775,8 @@ export default function AgencyListingsPage() {
       <Dialog open={showUpgradeDialog} onOpenChange={setShowUpgradeDialog}>
         <DialogContent>
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-              <AlertTriangle className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+            <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
+              <AlertTriangle className="w-6 h-6 text-orange-600" />
             </div>
             <div>
               <h2 className="text-xl font-bold">Attention</h2>

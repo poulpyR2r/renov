@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,6 +10,7 @@ import { ListingCard } from "@/components/listing-card";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { getListingModel } from "@/models/Listing";
+import { getHomeMetadata } from "@/lib/seo";
 import {
   Home,
   Wrench,
@@ -22,6 +24,8 @@ import {
   Building2,
   Hammer,
 } from "lucide-react";
+
+export const metadata: Metadata = getHomeMetadata();
 
 export default async function HomePage() {
   let recentListings: any[] = [];
@@ -77,19 +81,37 @@ export default async function HomePage() {
               {/* Main heading */}
               <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up leading-tight">
                 Trouvez votre{" "}
-                <span className="gradient-text">bien à rénover</span>
+                <span className="gradient-text">maison à rénover</span>
                 <br />
                 <span className="text-4xl md:text-5xl text-muted-foreground font-medium">
-                  en un seul endroit
+                  en France
                 </span>
               </h1>
 
               {/* Subtitle */}
               <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-in-up animation-delay-200 leading-relaxed">
-                RenovScout agrège les meilleures opportunités immobilières à
+                Maisons à Rénover agrège les meilleures opportunités immobilières à
                 rénover depuis toutes les plateformes françaises. Gagnez du
                 temps, trouvez la perle rare.
               </p>
+
+              {/* SEO Text Section - Visible pour les moteurs de recherche, masqué visuellement */}
+              <div className="sr-only">
+                <div className="prose prose-sm md:prose-base max-w-none">
+                  <p>
+                    <strong>Maisons à Rénover</strong> est votre moteur de recherche spécialisé pour trouver des{" "}
+                    <strong>maisons à rénover</strong> et des{" "}
+                    <strong>biens immobiliers avec travaux</strong> en France.
+                    Nous centralisons les annonces provenant des principales plateformes immobilières
+                    (LeBonCoin, SeLoger, PAP, etc.) pour vous faire gagner un temps précieux dans votre
+                    recherche. Que vous cherchiez une <strong>maison ancienne à rénover</strong>,
+                    un <strong>appartement avec travaux</strong>, ou un{" "}
+                    <strong>bien pour investissement</strong>, nos filtres avancés vous aident à
+                    identifier rapidement les opportunités correspondant à vos critères. Découvrez des biens
+                    avec un fort potentiel de rénovation et réalisez votre projet immobilier en toute sérénité.
+                  </p>
+                </div>
+              </div>
 
               {/* Search form with enhanced styling */}
               <div className="animate-fade-in-up animation-delay-300 mb-8">
@@ -143,7 +165,7 @@ export default async function HomePage() {
           <div className="container mx-auto max-w-6xl relative">
             <div className="text-center mb-16">
               <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-                Pourquoi RenovScout ?
+                Pourquoi Maisons à Rénover ?
               </span>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 La recherche immobilière{" "}

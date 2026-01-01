@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import { getAgencyByOwnerId, getAgencyModel } from "@/models/Agency";
 import { getUserByEmail } from "@/models/User";
 import { getListingModel, toggleListingSponsored } from "@/models/Listing";
+import { getCpcCostForPlan } from "@/lib/stripe-config";
 import { ObjectId } from "mongodb";
 
 export async function POST(
@@ -58,14 +59,17 @@ export async function POST(
     }
 
     // Check if enabling sponsoring and has budget
-    if (
-      isSponsored &&
-      (!agency.cpc || agency.cpc.balance < agency.cpc.costPerClick)
-    ) {
-      return NextResponse.json(
-        { error: "Budget CPC insuffisant. Veuillez recharger votre compte." },
-        { status: 400 }
-      );
+    if (isSponsored) {
+      const plan = agency.subscription?.plan || "free";
+      const baseCost = agency.cpc?.costPerClick || 0.5;
+      const costPerClick = getCpcCostForPlan(plan, baseCost);
+      
+      if (!agency.cpc || agency.cpc.balance < costPerClick) {
+        return NextResponse.json(
+          { error: "Budget CPC insuffisant. Veuillez recharger votre compte." },
+          { status: 400 }
+        );
+      }
     }
 
     await toggleListingSponsored(listingId, isSponsored);

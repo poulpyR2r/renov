@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -10,6 +11,9 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { getListingModel } from "@/models/Listing";
 import { ObjectId } from "mongodb";
+import { getListingMetadata } from "@/lib/seo";
+import { generateListingSchema, generateBreadcrumbSchema } from "@/lib/schema-org";
+import { StructuredData } from "@/components/structured-data";
 import {
   MapPin,
   Home,
@@ -257,6 +261,41 @@ function getRequiredWorkLabel(work?: string): string {
   return labels[work || ""] || work || "";
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  try {
+    const Listing = await getListingModel();
+    const listing = await Listing.findOne({
+      _id: new ObjectId(id),
+      status: "active",
+    });
+
+    if (!listing) {
+      return {
+        title: "Annonce non trouvée",
+      };
+    }
+
+    return getListingMetadata({
+      title: listing.title,
+      city: listing.location?.city || "Ville inconnue",
+      price: listing.price,
+      surface: listing.surface,
+      id: id,
+    });
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return {
+      title: "Annonce non trouvée",
+    };
+  }
+}
+
 export default async function ListingDetailPage({
   params,
 }: {
@@ -318,8 +357,51 @@ export default async function ListingDetailPage({
   const userRole = session?.user?.role;
   const showFavoriteButton = userRole !== "admin" && userRole !== "agency";
 
+  // Générer les données structurées Schema.org
+  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://renovscout.fr";
+  const listingUrl = `${BASE_URL}/l/${listing._id.toString()}`;
+  
+  const listingSchema = generateListingSchema({
+    _id: listing._id.toString(),
+    title: listing.title,
+    description: listing.description || "",
+    price: listing.price,
+    currency: listing.currency || "EUR",
+    surface: listing.surface,
+    rooms: listing.rooms,
+    bedrooms: listing.bedrooms,
+    bathrooms: listing.bathrooms,
+    location: listing.location,
+    propertyType: listing.propertyType,
+    images: listing.images,
+    url: listingUrl,
+    createdAt: listing.createdAt,
+    updatedAt: listing.updatedAt,
+  });
+
+  // Breadcrumb schema
+  const breadcrumbItems = [
+    { name: "Accueil", url: BASE_URL },
+    { name: "Recherche", url: `${BASE_URL}/search` },
+  ];
+  
+  if (listing.location?.city) {
+    breadcrumbItems.push({
+      name: listing.location.city,
+      url: `${BASE_URL}/maisons-a-renover/${listing.location.city.toLowerCase().replace(/\s+/g, "-")}`,
+    });
+  }
+  
+  breadcrumbItems.push({
+    name: listing.title,
+    url: listingUrl,
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems);
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-muted/30 to-background">
+      <StructuredData data={[listingSchema, breadcrumbSchema]} />
       <Header />
 
       {/* Tracker de vues pour les annonces d'agence */}
@@ -379,7 +461,7 @@ export default async function ListingDetailPage({
                         )}
                       </div>
                       <h1 className="text-3xl font-bold leading-tight mb-2">
-                        {listing.title}
+                        Maison à rénover à {listing.location?.city || "cette ville"}
                       </h1>
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <MapPin className="w-4 h-4" />

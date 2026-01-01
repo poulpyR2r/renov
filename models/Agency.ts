@@ -69,6 +69,18 @@ export interface IAgency {
   listingsCount: number;
   totalViews: number;
 
+  // Stripe IDs
+  stripeCustomerId?: string; // ID du Customer Stripe
+  stripeSubscriptionId?: string; // ID de l'abonnement actif
+  stripePriceId?: string; // Price ID du plan actuel
+  stripeSubscriptionStatus?:
+    | "active"
+    | "past_due"
+    | "canceled"
+    | "unpaid"
+    | "trialing";
+  stripeSubscriptionCurrentPeriodEnd?: Date; // Date de fin de période
+
   // Abonnement
   subscription: {
     plan: "free" | "starter" | "pro" | "enterprise";

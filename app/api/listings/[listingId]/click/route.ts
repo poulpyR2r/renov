@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { incrementListingClicks, getListingModel } from "@/models/Listing";
 import { getAgencyById, debitAgencyCpc } from "@/models/Agency";
+import { getCpcCostForPlan } from "@/lib/stripe-config";
 import { ObjectId } from "mongodb";
 
 export async function POST(
@@ -53,9 +54,12 @@ export async function POST(
           console.log(`[CPC] Agence trouvée:`, agency ? "Oui" : "Non");
 
           if (agency && agency.cpc) {
-            const costPerClick = agency.cpc.costPerClick || 0.5;
+            // Calculer le coût CPC avec réduction selon le plan
+            const plan = agency.subscription?.plan || "free";
+            const baseCost = agency.cpc.costPerClick || 0.5;
+            const costPerClick = getCpcCostForPlan(plan, baseCost);
             console.log(
-              `[CPC] Budget avant débit: ${agency.cpc.balance}€, coût: ${costPerClick}€`
+              `[CPC] Budget avant débit: ${agency.cpc.balance}€, coût de base: ${baseCost}€, plan: ${plan}, coût réel: ${costPerClick}€`
             );
             const debitResult = await debitAgencyCpc(agencyIdStr, costPerClick);
             console.log(`[CPC] Résultat débit:`, debitResult);

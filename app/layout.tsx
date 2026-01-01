@@ -14,7 +14,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "RenovScout - Trouvez votre bien à rénover",
+  title: "Maisons à Rénover - Trouvez votre bien à rénover",
   description:
     "Moteur de recherche d'annonces immobilières à rénover en France",
   generator: "v0.app",

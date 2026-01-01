@@ -12,7 +12,9 @@ import {
   Star,
   Crown,
   Sparkles,
+  Settings,
 } from "lucide-react";
+import { toast } from "sonner";
 
 interface SubscriptionData {
   subscription: {
@@ -21,6 +23,10 @@ interface SubscriptionData {
     startDate: string;
     endDate?: string;
     autoRenew: boolean;
+    stripeCustomerId?: string;
+    stripeSubscriptionId?: string;
+    stripeSubscriptionStatus?: "active" | "past_due" | "canceled" | "unpaid" | "trialing";
+    stripeSubscriptionCurrentPeriodEnd?: string;
   };
   currentListings: number;
 }
@@ -86,6 +92,8 @@ const plans = [
 export default function AgencySubscriptionPage() {
   const [data, setData] = useState<SubscriptionData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [subscribingPlanId, setSubscribingPlanId] = useState<string | null>(null);
+  const [isManagingSubscription, setIsManagingSubscription] = useState(false);
 
   useEffect(() => {
     fetchSubscriptionData();
@@ -129,15 +137,64 @@ export default function AgencySubscriptionPage() {
   const getPlanColor = (plan: string) => {
     switch (plan) {
       case "free":
-        return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
+        return "bg-gray-100 text-gray-700";
       case "starter":
-        return "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300";
+        return "bg-blue-100 text-blue-700";
       case "pro":
-        return "bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300";
+        return "bg-purple-100 text-purple-700";
       case "enterprise":
         return "bg-gradient-to-r from-amber-400 to-orange-500 text-white";
       default:
         return "bg-gray-100 text-gray-700";
+    }
+  };
+
+  const handleSubscribe = async (planId: "starter" | "pro" | "enterprise") => {
+    setSubscribingPlanId(planId);
+    try {
+      const res = await fetch("/api/stripe/subscription/checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ plan: planId }),
+      });
+
+      const result = await res.json();
+
+      if (res.ok && result.success && result.checkoutUrl) {
+        // Rediriger vers Stripe Checkout
+        window.location.href = result.checkoutUrl;
+      } else {
+        toast.error(result.error || "Erreur lors de la création de la session d'abonnement");
+        setSubscribingPlanId(null);
+      }
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+      toast.error("Erreur lors de la création de la session d'abonnement");
+      setSubscribingPlanId(null);
+    }
+  };
+
+  const handleManageSubscription = async () => {
+    setIsManagingSubscription(true);
+    try {
+      const res = await fetch("/api/stripe/customer-portal", {
+        method: "POST",
+      });
+
+      const result = await res.json();
+
+      if (res.ok && result.success && result.portalUrl) {
+        window.location.href = result.portalUrl;
+      } else {
+        toast.error(result.error || "Erreur lors de l'ouverture du Customer Portal");
+        setIsManagingSubscription(false);
+      }
+    } catch (error) {
+      console.error("Error opening customer portal:", error);
+      toast.error("Erreur lors de l'ouverture du Customer Portal");
+      setIsManagingSubscription(false);
     }
   };
 
@@ -205,11 +262,11 @@ export default function AgencySubscriptionPage() {
                     <div
                       className={`w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center ${
                         plan.color === "gray"
-                          ? "bg-gray-100 dark:bg-gray-800"
+                          ? "bg-gray-100"
                           : plan.color === "blue"
-                          ? "bg-blue-100 dark:bg-blue-900/40"
+                          ? "bg-blue-100"
                           : plan.color === "purple"
-                          ? "bg-purple-100 dark:bg-purple-900/40"
+                          ? "bg-purple-100"
                           : "bg-gradient-to-br from-amber-400 to-orange-500"
                       }`}
                     >
@@ -262,12 +319,22 @@ export default function AgencySubscriptionPage() {
                         ? "bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
                         : ""
                     }`}
-                    disabled={isCurrentPlan}
+                    disabled={isCurrentPlan || (subscribingPlanId !== null && subscribingPlanId !== plan.id) || plan.id === "free"}
+                    onClick={() => {
+                      if (plan.id !== "free" && !isCurrentPlan) {
+                        handleSubscribe(plan.id as "starter" | "pro" | "enterprise");
+                      }
+                    }}
                   >
                     {isCurrentPlan ? (
                       <span className="flex items-center gap-2">
                         <Check className="w-4 h-4" />
                         Plan actuel
+                      </span>
+                    ) : subscribingPlanId === plan.id ? (
+                      <span className="flex items-center gap-2">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Redirection...
                       </span>
                     ) : (
                       <span className="flex items-center gap-2">
@@ -282,6 +349,42 @@ export default function AgencySubscriptionPage() {
           })}
         </div>
       </div>
+
+      {/* Gérer l'abonnement (si abonnement payant actif) */}
+      {data.subscription.plan !== "free" && 
+       data.subscription.stripeCustomerId && 
+       data.subscription.stripeSubscriptionId && 
+       data.subscription.stripeSubscriptionStatus === "active" && (
+        <Card className="border-0 shadow-md">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-semibold text-lg mb-1">Gérer mon abonnement</h3>
+                <p className="text-sm text-muted-foreground">
+                  Mettez à jour votre méthode de paiement, changez de plan ou annulez votre abonnement
+                </p>
+              </div>
+              <Button
+                onClick={handleManageSubscription}
+                disabled={isManagingSubscription}
+                variant="outline"
+              >
+                {isManagingSubscription ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                    Ouverture...
+                  </>
+                ) : (
+                  <>
+                    <Settings className="w-4 h-4 mr-2" />
+                    Gérer mon abonnement
+                  </>
+                )}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Abonnement - Section principale */}
       {/* <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20">

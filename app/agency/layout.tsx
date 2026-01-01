@@ -331,8 +331,8 @@ export default function AgencyLayout({
       <Dialog open={showUpgradeDialog} onOpenChange={setShowUpgradeDialog}>
         <DialogContent>
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-              <AlertTriangle className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+            <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
+              <AlertTriangle className="w-6 h-6 text-orange-600" />
             </div>
             <div>
               <h2 className="text-xl font-bold">Attention</h2>

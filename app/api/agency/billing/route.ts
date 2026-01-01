@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireAgencyRole } from "@/lib/agency-rbac";
 import { getAgencyById } from "@/models/Agency";
 import { getListingModel } from "@/models/Listing";
+import { getCpcCostForPlan } from "@/lib/stripe-config";
 
 export async function GET(request: NextRequest) {
   try {
@@ -40,11 +41,18 @@ export async function GET(request: NextRequest) {
           startDate: agency.subscription?.startDate || agency.createdAt,
           endDate: agency.subscription?.endDate,
           autoRenew: agency.subscription?.autoRenew || false,
+          stripeCustomerId: agency.stripeCustomerId,
+          stripeSubscriptionId: agency.stripeSubscriptionId,
+          stripeSubscriptionStatus: agency.stripeSubscriptionStatus,
+          stripeSubscriptionCurrentPeriodEnd: agency.stripeSubscriptionCurrentPeriodEnd,
         },
         cpc: {
           balance: agency.cpc?.balance || 0,
           totalSpent: agency.cpc?.totalSpent || 0,
-          costPerClick: agency.cpc?.costPerClick || 0.5,
+          costPerClick: getCpcCostForPlan(
+            agency.subscription?.plan || "free",
+            agency.cpc?.costPerClick || 0.5
+          ),
           clicksThisMonth: agency.cpc?.clicksThisMonth || 0,
           lastRechargeAt: agency.cpc?.lastRechargeAt,
         },

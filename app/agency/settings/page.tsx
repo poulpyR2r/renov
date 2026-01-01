@@ -382,13 +382,13 @@ export default function AgencySettingsPage() {
 
       {/* Status Badge */}
       {data.status === "verified" && (
-        <div className="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 flex items-center gap-3">
+        <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center gap-3">
           <CheckCircle2 className="w-5 h-5 text-emerald-600" />
           <div>
-            <p className="font-medium text-emerald-700 dark:text-emerald-400">
+            <p className="font-medium text-emerald-700">
               Agence vérifiée
             </p>
-            <p className="text-sm text-emerald-600 dark:text-emerald-300">
+            <p className="text-sm text-emerald-600">
               Votre agence a été vérifiée et est active
             </p>
           </div>
@@ -431,7 +431,7 @@ export default function AgencySettingsPage() {
                   className={`relative w-14 h-8 rounded-full transition-colors ${
                     formData.requireApproval
                       ? "bg-orange-500"
-                      : "bg-gray-300 dark:bg-gray-600"
+                      : "bg-gray-300"
                   } ${isSavingApproval ? "opacity-50 cursor-wait" : ""}`}
                 >
                   <div
@@ -484,7 +484,7 @@ export default function AgencySettingsPage() {
                   className={`relative w-14 h-8 rounded-full transition-colors ${
                     formData.emailPreferences?.messages ?? true
                       ? "bg-primary"
-                      : "bg-gray-300 dark:bg-gray-600"
+                      : "bg-gray-300"
                   } ${isSavingMessages ? "opacity-50 cursor-wait" : ""}`}
                 >
                   <div

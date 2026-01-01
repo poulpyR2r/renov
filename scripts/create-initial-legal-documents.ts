@@ -15,13 +15,13 @@ const INITIAL_DOCUMENTS = {
 
 1. OBJET
 
-Les présentes Conditions Générales d'Utilisation (ci-après "CGU") régissent l'utilisation de la plateforme RenovScout (ci-après "la Plateforme") accessible à l'adresse www.renovscout.com.
+Les présentes Conditions Générales d'Utilisation (ci-après "CGU") régissent l'utilisation de la plateforme Maisons à Rénover (ci-après "la Plateforme") accessible à l'adresse www.renovscout.com.
 
 L'utilisation de la Plateforme implique l'acceptation sans réserve des présentes CGU par l'utilisateur.
 
 2. ÉDITEUR DE LA PLATEFORME
 
-La Plateforme est éditée par RenovScout.
+La Plateforme est éditée par Maisons à Rénover.
 
 3. ACCÈS À LA PLATEFORME
 
@@ -33,17 +33,17 @@ Les données personnelles collectées sur la Plateforme sont traitées conformé
 
 5. PROPRIÉTÉ INTELLECTUELLE
 
-L'ensemble des contenus présents sur la Plateforme (textes, images, vidéos, logos, etc.) sont la propriété exclusive de RenovScout ou de ses partenaires et sont protégés par les lois françaises et internationales relatives à la propriété intellectuelle.
+L'ensemble des contenus présents sur la Plateforme (textes, images, vidéos, logos, etc.) sont la propriété exclusive de Maisons à Rénover ou de ses partenaires et sont protégés par les lois françaises et internationales relatives à la propriété intellectuelle.
 
-Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments de la Plateforme est interdite, sauf autorisation écrite préalable de RenovScout.
+Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments de la Plateforme est interdite, sauf autorisation écrite préalable de Maisons à Rénover.
 
 6. LIMITES DE RESPONSABILITÉ
 
-RenovScout s'efforce de fournir sur la Plateforme des informations aussi précises que possible. Toutefois, RenovScout ne pourra être tenu responsable des omissions, des inexactitudes et des carences dans la mise à jour, qu'elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations.
+Maisons à Rénover s'efforce de fournir sur la Plateforme des informations aussi précises que possible. Toutefois, Maisons à Rénover ne pourra être tenu responsable des omissions, des inexactitudes et des carences dans la mise à jour, qu'elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations.
 
 7. MODIFICATION DES CGU
 
-RenovScout se réserve le droit de modifier les présentes CGU à tout moment. Les utilisateurs sont donc invités à les consulter régulièrement.
+Maisons à Rénover se réserve le droit de modifier les présentes CGU à tout moment. Les utilisateurs sont donc invités à les consulter régulièrement.
 
 8. DROIT APPLICABLE ET JURIDICTION
 
@@ -57,7 +57,7 @@ Les présentes CGU sont régies par le droit français. En cas de litige et à d
 
 1. ÉDITEUR
 
-Le site www.renovscout.com est édité par RenovScout.
+Le site www.renovscout.com est édité par Maisons à Rénover.
 
 2. HÉBERGEMENT
 
@@ -65,7 +65,7 @@ Le site est hébergé par Vercel Inc.
 
 3. DIRECTEUR DE PUBLICATION
 
-Le directeur de publication est RenovScout.
+Le directeur de publication est Maisons à Rénover.
 
 4. CONTACT
 
@@ -93,7 +93,7 @@ Le site utilise des cookies pour améliorer l'expérience utilisateur. Pour plus
 
 1. INTRODUCTION
 
-RenovScout s'engage à protéger la vie privée de ses utilisateurs. La présente Politique de Confidentialité explique comment nous collectons, utilisons et protégeons vos données personnelles.
+Maisons à Rénover s'engage à protéger la vie privée de ses utilisateurs. La présente Politique de Confidentialité explique comment nous collectons, utilisons et protégeons vos données personnelles.
 
 2. DONNÉES COLLECTÉES
 
@@ -203,17 +203,17 @@ La présente Politique de Cookies peut être modifiée à tout moment. La versio
 
 1. OBJET
 
-Les présentes Conditions Générales de Vente (ci-après "CGV") régissent les relations contractuelles entre RenovScout et les agences immobilières utilisant la Plateforme pour la mise en avant de leurs annonces immobilières.
+Les présentes Conditions Générales de Vente (ci-après "CGV") régissent les relations contractuelles entre Maisons à Rénover et les agences immobilières utilisant la Plateforme pour la mise en avant de leurs annonces immobilières.
 
 2. PARTIES
 
 Les présentes CGV sont conclues entre :
-- RenovScout, éditrice de la Plateforme
+- Maisons à Rénover, éditrice de la Plateforme
 - L'agence immobilière utilisant les services de la Plateforme (ci-après "l'Agence")
 
 3. SERVICES PROPOSÉS
 
-RenovScout propose aux agences immobilières des services de mise en avant et de promotion de leurs annonces immobilières sur la Plateforme, notamment :
+Maisons à Rénover propose aux agences immobilières des services de mise en avant et de promotion de leurs annonces immobilières sur la Plateforme, notamment :
 - Publication d'annonces immobilières
 - Mise en avant des annonces (sponsoring)
 - Statistiques et analyses de performance
@@ -225,7 +225,7 @@ Pour utiliser les services de la Plateforme, l'Agence doit créer un compte et a
 
 5. TARIFICATION
 
-Les services de mise en avant sont facturés selon les tarifs en vigueur au moment de la commande. Les tarifs sont exprimés en euros, toutes taxes comprises. RenovScout se réserve le droit de modifier ses tarifs à tout moment, étant entendu que les tarifs applicables sont ceux en vigueur au moment de la commande.
+Les services de mise en avant sont facturés selon les tarifs en vigueur au moment de la commande. Les tarifs sont exprimés en euros, toutes taxes comprises. Maisons à Rénover se réserve le droit de modifier ses tarifs à tout moment, étant entendu que les tarifs applicables sont ceux en vigueur au moment de la commande.
 
 6. PAIEMENT
 
@@ -233,8 +233,8 @@ Le paiement s'effectue selon les modalités définies lors de la souscription du
 
 7. OBLIGATIONS DES PARTIES
 
-7.1. Obligations de RenovScout
-RenovScout s'engage à :
+7.1. Obligations de Maisons à Rénover
+Maisons à Rénover s'engage à :
 - Fournir les services dans les meilleures conditions
 - Assurer la disponibilité de la Plateforme dans la mesure du possible
 - Respecter la confidentialité des données de l'Agence
@@ -247,19 +247,19 @@ L'Agence s'engage à :
 
 8. PROPRIÉTÉ INTELLECTUELLE
 
-L'ensemble des contenus de la Plateforme (textes, images, logos, etc.) sont la propriété exclusive de RenovScout. L'Agence dispose d'un droit d'utilisation non exclusif et non transférable des services de la Plateforme pour les besoins de son activité.
+L'ensemble des contenus de la Plateforme (textes, images, logos, etc.) sont la propriété exclusive de Maisons à Rénover. L'Agence dispose d'un droit d'utilisation non exclusif et non transférable des services de la Plateforme pour les besoins de son activité.
 
 9. LIMITES DE RESPONSABILITÉ
 
-RenovScout ne pourra être tenu responsable des dommages directs ou indirects résultant de l'utilisation ou de l'impossibilité d'utiliser la Plateforme, sauf en cas de faute lourde ou de dol.
+Maisons à Rénover ne pourra être tenu responsable des dommages directs ou indirects résultant de l'utilisation ou de l'impossibilité d'utiliser la Plateforme, sauf en cas de faute lourde ou de dol.
 
 10. DURÉE ET RÉSILIATION
 
-Les présentes CGV s'appliquent pour la durée d'utilisation des services par l'Agence. L'Agence peut résilier son compte à tout moment. RenovScout peut suspendre ou résilier l'accès de l'Agence en cas de manquement aux présentes CGV.
+Les présentes CGV s'appliquent pour la durée d'utilisation des services par l'Agence. L'Agence peut résilier son compte à tout moment. Maisons à Rénover peut suspendre ou résilier l'accès de l'Agence en cas de manquement aux présentes CGV.
 
 11. MODIFICATION DES CGV
 
-RenovScout se réserve le droit de modifier les présentes CGV à tout moment. Les modifications sont applicables dès leur publication sur la Plateforme.
+Maisons à Rénover se réserve le droit de modifier les présentes CGV à tout moment. Les modifications sont applicables dès leur publication sur la Plateforme.
 
 12. DROIT APPLICABLE ET JURIDICTION
 

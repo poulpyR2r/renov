@@ -146,11 +146,11 @@ export default function AgencyDashboardPage() {
   const getPlanColor = (plan: string) => {
     switch (plan) {
       case "free":
-        return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
+        return "bg-gray-100 text-gray-700";
       case "starter":
-        return "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300";
+        return "bg-blue-100 text-blue-700";
       case "pro":
-        return "bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300";
+        return "bg-purple-100 text-purple-700";
       case "enterprise":
         return "bg-gradient-to-r from-amber-400 to-orange-500 text-white";
       default:
@@ -297,11 +297,11 @@ export default function AgencyDashboardPage() {
       {/* Abonnement - Section principale (MANAGER + ADMIN seulement) */}
       {canAccessBilling && (
         <>
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-50 to-amber-50">
             <CardContent className="p-6">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-white dark:bg-gray-800 shadow-md flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-xl bg-white shadow-md flex items-center justify-center">
                     <Star className="w-7 h-7 text-orange-500" />
                   </div>
                   <div>
@@ -341,7 +341,7 @@ export default function AgencyDashboardPage() {
 
               {/* Barre de progression */}
               <div className="mt-4">
-                <div className="w-full h-3 bg-white/80 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
+                <div className="w-full h-3 bg-white/80 rounded-full overflow-hidden shadow-inner">
                   <div
                     className={`h-full rounded-full transition-all ${
                       calculatedListingsRemaining <= 0
@@ -382,13 +382,13 @@ export default function AgencyDashboardPage() {
 
           {/* Alerte limite atteinte */}
           {calculatedListingsRemaining <= 0 && (
-            <div className="p-4 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 flex items-center gap-3">
+            <div className="p-4 rounded-lg bg-red-50 border border-red-200 flex items-center gap-3">
               <AlertTriangle className="w-5 h-5 text-red-600" />
               <div className="flex-1">
-                <p className="font-medium text-red-700 dark:text-red-400">
+                <p className="font-medium text-red-700">
                   Limite d'annonces atteinte
                 </p>
-                <p className="text-sm text-red-600 dark:text-red-300">
+                <p className="text-sm text-red-600">
                   Passez à un plan supérieur pour publier plus d'annonces.
                 </p>
               </div>
@@ -405,7 +405,7 @@ export default function AgencyDashboardPage() {
         <Card className="border-0 shadow-md">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
                 <FileText className="w-5 h-5 text-blue-600" />
               </div>
               <div>
@@ -423,7 +423,7 @@ export default function AgencyDashboardPage() {
         <Card className="border-0 shadow-md">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
                 <Eye className="w-5 h-5 text-purple-600" />
               </div>
               <div>
@@ -440,7 +440,7 @@ export default function AgencyDashboardPage() {
         <Card className="border-0 shadow-md">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center">
                 <MousePointer className="w-5 h-5 text-emerald-600" />
               </div>
               <div>
@@ -457,7 +457,7 @@ export default function AgencyDashboardPage() {
         <Card className="border-0 shadow-md">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-pink-100 flex items-center justify-center">
                 <Heart className="w-5 h-5 text-pink-600" />
               </div>
               <div>
@@ -513,7 +513,7 @@ export default function AgencyDashboardPage() {
                 >
                   <div className="flex items-center gap-3">
                     {listing.isSponsored && (
-                      <span className="px-2 py-0.5 rounded text-xs bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 flex items-center gap-1">
+                      <span className="px-2 py-0.5 rounded text-xs bg-orange-100 text-orange-700 flex items-center gap-1">
                         <Zap className="w-3 h-3" />
                         Sponsorisée
                       </span>
@@ -596,8 +596,8 @@ export default function AgencyDashboardPage() {
       <Dialog open={showUpgradeDialog} onOpenChange={setShowUpgradeDialog}>
         <DialogContent>
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-              <AlertTriangle className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+            <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
+              <AlertTriangle className="w-6 h-6 text-orange-600" />
             </div>
             <div>
               <h2 className="text-xl font-bold">Attention</h2>

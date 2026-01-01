@@ -328,40 +328,28 @@ export function ListingCard({
         {/* Content Section */}
         <div className="p-4 flex flex-col h-[200px]">
           {/* Badges au-dessus du titre */}
-          <div className="flex items-center gap-2 mb-2 flex-wrap">
+          <div className="flex items-center gap-1.5 mb-2 flex-wrap min-h-[1.75rem]">
             {listing.isSponsored && (
-              <Badge className="bg-gradient-to-r from-orange-500 to-amber-500 text-white border-0 shadow-lg">
-                <Zap className="w-3.5 h-3.5 mr-1 fill-white" />
+              <Badge className="bg-gradient-to-r from-orange-500 to-amber-500 text-white border-0 shadow-lg text-xs px-2 py-0.5">
+                <Zap className="w-3 h-3 mr-1 fill-white" />
                 Sponsorisée
               </Badge>
             )}
-            {/* {typeof listing.renovationScore === "number" && (
+            {/* {listing.renovation?.level && (
               <Badge
-                className={`${getScoreColor(
-                  listing.renovationScore
-                )} border-0 shadow-lg`}
+                className={`${getRenovationLevelColor(
+                  listing.renovation.level
+                )} border-0 shadow-lg text-xs px-2 py-0.5`}
               >
-                <Sparkles className="w-3.5 h-3.5 mr-1" />
-                {listing.renovationScore} -{" "}
-                {getScoreLabel(listing.renovationScore)}
+                <TrendingUp className="w-3 h-3 mr-1" />
+                {listing.renovation.level}/5
               </Badge>
             )} */}
             {listing.renovation?.level && (
               <Badge
                 className={`${getRenovationLevelColor(
                   listing.renovation.level
-                )} border-0 shadow-lg`}
-              >
-                <TrendingUp className="w-3.5 h-3.5 mr-1" />
-                Score rénovation: {listing.renovation.level}/5
-              </Badge>
-            )}
-
-            {listing.renovation.level && (
-              <Badge
-                className={`${getRenovationLevelColor(
-                  listing.renovation.level
-                )} border-0 shadow-lg`}
+                )} border-0 shadow-lg text-xs px-2 py-0.5`}
               >
                 {getRenovationLevelLabel(listing.renovation.level)}
               </Badge>

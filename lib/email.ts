@@ -12,8 +12,8 @@ const transporter = nodemailer.createTransport({
 });
 
 const FROM_EMAIL =
-  process.env.FROM_EMAIL || "RenovScout <noreply@renovscout.com>";
-const APP_NAME = "RenovScout";
+  process.env.FROM_EMAIL || "Maisons à Rénover <noreply@renovscout.com>";
+const APP_NAME = "Maisons à Rénover";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
 export interface SendEmailOptions {
@@ -328,7 +328,7 @@ export async function sendPasswordResetEmail(
   return sendEmail({
     to,
     subject: "Réinitialisation de votre mot de passe",
-    html: wrapInLayout(content, "Réinitialisez votre mot de passe RenovScout"),
+    html: wrapInLayout(content, "Réinitialisez votre mot de passe Maisons à Rénover"),
   });
 }
 

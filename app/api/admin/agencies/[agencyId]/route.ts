@@ -94,7 +94,7 @@ export async function PATCH(
                   Publier une annonce
                 </a>
               </div>
-              <p>L'équipe RenovScout</p>
+              <p>L'équipe Maisons à Rénover</p>
             </div>
           `,
         });
@@ -110,7 +110,7 @@ export async function PATCH(
               <p>Malheureusement, nous ne pouvons pas valider votre compte pour le moment.</p>
               ${rejectionReason ? `<p><strong>Motif :</strong> ${rejectionReason}</p>` : ""}
               <p>Si vous pensez qu'il s'agit d'une erreur, n'hésitez pas à nous contacter.</p>
-              <p>L'équipe RenovScout</p>
+              <p>L'équipe Maisons à Rénover</p>
             </div>
           `,
         });

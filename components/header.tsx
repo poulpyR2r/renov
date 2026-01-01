@@ -45,7 +45,7 @@ export function Header() {
               <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-background" />
             </div>
             <span className="font-bold text-lg bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
-              RenovScout
+              Maisons à Rénover
             </span>
           </Link>
 

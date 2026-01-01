@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { getAgencyByOwnerId } from "@/models/Agency";
 import { getUserByEmail } from "@/models/User";
 import { getListingModel, getListingFavoritesCount } from "@/models/Listing";
+import { getCpcCostForPlan } from "@/lib/stripe-config";
 import { ObjectId } from "mongodb";
 
 export async function GET(request: NextRequest) {
@@ -92,7 +93,10 @@ export async function GET(request: NextRequest) {
         cpc: {
           balance: agency.cpc?.balance || 0,
           clicksThisMonth: agency.cpc?.clicksThisMonth || 0,
-          costPerClick: agency.cpc?.costPerClick || 0.5,
+          costPerClick: getCpcCostForPlan(
+            agency.subscription?.plan || "free",
+            agency.cpc?.costPerClick || 0.5
+          ),
         },
         stats: {
           totalListings: listings.length,

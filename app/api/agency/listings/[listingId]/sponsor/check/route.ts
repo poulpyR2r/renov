@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { getAgencyByOwnerId } from "@/models/Agency";
 import { getUserByEmail } from "@/models/User";
+import { getCpcCostForPlan } from "@/lib/stripe-config";
 
 export async function GET(
   request: NextRequest,
@@ -34,7 +35,9 @@ export async function GET(
     }
 
     const balance = agency.cpc?.balance || 0;
-    const costPerClick = agency.cpc?.costPerClick || 0.5;
+    const plan = agency.subscription?.plan || "free";
+    const baseCost = agency.cpc?.costPerClick || 0.5;
+    const costPerClick = getCpcCostForPlan(plan, baseCost);
     const hasEnoughCredits = balance >= costPerClick;
 
     return NextResponse.json({

@@ -723,7 +723,9 @@ export default function SearchPage() {
                 <span className="text-sm font-medium">Recherche avancée</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in-up">
-                Trouvez votre <span className="gradient-text">perle rare</span>
+                {searchParams.get("cities") 
+                  ? `Maisons à rénover à ${searchParams.get("cities")}`
+                  : "Maisons à rénover en France"}
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto animate-fade-in-up animation-delay-100">
                 Utilisez nos filtres pour affiner votre recherche et découvrir
@@ -974,6 +976,33 @@ export default function SearchPage() {
                   </Button>
                 </CardContent>
               </Card>
+            )}
+
+            {/* SEO Content Section - Visible pour les moteurs de recherche, masqué visuellement */}
+            {listings.length > 0 && (
+              <section className="sr-only">
+                <div className="container mx-auto max-w-4xl">
+                  <div className="prose prose-sm md:prose-base max-w-none">
+                    <h2>
+                      Maisons à rénover en France
+                    </h2>
+                    <p>
+                      Découvrez notre sélection de <strong>biens immobiliers à rénover</strong> en France. 
+                      Que vous cherchiez une <strong>maison ancienne avec travaux</strong>, un{" "}
+                      <strong>appartement à rénover</strong>, ou un{" "}
+                      <strong>bien pour investissement immobilier</strong>, 
+                      nos filtres avancés vous permettent de trouver rapidement les opportunités correspondant à vos critères. 
+                      Les biens présentés nécessitent des travaux de rénovation (électricité, plomberie, isolation, ravalement...) 
+                      et offrent un excellent rapport qualité-prix pour votre projet.
+                    </p>
+                    <p>
+                      Utilisez nos filtres pour affiner votre recherche par localisation, prix, surface, 
+                      type de travaux nécessaires, ou classe énergétique (DPE). Maisons à Rénover centralise les annonces 
+                      des principales plateformes immobilières pour vous faire gagner du temps dans votre recherche.
+                    </p>
+                  </div>
+                </div>
+              </section>
             )}
           </div>
         </section>

@@ -19,6 +19,30 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/change-password", request.url));
   }
 
+  // Add X-Robots-Tag header for private pages to prevent indexing
+  const privateRoutes = [
+    "/admin",
+    "/agency",
+    "/profile",
+    "/submit",
+    "/favorites",
+    "/alerts",
+    "/login",
+    "/register",
+    "/change-password",
+    "/stripe",
+  ];
+
+  const isPrivateRoute = privateRoutes.some((route) =>
+    pathname.startsWith(route)
+  );
+
+  if (isPrivateRoute) {
+    const response = NextResponse.next();
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    return response;
+  }
+
   return NextResponse.next();
 }
 

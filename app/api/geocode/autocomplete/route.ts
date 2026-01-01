@@ -78,7 +78,7 @@ async function fallbackNominatim(
 
     const response = await fetch(nominatimUrl, {
       headers: {
-        "User-Agent": "RenovScout/1.0",
+        "User-Agent": "Maisons à Rénover/1.0",
       },
     });
 

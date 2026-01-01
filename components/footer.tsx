@@ -24,7 +24,7 @@ export function Footer() {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
                 <Home className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="gradient-text">RenovScout</span>
+              <span className="gradient-text">Maisons à Rénover</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Votre moteur de recherche intelligent pour dénicher les meilleures
@@ -137,7 +137,7 @@ export function Footer() {
               À propos
             </h4>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              RenovScout agrège les annonces de biens à rénover depuis les
+              Maisons à Rénover agrège les annonces de biens à rénover depuis les
               principales plateformes immobilières françaises.
             </p>
           </div>
@@ -146,7 +146,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border/50">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} RenovScout. Tous droits réservés.
+            © {new Date().getFullYear()} Maisons à Rénover. Tous droits réservés.
           </p>
         </div>
       </div>
