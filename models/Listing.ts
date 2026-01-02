@@ -185,19 +185,33 @@ export async function incrementListingClicks(listingId: string): Promise<void> {
 export async function getAgencyListings(
   agencyId: string,
   page: number = 1,
-  limit: number = 20
+  limit: number = 20,
+  sortBy: string = "createdAt",
+  sortOrder: string = "desc",
+  statusFilter: string = "all"
 ): Promise<{ listings: IListing[]; total: number; pages: number }> {
   const Listing = await getListingModel();
 
   // Chercher par ObjectId ou string (pour compatibilité)
-  const query = {
+  const query: any = {
     $or: [{ agencyId: new ObjectId(agencyId) }, { agencyId: agencyId }],
-  } as any;
+  };
+
+  // Filtre par statut
+  if (statusFilter !== "all") {
+    query.status = statusFilter;
+  }
+
   const total = await Listing.countDocuments(query);
   const pages = Math.ceil(total / limit);
 
+  // Définir l'ordre de tri
+  const sortDirection = sortOrder === "asc" ? 1 : -1;
+  const validSortFields = ["createdAt", "price", "clicks", "views"];
+  const sortField = validSortFields.includes(sortBy) ? sortBy : "createdAt";
+
   const listings = await Listing.find(query)
-    .sort({ createdAt: -1 })
+    .sort({ [sortField]: sortDirection })
     .skip((page - 1) * limit)
     .limit(limit)
     .toArray();

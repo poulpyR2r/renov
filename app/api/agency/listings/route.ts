@@ -27,8 +27,18 @@ export async function GET(request: NextRequest) {
 
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get("page") || "1");
+    const sortBy = searchParams.get("sortBy") || "createdAt";
+    const sortOrder = searchParams.get("sortOrder") || "desc";
+    const statusFilter = searchParams.get("status") || "all";
 
-    const result = await getAgencyListings(agency._id!.toString(), page, 20);
+    const result = await getAgencyListings(
+      agency._id!.toString(),
+      page,
+      20,
+      sortBy,
+      sortOrder,
+      statusFilter
+    );
 
     // Get favorites count for each listing
     const listingsWithFavorites = await Promise.all(

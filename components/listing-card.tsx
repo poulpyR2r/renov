@@ -307,17 +307,19 @@ export function ListingCard({
           </div>
 
           {/* Navigation images */}
-          {hasMultipleImages && isHovered && (
+          {hasMultipleImages && (
             <>
               <button
                 onClick={prevImage}
-                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white shadow-lg"
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 md:w-8 md:h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-white shadow-lg touch-manipulation"
+                aria-label="Image précédente"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextImage}
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white shadow-lg"
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 md:w-8 md:h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-white shadow-lg touch-manipulation"
+                aria-label="Image suivante"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -326,7 +328,7 @@ export function ListingCard({
         </div>
 
         {/* Content Section */}
-        <div className="p-4 flex flex-col h-[200px]">
+        <div className="p-4 flex flex-col min-h-[200px]">
           {/* Badges au-dessus du titre */}
           <div className="flex items-center gap-1.5 mb-2 flex-wrap min-h-[1.75rem]">
             {listing.isSponsored && (

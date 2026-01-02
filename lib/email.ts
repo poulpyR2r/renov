@@ -301,10 +301,8 @@ export async function sendNewsletterEmail(
 export async function sendPasswordResetEmail(
   to: string,
   name: string,
-  resetToken: string
+  resetUrl: string
 ) {
-  const resetUrl = `${APP_URL}/reset-password?token=${resetToken}`;
-
   const content = `
     <div class="content">
       <h2>Réinitialisation de votre mot de passe</h2>

@@ -87,7 +87,7 @@ export function UserMenu() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-56 bg-card border rounded-xl shadow-xl overflow-hidden z-50 animate-fade-in-down">
+        <div className="absolute right-0 top-full mt-2 w-56 bg-card border rounded-xl shadow-xl overflow-hidden z-50 animate-fade-in-down max-h-[80vh] overflow-y-auto">
           <div className="p-3 border-b bg-muted/30">
             <div className="flex items-center gap-2">
               <p className="font-medium text-sm truncate">

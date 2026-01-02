@@ -62,9 +62,9 @@ export function ImagesCarousel({ images }: { images: string[] }) {
 
   return (
     <>
-      <div className="space-y-3">
+      <div className="space-y-3 w-full">
         {/* Main Carousel */}
-        <div className="relative group rounded-2xl overflow-hidden bg-muted">
+        <div className="relative group rounded-2xl overflow-hidden bg-muted w-full">
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {imgs.map((src, i) => (

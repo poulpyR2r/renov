@@ -16,6 +16,9 @@ export interface IUser {
   favorites: string[]; // Array of listing IDs
   emailVerified?: Date;
   mustChangePassword?: boolean; // Force password change on first login
+  // Password reset
+  resetPasswordToken?: string;
+  resetPasswordExpiry?: Date;
   // Email preferences
   emailPreferences?: {
     alerts: boolean; // Receive listing alerts

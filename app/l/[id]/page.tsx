@@ -12,7 +12,10 @@ import { Separator } from "@/components/ui/separator";
 import { getListingModel } from "@/models/Listing";
 import { ObjectId } from "mongodb";
 import { getListingMetadata } from "@/lib/seo";
-import { generateListingSchema, generateBreadcrumbSchema } from "@/lib/schema-org";
+import {
+  generateListingSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/schema-org";
 import { StructuredData } from "@/components/structured-data";
 import {
   MapPin,
@@ -154,9 +157,15 @@ function getDpeClassColor(klass?: string): string {
   return colors[klass || ""] || "bg-muted text-muted-foreground";
 }
 
-function DpeScale({ currentClass, label }: { currentClass?: string; label: string }) {
+function DpeScale({
+  currentClass,
+  label,
+}: {
+  currentClass?: string;
+  label: string;
+}) {
   const classes = ["A", "B", "C", "D", "E", "F", "G"];
-  
+
   return (
     <div className="space-y-2">
       <p className="text-xs text-muted-foreground font-medium">{label}</p>
@@ -169,7 +178,8 @@ function DpeScale({ currentClass, label }: { currentClass?: string; label: strin
               key={klass}
               className={`flex-1 rounded-md py-2 text-center text-sm font-bold transition-all ${
                 isCurrent
-                  ? colorClass + " ring-2 ring-offset-2 ring-primary scale-105 shadow-md"
+                  ? colorClass +
+                    " ring-2 ring-offset-2 ring-primary scale-105 shadow-md"
                   : colorClass + " opacity-60"
               }`}
             >
@@ -180,11 +190,14 @@ function DpeScale({ currentClass, label }: { currentClass?: string; label: strin
       </div>
       {currentClass && (
         <p className="text-xs text-muted-foreground text-center">
-          Classe actuelle : <span className="font-semibold text-foreground">{currentClass}</span>
+          Classe actuelle :{" "}
+          <span className="font-semibold text-foreground">{currentClass}</span>
         </p>
       )}
       {!currentClass && (
-        <p className="text-xs text-muted-foreground text-center">Non renseigné</p>
+        <p className="text-xs text-muted-foreground text-center">
+          Non renseigné
+        </p>
       )}
     </div>
   );
@@ -360,7 +373,7 @@ export default async function ListingDetailPage({
   // Générer les données structurées Schema.org
   const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://renovscout.fr";
   const listingUrl = `${BASE_URL}/l/${listing._id.toString()}`;
-  
+
   const listingSchema = generateListingSchema({
     _id: listing._id.toString(),
     title: listing.title,
@@ -384,14 +397,16 @@ export default async function ListingDetailPage({
     { name: "Accueil", url: BASE_URL },
     { name: "Recherche", url: `${BASE_URL}/search` },
   ];
-  
+
   if (listing.location?.city) {
     breadcrumbItems.push({
       name: listing.location.city,
-      url: `${BASE_URL}/maisons-a-renover/${listing.location.city.toLowerCase().replace(/\s+/g, "-")}`,
+      url: `${BASE_URL}/maisons-a-renover/${listing.location.city
+        .toLowerCase()
+        .replace(/\s+/g, "-")}`,
     });
   }
-  
+
   breadcrumbItems.push({
     name: listing.title,
     url: listingUrl,
@@ -400,17 +415,17 @@ export default async function ListingDetailPage({
   const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-muted/30 to-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-muted/30 to-background overflow-x-hidden">
       <StructuredData data={[listingSchema, breadcrumbSchema]} />
       <Header />
 
       {/* Tracker de vues pour les annonces d'agence */}
       <ListingViewTracker listingId={listing._id.toString()} />
 
-      <main className="flex-1">
+      <main className="flex-1 w-full overflow-x-hidden">
         {/* Top Navigation */}
-        <div className="sticky top-0 z-40 glass border-b">
-          <div className="container mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+        <div className="sticky top-0 z-40 glass border-b w-full">
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6 py-3 flex items-center justify-between w-full">
             <Button asChild variant="ghost" size="sm" className="gap-2">
               <Link href="/search">
                 <ArrowLeft className="w-4 h-4" />
@@ -434,10 +449,10 @@ export default async function ListingDetailPage({
           </div>
         </div>
 
-        <div className="container mx-auto max-w-7xl px-4 py-8">
-          <div className="grid lg:grid-cols-3 gap-8">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 py-6 sm:py-8 w-full">
+          <div className="grid lg:grid-cols-3 gap-6 md:gap-8 w-full">
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-6 w-full min-w-0">
               {/* Images Carousel */}
               <ImagesCarousel images={listing.images || []} />
 
@@ -461,7 +476,8 @@ export default async function ListingDetailPage({
                         )}
                       </div>
                       <h1 className="text-3xl font-bold leading-tight mb-2">
-                        Maison à rénover à {listing.location?.city || "cette ville"}
+                        Maison à rénover à{" "}
+                        {listing.location?.city || "cette ville"}
                       </h1>
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <MapPin className="w-4 h-4" />
@@ -488,7 +504,7 @@ export default async function ListingDetailPage({
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                     {listing.surface && (
                       <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
                         <Ruler className="w-5 h-5 text-primary" />
@@ -507,7 +523,9 @@ export default async function ListingDetailPage({
                           <p className="text-xs text-muted-foreground">
                             Superficie du terrain
                           </p>
-                          <p className="font-semibold">{listing.landSurface} m²</p>
+                          <p className="font-semibold">
+                            {listing.landSurface} m²
+                          </p>
                         </div>
                       </div>
                     )}
@@ -582,38 +600,47 @@ export default async function ListingDetailPage({
                           <Thermometer className="w-4 h-4" />
                           Diagnostic de Performance Énergétique (DPE)
                         </h3>
-                        
+
                         {/* Statut DPE */}
                         <div className="p-4 rounded-lg bg-muted/50">
                           <p className="text-xs text-muted-foreground mb-1">
                             Statut
                           </p>
                           <p className="font-semibold">
-                            {listing.diagnostics.dpe.status === "available" && "Disponible"}
-                            {listing.diagnostics.dpe.status === "in_progress" && "En cours de réalisation"}
-                            {listing.diagnostics.dpe.status === "not_applicable" && "Non concerné"}
+                            {listing.diagnostics.dpe.status === "available" &&
+                              "Disponible"}
+                            {listing.diagnostics.dpe.status === "in_progress" &&
+                              "En cours de réalisation"}
+                            {listing.diagnostics.dpe.status ===
+                              "not_applicable" && "Non concerné"}
                             {!listing.diagnostics.dpe.status && "Non spécifié"}
                           </p>
                         </div>
 
                         {/* Classes DPE (seulement si disponible) */}
-                        {listing.diagnostics.dpe.status === "available" && listing.diagnostics.dpe.energyClass && listing.diagnostics.dpe.gesClass && (
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="p-4 rounded-lg border">
-                              <DpeScale
-                                currentClass={listing.diagnostics.dpe.energyClass}
-                                label="Classe Énergie"
-                              />
+                        {listing.diagnostics.dpe.status === "available" &&
+                          listing.diagnostics.dpe.energyClass &&
+                          listing.diagnostics.dpe.gesClass && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                              <div className="p-4 rounded-lg border">
+                                <DpeScale
+                                  currentClass={
+                                    listing.diagnostics.dpe.energyClass
+                                  }
+                                  label="Classe Énergie"
+                                />
+                              </div>
+                              <div className="p-4 rounded-lg border">
+                                <DpeScale
+                                  currentClass={
+                                    listing.diagnostics.dpe.gesClass
+                                  }
+                                  label="Classe GES"
+                                />
+                              </div>
                             </div>
-                            <div className="p-4 rounded-lg border">
-                              <DpeScale
-                                currentClass={listing.diagnostics.dpe.gesClass}
-                                label="Classe GES"
-                              />
-                            </div>
-                          </div>
-                        )}
-                        
+                          )}
+
                         {/* Détails DPE (seulement si disponible) */}
                         {listing.diagnostics.dpe.status === "available" && (
                           <>

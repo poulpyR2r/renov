@@ -33,8 +33,8 @@ export function Header() {
     agencyRole === "AGENCY_ADMIN" || agencyRole === "AGENCY_MANAGER";
 
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
-      <div className="container mx-auto px-4">
+    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50 w-full">
+      <div className="container mx-auto px-4 w-full">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
@@ -42,9 +42,8 @@ export function Header() {
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/25 group-hover:shadow-orange-500/40 transition-shadow">
                 <Home className="w-4.5 h-4.5 text-white" />
               </div>
-              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-background" />
             </div>
-            <span className="font-bold text-lg bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
+            <span className="font-bold text-sm sm:text-base md:text-lg bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent whitespace-nowrap">
               Maisons à Rénover
             </span>
           </Link>
@@ -144,14 +143,14 @@ export function Header() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-border/50 bg-background/95 backdrop-blur-xl">
+        <div className="md:hidden border-t border-border bg-background">
           <nav className="container mx-auto px-4 py-3 space-y-1">
             <Link
               href="/search"
               onClick={() => setIsMenuOpen(false)}
               className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
             >
-              <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-blue-100  flex items-center justify-center">
                 <Search className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               </div>
               Rechercher des biens
@@ -162,7 +161,7 @@ export function Header() {
               onClick={() => setIsMenuOpen(false)}
               className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
             >
-              <div className="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-emerald-100  flex items-center justify-center">
                 <PlusCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               </div>
               Soumettre une annonce
@@ -175,7 +174,7 @@ export function Header() {
                 onClick={() => setIsMenuOpen(false)}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
               >
-                <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-orange-100  flex items-center justify-center">
                   <Shield className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                 </div>
                 Panneau admin
@@ -190,7 +189,7 @@ export function Header() {
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-orange-100  flex items-center justify-center">
                     <LayoutDashboard className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                   </div>
                   Tableau de bord
@@ -200,7 +199,7 @@ export function Header() {
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-orange-100  flex items-center justify-center">
                     <FileText className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                   </div>
                   Mes annonces
@@ -211,7 +210,7 @@ export function Header() {
                     onClick={() => setIsMenuOpen(false)}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-orange-100  flex items-center justify-center">
                       <CreditCard className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                     </div>
                     Facturation & CPC
@@ -228,7 +227,7 @@ export function Header() {
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-red-100  flex items-center justify-center">
                     <Heart className="w-4 h-4 text-red-600 dark:text-red-400" />
                   </div>
                   Mes favoris
@@ -238,7 +237,7 @@ export function Header() {
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-amber-100  flex items-center justify-center">
                     <Bell className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                   </div>
                   Mes alertes

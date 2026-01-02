@@ -1089,30 +1089,24 @@ export function ListingsMap({
             showSidebar && !isMobile ? "right-4" : "right-3"
           }`}
         >
-          <Button
-            variant="secondary"
-            size="icon"
+          <button
             onClick={handleZoomIn}
-            className="shadow-lg bg-white/90 backdrop-blur hover:bg-white dark:bg-stone-800/90 h-8 w-8 md:h-9 md:w-9"
+            className="h-10 w-10 rounded-lg shadow-lg bg-white hover:bg-gray-100 dark:bg-stone-800 dark:hover:bg-stone-700 flex items-center justify-center text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-stone-600"
           >
-            <ZoomIn className="w-4 h-4" />
-          </Button>
-          <Button
-            variant="secondary"
-            size="icon"
+            <ZoomIn className="w-5 h-5" />
+          </button>
+          <button
             onClick={handleZoomOut}
-            className="shadow-lg bg-white/90 backdrop-blur hover:bg-white dark:bg-stone-800/90 h-8 w-8 md:h-9 md:w-9"
+            className="h-10 w-10 rounded-lg shadow-lg bg-white hover:bg-gray-100 dark:bg-stone-800 dark:hover:bg-stone-700 flex items-center justify-center text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-stone-600"
           >
-            <ZoomOut className="w-4 h-4" />
-          </Button>
-          <Button
-            variant="secondary"
-            size="icon"
+            <ZoomOut className="w-5 h-5" />
+          </button>
+          <button
             onClick={handleLocate}
-            className="shadow-lg bg-white/90 backdrop-blur hover:bg-white dark:bg-stone-800/90 h-8 w-8 md:h-9 md:w-9"
+            className="h-10 w-10 rounded-lg shadow-lg bg-white hover:bg-gray-100 dark:bg-stone-800 dark:hover:bg-stone-700 flex items-center justify-center text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-stone-600"
           >
-            <Locate className="w-4 h-4" />
-          </Button>
+            <Locate className="w-5 h-5" />
+          </button>
         </div>
 
         {/* CTA Rechercher dans cette zone */}
@@ -1169,7 +1163,7 @@ export function ListingsMap({
                         variant="ghost"
                         size="icon"
                         onClick={prevImage}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full h-8 w-8 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full h-10 w-10 md:h-8 md:w-8 z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity touch-manipulation"
                         aria-label="Image précédente"
                       >
                         <ChevronLeft className="w-5 h-5" />
@@ -1178,7 +1172,7 @@ export function ListingsMap({
                         variant="ghost"
                         size="icon"
                         onClick={nextImage}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full h-8 w-8 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full h-10 w-10 md:h-8 md:w-8 z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity touch-manipulation"
                         aria-label="Image suivante"
                       >
                         <ChevronRight className="w-5 h-5" />

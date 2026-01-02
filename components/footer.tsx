@@ -13,8 +13,8 @@ export function Footer() {
       {/* Decorative background */}
       <div className="absolute inset-0 pattern-grid opacity-20" />
 
-      <div className="container mx-auto max-w-6xl relative px-4 py-16">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
+      <div className="container mx-auto max-w-6xl relative px-4 py-8 md:py-16">
+        <div className="grid md:grid-cols-4 gap-6 md:gap-12 mb-8 md:mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
             <Link

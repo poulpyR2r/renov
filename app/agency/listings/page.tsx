@@ -19,10 +19,22 @@ import {
   Edit,
   CreditCard,
   Info,
+  CheckCircle,
+  ArrowUpDown,
+  Calendar,
+  BadgeEuro,
+  Filter,
 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { useAgencyRole } from "@/hooks/useAgencyRole";
 import { useRouter } from "next/navigation";
@@ -73,6 +85,11 @@ export default function AgencyListingsPage() {
     null
   );
   const [showUpgradeDialog, setShowUpgradeDialog] = useState(false);
+  const [soldDialogOpen, setSoldDialogOpen] = useState(false);
+  const [listingToMarkSold, setListingToMarkSold] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<string>("createdAt");
+  const [sortOrder, setSortOrder] = useState<string>("desc");
+  const [statusFilter, setStatusFilter] = useState<string>("active");
   const agencyRole = useAgencyRole();
   const canSponsor =
     agencyRole === "AGENCY_ADMIN" || agencyRole === "AGENCY_MANAGER";
@@ -81,7 +98,7 @@ export default function AgencyListingsPage() {
 
   useEffect(() => {
     fetchListings();
-  }, [page]);
+  }, [page, sortBy, sortOrder, statusFilter]);
 
   // Récupérer le quota d'annonces disponibles
   useEffect(() => {
@@ -114,7 +131,12 @@ export default function AgencyListingsPage() {
   const fetchListings = async () => {
     setIsLoading(true);
     try {
-      const params = new URLSearchParams({ page: page.toString() });
+      const params = new URLSearchParams({
+        page: page.toString(),
+        sortBy,
+        sortOrder,
+        status: statusFilter,
+      });
 
       const res = await fetch(`/api/agency/listings?${params}`);
       const data = await res.json();
@@ -335,6 +357,39 @@ export default function AgencyListingsPage() {
     }
   };
 
+  const handleMarkSoldClick = (listingId: string) => {
+    setListingToMarkSold(listingId);
+    setSoldDialogOpen(true);
+  };
+
+  const handleMarkSold = async () => {
+    if (!listingToMarkSold) return;
+
+    setActionLoading(listingToMarkSold);
+    setSoldDialogOpen(false);
+    try {
+      const res = await fetch(`/api/agency/listings/${listingToMarkSold}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "sold" }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success("Annonce marquée comme vendue");
+        fetchListings();
+      } else {
+        toast.error(data.error || "Erreur lors de la mise à jour");
+      }
+    } catch (error) {
+      toast.error("Erreur lors de la mise à jour");
+    } finally {
+      setActionLoading(null);
+      setListingToMarkSold(null);
+    }
+  };
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
@@ -369,7 +424,7 @@ export default function AgencyListingsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold">Mes annonces</h2>
           <p className="text-muted-foreground">
@@ -383,6 +438,73 @@ export default function AgencyListingsPage() {
           <Plus className="w-4 h-4 mr-2" />
           Nouvelle annonce
         </Button>
+      </div>
+
+      {/* Filters */}
+      <div className="flex flex-wrap items-center gap-3">
+        {/* Filtre par statut */}
+        <div className="flex items-center gap-2">
+          <Filter className="w-4 h-4 text-muted-foreground" />
+          <Select value={statusFilter} onValueChange={(value) => { setStatusFilter(value); setPage(1); }}>
+            <SelectTrigger className="w-[140px]">
+              <SelectValue placeholder="Statut" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Toutes</SelectItem>
+              <SelectItem value="active">Actives</SelectItem>
+              <SelectItem value="pending">En attente</SelectItem>
+              <SelectItem value="inactive">Inactives</SelectItem>
+              <SelectItem value="sold">Vendues</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Tri */}
+        <div className="flex items-center gap-2">
+          <ArrowUpDown className="w-4 h-4 text-muted-foreground" />
+          <Select value={sortBy} onValueChange={(value) => { setSortBy(value); setPage(1); }}>
+            <SelectTrigger className="w-[140px]">
+              <SelectValue placeholder="Trier par" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="createdAt">
+                <span className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  Date
+                </span>
+              </SelectItem>
+              <SelectItem value="price">
+                <span className="flex items-center gap-2">
+                  <BadgeEuro className="w-4 h-4" />
+                  Prix
+                </span>
+              </SelectItem>
+              <SelectItem value="views">
+                <span className="flex items-center gap-2">
+                  <Eye className="w-4 h-4" />
+                  Vues
+                </span>
+              </SelectItem>
+              <SelectItem value="clicks">
+                <span className="flex items-center gap-2">
+                  <MousePointer className="w-4 h-4" />
+                  Clics
+                </span>
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Ordre */}
+        <Select value={sortOrder} onValueChange={(value) => { setSortOrder(value); setPage(1); }}>
+          <SelectTrigger className="w-[130px]">
+            <SelectValue placeholder="Ordre" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="desc">Plus récent</SelectItem>
+            <SelectItem value="asc">Plus ancien</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Listings */}
@@ -505,15 +627,27 @@ export default function AgencyListingsPage() {
                         )}
 
                         {canValidate && listing.status === "active" && (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleDeactivateClick(listing._id)}
-                            disabled={actionLoading === listing._id}
-                            className="text-amber-600 hover:text-amber-700 hover:bg-amber-50"
-                          >
-                            Désactiver
-                          </Button>
+                          <>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleMarkSoldClick(listing._id)}
+                              disabled={actionLoading === listing._id}
+                              className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                            >
+                              <CheckCircle className="w-4 h-4 mr-1" />
+                              Vendu
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleDeactivateClick(listing._id)}
+                              disabled={actionLoading === listing._id}
+                              className="text-amber-600 hover:text-amber-700 hover:bg-amber-50"
+                            >
+                              Désactiver
+                            </Button>
+                          </>
                         )}
 
                         {canValidate && listing.status === "inactive" && (
@@ -767,6 +901,18 @@ export default function AgencyListingsPage() {
         title="Activer cette annonce"
         description="L'annonce sera à nouveau visible sur le site."
         confirmText="Activer"
+        cancelText="Annuler"
+        variant="default"
+      />
+
+      {/* Mark as Sold Confirmation Dialog */}
+      <ConfirmDialog
+        open={soldDialogOpen}
+        onOpenChange={setSoldDialogOpen}
+        onConfirm={handleMarkSold}
+        title="Marquer comme vendu"
+        description="Cette annonce sera déplacée dans la section 'Vendues'. Elle ne sera plus visible sur le site public."
+        confirmText="Confirmer la vente"
         cancelText="Annuler"
         variant="default"
       />

@@ -703,12 +703,12 @@ export default function SearchPage() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
       <Header />
 
-      <main className="flex-1">
+      <main className="flex-1 w-full overflow-x-hidden">
         {/* Hero Section */}
-        <section className="relative py-16 px-4 overflow-hidden">
+        <section className="relative py-16 px-4 overflow-hidden w-full">
           <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50/50 to-teal-50/30" />
           <div className="absolute inset-0 pattern-dots opacity-40" />
 
@@ -716,7 +716,7 @@ export default function SearchPage() {
           <div className="absolute top-10 right-[10%] w-16 h-16 bg-gradient-to-br from-primary/20 to-transparent rounded-2xl rotate-12 animate-float" />
           <div className="absolute bottom-10 left-[5%] w-12 h-12 bg-gradient-to-br from-accent/20 to-transparent rounded-full animate-float-reverse" />
 
-          <div className="container mx-auto max-w-6xl relative">
+          <div className="container mx-auto max-w-6xl relative w-full">
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 animate-fade-in-down">
                 <Search className="w-4 h-4 text-primary" />
@@ -751,8 +751,8 @@ export default function SearchPage() {
         />
 
         {/* Filters & Results Section */}
-        <section className="py-8 px-4 relative z-10">
-          <div className="container mx-auto max-w-6xl">
+        <section className="py-8 px-4 relative z-10 w-full overflow-x-hidden">
+          <div className="container mx-auto max-w-6xl w-full">
             {/* Results Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div className="flex items-center gap-3">
@@ -778,7 +778,8 @@ export default function SearchPage() {
                 )}
               </div>
 
-              <div className="flex items-center gap-2">
+              {/* Boutons grille/liste - masqués sur mobile */}
+              <div className="hidden sm:flex items-center gap-2">
                 <Button
                   variant={viewMode === "grid" ? "secondary" : "ghost"}
                   size="sm"
@@ -816,8 +817,8 @@ export default function SearchPage() {
                 <div
                   className={
                     viewMode === "grid"
-                      ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-                      : "flex flex-col gap-4"
+                      ? "grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 w-full"
+                      : "flex flex-col gap-4 w-full"
                   }
                 >
                   {listings.map((listing, index) => (

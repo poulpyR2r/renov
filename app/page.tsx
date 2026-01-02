@@ -54,7 +54,7 @@ export default async function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
           {/* Background with gradient and pattern */}
           <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-teal-50" />
           <div className="absolute inset-0 pattern-dots opacity-60" />
@@ -121,7 +121,7 @@ export default async function HomePage() {
               </div>
 
               {/* Quick stats */}
-              <div className="flex flex-wrap justify-center gap-8 mt-12 animate-fade-in-up animation-delay-400">
+              <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-12 animate-fade-in-up animation-delay-400">
                 <div className="flex items-center gap-2">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Building2 className="w-5 h-5 text-primary" />

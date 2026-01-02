@@ -72,82 +72,119 @@ export function FilterBar({
 
   const hasActiveChips = filters.cities?.length > 0 || filters.minPrice || filters.maxPrice || filters.propertyTypes.length > 0;
 
+  // Sur mobile : on montre seulement Carte, Localisation et Filtres
+  // Sur desktop : on montre tous les boutons
+  const allButtons = [
+    { key: "map", component: (
+      <Button
+        key="map"
+        variant="outline"
+        size="default"
+        onClick={onShowMap}
+        className="rounded-full h-9 sm:h-10 px-4 sm:px-4 md:px-6 whitespace-nowrap sm:flex-1 sm:min-w-0 sm:max-w-[200px] text-sm"
+      >
+        <Map className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
+        Carte
+      </Button>
+    )},
+    { key: "location", component: (
+      <Button
+        key="location"
+        variant="outline"
+        size="default"
+        onClick={onOpenLocation}
+        className="rounded-full h-9 sm:h-10 px-4 sm:px-4 md:px-6 whitespace-nowrap sm:flex-1 sm:min-w-0 sm:max-w-[250px] text-sm"
+      >
+        <MapPin className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2 shrink-0" />
+        <span className="truncate max-w-[140px] sm:max-w-none">
+          {filters.cities?.length > 0
+            ? filters.cities.length === 1
+              ? filters.cities[0]
+              : `${filters.cities.length} villes`
+            : "Choisir une localisation"}
+        </span>
+        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 ml-1.5 sm:ml-2 shrink-0" />
+      </Button>
+    )},
+    { key: "propertyType", component: (
+      <Button
+        key="propertyType"
+        variant="outline"
+        size="default"
+        onClick={onOpenPropertyType}
+        className="rounded-full h-9 sm:h-10 px-4 sm:px-4 md:px-6 whitespace-nowrap sm:flex-1 sm:min-w-0 sm:max-w-[200px] text-sm"
+      >
+        <Home className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2 shrink-0" />
+        <span className="truncate capitalize">{getPropertyTypeLabel()}</span>
+        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 ml-1.5 sm:ml-2 shrink-0" />
+      </Button>
+    )},
+    { key: "price", component: (
+      <Button
+        key="price"
+        variant="outline"
+        size="default"
+        onClick={onOpenPrice}
+        className="rounded-full h-9 sm:h-10 px-4 sm:px-4 md:px-6 whitespace-nowrap sm:flex-1 sm:min-w-0 sm:max-w-[200px] text-sm"
+      >
+        <CircleDollarSign className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2 shrink-0" />
+        <span className="truncate">{getPriceLabel()}</span>
+        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 ml-1.5 sm:ml-2 shrink-0" />
+      </Button>
+    )},
+    { key: "filters", component: (
+      <Button
+        key="filters"
+        variant="outline"
+        size="default"
+        onClick={onOpenFilters}
+        className="rounded-full h-9 sm:h-10 px-4 sm:px-4 md:px-6 whitespace-nowrap sm:flex-1 sm:min-w-0 sm:max-w-[200px] relative text-sm"
+      >
+        <SlidersHorizontal className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2 shrink-0" />
+        Filtres
+        {activeFiltersCount > 0 && (
+          <Badge
+            variant="destructive"
+            className="absolute -top-1 -right-1 h-5 w-5 sm:h-6 sm:w-6 rounded-full p-0 flex items-center justify-center text-[10px] sm:text-xs"
+          >
+            {activeFiltersCount}
+          </Badge>
+        )}
+      </Button>
+    )},
+  ];
+
+  // Sur mobile : seulement Carte, Localisation et Filtres (index 0, 1, 4)
+  // Sur desktop : tous les boutons
+  const mobileVisibleKeys = ["map", "location", "filters"];
+
   return (
     <div className="sticky top-0 z-40 bg-background border-b">
       {/* Pills bar */}
-      <div className="container mx-auto px-4 py-4 max-w-6xl">
-        <div className="flex items-center justify-center gap-3 flex-wrap">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={onShowMap}
-            className="rounded-full h-11 px-6 whitespace-nowrap flex-1 min-w-[140px] max-w-[200px]"
-          >
-            <Map className="h-5 w-5 mr-2" />
-            Carte
-          </Button>
-
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={onOpenLocation}
-            className="rounded-full h-11 px-6 whitespace-nowrap flex-1 min-w-[200px] max-w-[250px]"
-          >
-            <MapPin className="h-5 w-5 mr-2" />
-            <span className="truncate">
-              {filters.cities?.length > 0
-                ? filters.cities.length === 1
-                  ? filters.cities[0]
-                  : `${filters.cities.length} villes`
-                : "Choisir une localisation"}
-            </span>
-            <ChevronRight className="h-5 w-5 ml-2 shrink-0" />
-          </Button>
-
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={onOpenPropertyType}
-            className="rounded-full h-11 px-6 whitespace-nowrap flex-1 min-w-[160px] max-w-[200px]"
-          >
-            <Home className="h-5 w-5 mr-2" />
-                    <span className="truncate capitalize">{getPropertyTypeLabel()}</span>
-            <ChevronRight className="h-5 w-5 ml-2 shrink-0" />
-          </Button>
-
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={onOpenPrice}
-            className="rounded-full h-11 px-6 whitespace-nowrap flex-1 min-w-[140px] max-w-[200px]"
-          >
-            <CircleDollarSign className="h-5 w-5 mr-2" />
-            <span className="truncate">{getPriceLabel()}</span>
-            <ChevronRight className="h-5 w-5 ml-2 shrink-0" />
-          </Button>
-
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={onOpenFilters}
-            className="rounded-full h-11 px-6 whitespace-nowrap flex-1 min-w-[140px] max-w-[200px] relative"
-          >
-            <SlidersHorizontal className="h-5 w-5 mr-2" />
-            Filtres
-            {activeFiltersCount > 0 && (
-              <Badge
-                variant="destructive"
-                className="absolute -top-1 -right-1 h-6 w-6 rounded-full p-0 flex items-center justify-center text-xs"
+      <div className="container mx-auto px-3 sm:px-4 py-2 sm:py-3 max-w-6xl">
+        {/* Mobile : scroll horizontal */}
+        <div className="flex items-center gap-2 sm:gap-2 md:gap-3 overflow-x-auto scrollbar-hide sm:flex-wrap sm:justify-center pb-2 sm:pb-0">
+          {/* Boutons : Carte, Localisation, Filtres sur mobile / Tous sur desktop */}
+          {allButtons.map(({ key, component }) => {
+            const isVisibleOnMobile = mobileVisibleKeys.includes(key);
+            return (
+              <div 
+                key={key} 
+                className={
+                  isVisibleOnMobile
+                    ? "flex-shrink-0 sm:flex sm:flex-1 sm:min-w-0" 
+                    : "hidden sm:flex sm:flex-1 sm:min-w-0"
+                }
               >
-                {activeFiltersCount}
-              </Badge>
-            )}
-          </Button>
+                {component}
+              </div>
+            );
+          })}
         </div>
 
         {/* Context chips */}
         {hasActiveChips && (
-          <div className="flex items-center gap-2 mt-2 flex-wrap">
+          <div className="flex items-center gap-1.5 sm:gap-2 mt-1.5 sm:mt-2 flex-wrap">
             <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-muted text-sm">
               <span>Ventes immobilières</span>
               <ChevronRight className="h-3 w-3" />
