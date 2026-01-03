@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import { auth } from "@/auth";
 import { getAgencyModel, getAgencyById } from "@/models/Agency";
 import { PackType, getPackConfig } from "@/lib/packs";
 import { ObjectId } from "mongodb";
@@ -14,7 +13,7 @@ export async function PATCH(
   context: { params: Promise<{ agencyId: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
     
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json(
@@ -97,7 +96,7 @@ export async function GET(
   context: { params: Promise<{ agencyId: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
     
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json(

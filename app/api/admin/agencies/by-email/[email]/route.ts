@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import { auth } from "@/auth";
 import { getAgencyModel } from "@/models/Agency";
 import { PackType, getPackConfig } from "@/lib/packs";
 
@@ -13,7 +12,7 @@ export async function GET(
   context: { params: Promise<{ email: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
     
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json(
