@@ -12,18 +12,11 @@ WORKDIR /app
 # Installer les dépendances système nécessaires
 RUN apk add --no-cache libc6-compat
 
-# Copier les fichiers de dépendances
-COPY package.json package-lock.json* pnpm-lock.yaml* ./
+# Copier les fichiers de dépendances (npm uniquement)
+COPY package.json package-lock.json* ./
 
-# Installer les dépendances avec npm (ou pnpm si préféré)
-RUN \
-  if [ -f pnpm-lock.yaml ]; then \
-    corepack enable pnpm && pnpm i --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then \
-    npm ci; \
-  else \
-    npm i; \
-  fi
+# Installer les dépendances avec npm
+RUN npm ci --legacy-peer-deps
 
 # ============================================
 # STAGE 2: Builder
