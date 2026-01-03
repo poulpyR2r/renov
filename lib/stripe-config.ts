@@ -1,12 +1,34 @@
 import Stripe from "stripe";
 import { PackType, getPackConfig } from "./packs";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error("STRIPE_SECRET_KEY is not set");
+// ============================================
+// STRIPE CLIENT - Initialisation lazy
+// ============================================
+
+let stripeInstance: Stripe | null = null;
+
+/**
+ * Obtient l'instance Stripe (initialisation lazy)
+ * Permet le build sans STRIPE_SECRET_KEY
+ */
+export function getStripe(): Stripe {
+  if (!stripeInstance) {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      throw new Error("STRIPE_SECRET_KEY is not set");
+    }
+    stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      typescript: true,
+    });
+  }
+  return stripeInstance;
 }
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  typescript: true,
+// Export pour compatibilité (usage direct)
+// Note: Utiliser getStripe() de préférence
+export const stripe = new Proxy({} as Stripe, {
+  get(_, prop) {
+    return getStripe()[prop as keyof Stripe];
+  },
 });
 
 // Mapping des packs vers les Price IDs Stripe
