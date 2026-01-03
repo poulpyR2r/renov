@@ -72,14 +72,6 @@ services:
       - "traefik.http.routers.maisonsarenover-app.tls.certresolver=le"
       - "traefik.http.routers.maisonsarenover-app.service=maisonsarenover-app"
       
-      # ==========================================
-      # Router API (HTTPS) - api.maisons-a-renover.fr
-      # Pointe vers le même service (Next.js gère les routes /api/*)
-      # ==========================================
-      - "traefik.http.routers.maisonsarenover-api.rule=Host(`api.maisons-a-renover.fr`)"
-      - "traefik.http.routers.maisonsarenover-api.entrypoints=websecure"
-      - "traefik.http.routers.maisonsarenover-api.tls.certresolver=le"
-      - "traefik.http.routers.maisonsarenover-api.service=maisonsarenover-app"
       
       # ==========================================
       # Service - Port interne
@@ -93,12 +85,6 @@ services:
       - "traefik.http.routers.maisonsarenover-app-redirect.entrypoints=web"
       - "traefik.http.routers.maisonsarenover-app-redirect.middlewares=maisonsarenover-redirect-https"
       
-      # ==========================================
-      # Redirection HTTP -> HTTPS (API)
-      # ==========================================
-      - "traefik.http.routers.maisonsarenover-api-redirect.rule=Host(`api.maisons-a-renover.fr`)"
-      - "traefik.http.routers.maisonsarenover-api-redirect.entrypoints=web"
-      - "traefik.http.routers.maisonsarenover-api-redirect.middlewares=maisonsarenover-redirect-https"
       
       # ==========================================
       # Middleware - Redirection HTTPS
