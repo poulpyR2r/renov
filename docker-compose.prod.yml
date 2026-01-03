@@ -54,6 +54,7 @@ services:
       # URLs de production
       - NEXT_PUBLIC_APP_URL=https://maisons-a-renover.fr
       - NEXTAUTH_URL=https://maisons-a-renover.fr
+      - AUTH_TRUST_HOST=true
     depends_on:
       db:
         condition: service_healthy
