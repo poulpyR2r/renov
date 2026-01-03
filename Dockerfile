@@ -46,8 +46,8 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Installer les dépendances système minimales
-RUN apk add --no-cache libc6-compat
+# Installer les dépendances système minimales (wget pour healthcheck)
+RUN apk add --no-cache libc6-compat wget
 
 # Variables d'environnement de production
 ENV NODE_ENV=production
