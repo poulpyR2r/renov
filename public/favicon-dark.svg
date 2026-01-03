@@ -1,0 +1,10 @@
+<svg width="32" height="32" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- For dark mode: light background -->
+  <rect width="180" height="180" rx="40" fill="#ffffff"/>
+  <rect x="45" y="85" width="90" height="70" rx="4" fill="#f97316"/>
+  <path d="M30 90 L90 35 L150 90 L140 90 L90 50 L40 90 Z" fill="#dc2626"/>
+  <rect x="75" y="110" width="30" height="45" rx="3" fill="#374151"/>
+  <circle cx="98" cy="135" r="3" fill="#fbbf24"/>
+  <rect x="52" y="95" width="18" height="18" rx="2" fill="#fef3c7"/>
+  <rect x="110" y="95" width="18" height="18" rx="2" fill="#fef3c7"/>
+</svg>
