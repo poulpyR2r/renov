@@ -46,8 +46,18 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Installer les dépendances système minimales (wget pour healthcheck)
-RUN apk add --no-cache libc6-compat wget
+# Installer les dépendances système minimales (wget pour healthcheck + su-exec pour switch user)
+RUN apk add --no-cache libc6-compat wget su-exec
+
+# Créer le script d'entrée qui fixe les permissions puis lance la commande en tant que nextjs
+RUN echo '#!/bin/sh' > /docker-entrypoint.sh && \
+  echo 'set -e' >> /docker-entrypoint.sh && \
+  echo 'if [ -d "/app/public/uploads" ]; then' >> /docker-entrypoint.sh && \
+  echo '  chown -R nextjs:nodejs /app/public/uploads 2>/dev/null || true' >> /docker-entrypoint.sh && \
+  echo '  chmod -R 755 /app/public/uploads 2>/dev/null || true' >> /docker-entrypoint.sh && \
+  echo 'fi' >> /docker-entrypoint.sh && \
+  echo 'exec su-exec nextjs "$@"' >> /docker-entrypoint.sh && \
+  chmod +x /docker-entrypoint.sh
 
 # Variables d'environnement de production
 ENV NODE_ENV=production
@@ -62,8 +72,8 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Changer vers l'utilisateur non-root
-USER nextjs
+# Créer le dossier uploads par défaut (sera remplacé par le volume)
+RUN mkdir -p ./public/uploads && chown -R nextjs:nodejs ./public/uploads
 
 # Exposer le port
 EXPOSE 3000
@@ -71,6 +81,9 @@ EXPOSE 3000
 # Healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1
+
+# Point d'entrée (exécuté en tant que root pour fixer les permissions, puis switch vers nextjs)
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Commande de démarrage
 CMD ["node", "server.js"]

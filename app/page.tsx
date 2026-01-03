@@ -90,25 +90,30 @@ export default async function HomePage() {
 
               {/* Subtitle */}
               <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-in-up animation-delay-200 leading-relaxed">
-                Maisons à Rénover agrège les meilleures opportunités immobilières à
-                rénover depuis toutes les plateformes françaises. Gagnez du
-                temps, trouvez la perle rare.
+                Maisons à Rénover agrège les meilleures opportunités
+                immobilières à rénover depuis toutes les plateformes françaises.
+                Gagnez du temps, trouvez la perle rare.
               </p>
 
               {/* SEO Text Section - Visible pour les moteurs de recherche, masqué visuellement */}
               <div className="sr-only">
                 <div className="prose prose-sm md:prose-base max-w-none">
                   <p>
-                    <strong>Maisons à Rénover</strong> est votre moteur de recherche spécialisé pour trouver des{" "}
+                    <strong>Maisons à Rénover</strong> est votre moteur de
+                    recherche spécialisé pour trouver des{" "}
                     <strong>maisons à rénover</strong> et des{" "}
                     <strong>biens immobiliers avec travaux</strong> en France.
-                    Nous centralisons les annonces provenant des principales plateformes immobilières
-                    (LeBonCoin, SeLoger, PAP, etc.) pour vous faire gagner un temps précieux dans votre
-                    recherche. Que vous cherchiez une <strong>maison ancienne à rénover</strong>,
-                    un <strong>appartement avec travaux</strong>, ou un{" "}
-                    <strong>bien pour investissement</strong>, nos filtres avancés vous aident à
-                    identifier rapidement les opportunités correspondant à vos critères. Découvrez des biens
-                    avec un fort potentiel de rénovation et réalisez votre projet immobilier en toute sérénité.
+                    Nous centralisons les annonces provenant des principales
+                    plateformes immobilières (LeBonCoin, SeLoger, PAP, etc.)
+                    pour vous faire gagner un temps précieux dans votre
+                    recherche. Que vous cherchiez une{" "}
+                    <strong>maison ancienne à rénover</strong>, un{" "}
+                    <strong>appartement avec travaux</strong>, ou un{" "}
+                    <strong>bien pour investissement</strong>, nos filtres
+                    avancés vous aident à identifier rapidement les opportunités
+                    correspondant à vos critères. Découvrez des biens avec un
+                    fort potentiel de rénovation et réalisez votre projet
+                    immobilier en toute sérénité.
                   </p>
                 </div>
               </div>
@@ -273,16 +278,6 @@ export default async function HomePage() {
                   <h3 className="text-xl font-semibold mb-2">
                     Aucune annonce disponible
                   </h3>
-                  <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                    Les annonces apparaîtront ici une fois le scraping lancé.
-                    Commencez dès maintenant !
-                  </p>
-                  <Button asChild size="lg" className="animate-pulse-glow">
-                    <Link href="/admin">
-                      <Zap className="w-4 h-4 mr-2" />
-                      Lancer le scraping
-                    </Link>
-                  </Button>
                 </CardContent>
               </Card>
             )}
