@@ -54,6 +54,9 @@ export async function GET(request: NextRequest) {
           images: l.images,
           status: l.status,
           isSponsored: l.isSponsored || false,
+          sponsorStartAt: l.sponsoredAt,
+          sponsorEndAt: l.sponsoredUntil,
+          autoBoostApplied: l.autoBoostApplied || false, // ✅ Auto-boost gratuit PRO/PREMIUM
           views: l.views || 0,
           clicks: l.clicks || 0,
           favorites: favoritesCount,

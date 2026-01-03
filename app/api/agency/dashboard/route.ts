@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { getAgencyByOwnerId } from "@/models/Agency";
+import { getAgencyByOwnerId, getAgencyActiveListingsCount } from "@/models/Agency";
 import { getUserByEmail } from "@/models/User";
 import { getListingModel, getListingFavoritesCount } from "@/models/Listing";
-import { getCpcCostForPlan } from "@/lib/stripe-config";
+import { getCpcCostForPack, getCpcMaxDurationDays } from "@/lib/stripe-config";
+import { PackType, getPackConfig, canViewStat } from "@/lib/packs";
+import { getAgencyContactsCount } from "@/models/Contact";
 import { ObjectId } from "mongodb";
 
 export async function GET(request: NextRequest) {
@@ -31,13 +33,14 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // ✅ Récupérer le pack et sa configuration
+    const pack: PackType = agency.subscription?.pack || "FREE";
+    const packConfig = getPackConfig(pack);
+
     // Get listings stats
     const Listing = await getListingModel();
-    const now = new Date();
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-
-    // Get agency listings - chercher par ObjectId ou string
     const agencyIdStr = agency._id?.toString();
+    
     const listings = await Listing.find({
       $or: [{ agencyId: agency._id }, { agencyId: agencyIdStr }],
     } as any).toArray();
@@ -45,7 +48,7 @@ export async function GET(request: NextRequest) {
     const activeListings = listings.filter((l) => l.status === "active");
     const sponsoredListings = listings.filter((l) => l.isSponsored);
 
-    // Calculate stats
+    // Calculate stats (toujours visibles : vues et clics)
     const totalViews = listings.reduce((sum, l) => sum + (l.views || 0), 0);
     const totalClicks = listings.reduce((sum, l) => sum + (l.clicks || 0), 0);
 
@@ -57,9 +60,7 @@ export async function GET(request: NextRequest) {
       )
       .slice(0, 5)
       .map(async (l) => {
-        const favoritesCount = await getListingFavoritesCount(
-          l._id!.toString()
-        );
+        const favoritesCount = await getListingFavoritesCount(l._id!.toString());
         return {
           _id: l._id?.toString(),
           title: l.title,
@@ -78,6 +79,16 @@ export async function GET(request: NextRequest) {
       listings.map((l) => getListingFavoritesCount(l._id!.toString()))
     ).then((counts) => counts.reduce((sum, count) => sum + count, 0));
 
+    // ✅ Compteur d'annonces actives pour limite
+    const activeListingsCount = await getAgencyActiveListingsCount(agencyIdStr!);
+
+    // ✅ Contacts (visible seulement pour STARTER+) - DONNÉES RÉELLES
+    let totalContacts = 0;
+    const canSeeContacts = canViewStat(pack, "contacts");
+    if (canSeeContacts && agencyIdStr) {
+      totalContacts = await getAgencyContactsCount(agencyIdStr);
+    }
+
     return NextResponse.json({
       success: true,
       data: {
@@ -85,18 +96,36 @@ export async function GET(request: NextRequest) {
           companyName: agency.companyName,
           status: agency.status,
         },
-        subscription: {
-          plan: agency.subscription?.plan || "free",
-          maxListings: agency.subscription?.maxListings || 5,
-          endDate: agency.subscription?.endDate,
+        // ✅ Nouveau format avec pack
+        pack: {
+          type: pack,
+          name: packConfig.name,
+          maxActiveListings: packConfig.maxActiveListings,
+          currentActiveListings: activeListingsCount,
+          remainingListings: packConfig.maxActiveListings === -1 
+            ? Infinity 
+            : Math.max(0, packConfig.maxActiveListings - activeListingsCount),
+          cpcDiscount: packConfig.cpcDiscount,
+          cpcMaxDurationDays: packConfig.cpcMaxDurationDays,
+          badge: packConfig.features.badge,
+          // Stats visibles selon le pack
+          visibleStats: {
+            views: packConfig.stats.views,
+            clicks: packConfig.stats.clicks,
+            contacts: packConfig.stats.contacts,
+            performancePerListing: packConfig.stats.performancePerListing,
+            costPerContact: packConfig.stats.costPerContact,
+            globalPerformance: packConfig.stats.globalPerformance,
+            performanceByZone: packConfig.stats.performanceByZone,
+          },
         },
         cpc: {
           balance: agency.cpc?.balance || 0,
           clicksThisMonth: agency.cpc?.clicksThisMonth || 0,
-          costPerClick: getCpcCostForPlan(
-            agency.subscription?.plan || "free",
-            agency.cpc?.costPerClick || 0.5
-          ),
+          costPerClick: getCpcCostForPack(pack, agency.cpc?.costPerClick || 0.5),
+          baseCost: agency.cpc?.costPerClick || 0.5,
+          discount: packConfig.cpcDiscount,
+          maxDurationDays: getCpcMaxDurationDays(pack),
         },
         stats: {
           totalListings: listings.length,
@@ -105,8 +134,11 @@ export async function GET(request: NextRequest) {
           totalViews,
           totalClicks,
           totalFavorites,
-          viewsThisMonth: totalViews, // Pour l'instant, on montre toutes les vues
-          clicksThisMonth: totalClicks, // Pour l'instant, on montre tous les clics
+          // ✅ Contacts (restreint selon pack)
+          totalContacts: canSeeContacts ? totalContacts : null,
+          contactsLocked: !canSeeContacts,
+          viewsThisMonth: totalViews,
+          clicksThisMonth: totalClicks,
         },
         recentListings,
       },

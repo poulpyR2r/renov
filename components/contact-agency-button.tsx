@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { MessageSquare } from "lucide-react";
 import { toast } from "sonner";
+import { trackContact } from "@/lib/track-contact";
 
 interface ContactAgencyButtonProps {
   listingId: string;
@@ -43,6 +44,9 @@ export function ContactAgencyButton({
     // Utilisateur connecté : créer la conversation
     setIsLoading(true);
     try {
+      // ✅ Tracker le contact
+      await trackContact(listingId, "message");
+
       const response = await fetch(`/api/listings/${listingId}/conversations`, {
         method: "POST",
         headers: {

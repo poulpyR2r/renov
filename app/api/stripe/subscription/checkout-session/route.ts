@@ -3,8 +3,20 @@ import { requireAgencyRole } from "@/lib/agency-rbac";
 import { getAgencyById } from "@/models/Agency";
 import { getOrCreateStripeCustomer } from "@/lib/stripe-helpers";
 import { stripe } from "@/lib/stripe-config";
-import { getStripePriceIdForPlan, PLAN_MAX_LISTINGS } from "@/lib/stripe-config";
 import Stripe from "stripe";
+import { PackType, getPackConfig, getEffectivePrice } from "@/lib/packs";
+
+// Mapping des packs vers les Stripe Price IDs
+// Ces IDs doivent être configurés dans Stripe Dashboard
+function getStripePriceIdForPack(pack: PackType): string {
+  const priceIds: Record<PackType, string> = {
+    FREE: "", // Pas de prix pour le pack gratuit
+    STARTER: process.env.STRIPE_PRICE_ID_STARTER || "price_starter",
+    PRO: process.env.STRIPE_PRICE_ID_PRO || "price_pro",
+    PREMIUM: process.env.STRIPE_PRICE_ID_PREMIUM || "price_premium",
+  };
+  return priceIds[pack];
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,20 +40,30 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { plan } = body; // "starter", "pro", "enterprise"
+    const { pack } = body; // "STARTER", "PRO", "PREMIUM"
 
-    if (!plan || !["starter", "pro", "enterprise"].includes(plan)) {
+    // Valider le pack
+    const validPacks: PackType[] = ["STARTER", "PRO", "PREMIUM"];
+    if (!pack || !validPacks.includes(pack)) {
       return NextResponse.json(
-        { error: "Plan invalide. Choisissez parmi: starter, pro, enterprise" },
+        { error: "Pack invalide. Choisissez parmi: STARTER, PRO, PREMIUM" },
         { status: 400 }
       );
     }
 
-    // Vérifier si l'agence a déjà un abonnement actif
-    // Si oui, Stripe gérera automatiquement le changement de plan via le Customer Portal
-    // Ici, on crée une nouvelle session pour un nouvel abonnement ou un upgrade
+    // Vérifier que ce n'est pas un downgrade
+    const currentPack = agency.subscription?.pack || "FREE";
+    const currentPriority = getPackConfig(currentPack as PackType).displayPriority;
+    const targetPriority = getPackConfig(pack).displayPriority;
 
-    const priceId = getStripePriceIdForPlan(plan as "starter" | "pro" | "enterprise");
+    if (targetPriority <= currentPriority && currentPack !== "FREE") {
+      return NextResponse.json(
+        { error: "Impossible de changer vers un pack inférieur. Contactez le support." },
+        { status: 400 }
+      );
+    }
+
+    const priceId = getStripePriceIdForPack(pack);
 
     // Créer ou récupérer le Stripe Customer
     const customerId = await getOrCreateStripeCustomer(
@@ -57,7 +79,7 @@ export async function POST(request: NextRequest) {
     const subscriptionData: Stripe.Checkout.SessionCreateParams.SubscriptionData = {
       metadata: {
         agencyId: authResult.agencyId,
-        plan: plan,
+        pack: pack,
       },
     };
 
@@ -78,7 +100,7 @@ export async function POST(request: NextRequest) {
       metadata: {
         agencyId: authResult.agencyId,
         type: "subscription",
-        plan: plan,
+        pack: pack,
       },
       // Permettre la mise à jour de l'abonnement si un abonnement existe déjà
       // Stripe gérera automatiquement le changement de plan
@@ -87,7 +109,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      checkoutUrl: session.url,
+      url: session.url,
       sessionId: session.id,
     });
   } catch (error: any) {

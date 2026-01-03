@@ -51,10 +51,52 @@ interface Listing {
   images: string[];
   status: string;
   isSponsored: boolean;
+  sponsorEndAt?: string;
+  autoBoostApplied?: boolean; // ✅ Auto-boost gratuit PRO/PREMIUM (pas de CPC)
   views: number;
   clicks: number;
   favorites: number;
   createdAt: string;
+}
+
+// Fonction pour calculer le temps restant du sponsoring (arrondi intelligent)
+function getRemainingTime(endDate: string): string {
+  const end = new Date(endDate);
+  const now = new Date();
+  const diffMs = end.getTime() - now.getTime();
+  
+  if (diffMs <= 0) return "Expiré";
+  
+  const totalHours = diffMs / (1000 * 60 * 60);
+  const totalDays = totalHours / 24;
+  
+  // Arrondir au jour supérieur si plus de 23h dans le jour
+  const roundedDays = Math.ceil(totalDays);
+  const remainingHours = Math.floor(totalHours % 24);
+  const remainingMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+  
+  // Si plus de 1 jour
+  if (totalDays >= 1) {
+    // Si presque un jour complet (> 22h), afficher le jour arrondi
+    if (remainingHours >= 22) {
+      return `${roundedDays}j`;
+    }
+    // Sinon afficher jours + heures
+    const days = Math.floor(totalDays);
+    return `${days}j ${remainingHours}h`;
+  } 
+  // Si moins d'1 jour mais plus d'1 heure
+  else if (totalHours >= 1) {
+    const hours = Math.floor(totalHours);
+    return `${hours}h ${remainingMinutes}min`;
+  } 
+  // Moins d'1 heure
+  else if (remainingMinutes > 0) {
+    return `${remainingMinutes}min`;
+  } 
+  else {
+    return "< 1min";
+  }
 }
 
 export default function AgencyListingsPage() {
@@ -70,6 +112,8 @@ export default function AgencyListingsPage() {
     hasEnoughCredits: boolean;
     balance: number;
     costPerClick: number;
+    maxDurationDays: number;
+    cpcDiscount: number;
   } | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [listingToDelete, setListingToDelete] = useState<string | null>(null);
@@ -163,6 +207,8 @@ export default function AgencyListingsPage() {
           hasEnoughCredits: data.hasEnoughCredits,
           balance: data.balance,
           costPerClick: data.costPerClick,
+          maxDurationDays: data.maxDurationDays || 7,
+          cpcDiscount: data.cpcDiscount || 0,
         });
         setSelectedListing(listingId);
         setSponsorDialogOpen(true);
@@ -559,9 +605,18 @@ export default function AgencyListingsPage() {
                               {listing.title}
                             </h3>
                             {listing.isSponsored && (
-                              <span className="px-2 py-0.5 rounded text-xs bg-orange-100 text-orange-700 flex items-center gap-1">
+                              <span className={`px-2 py-0.5 rounded text-xs flex items-center gap-1 ${
+                                listing.autoBoostApplied 
+                                  ? "bg-purple-100 text-purple-700" 
+                                  : "bg-orange-100 text-orange-700"
+                              }`}>
                                 <Zap className="w-3 h-3" />
-                                CPC
+                                {listing.autoBoostApplied ? "Boost PRO" : "CPC"}
+                                {listing.sponsorEndAt && (
+                                  <span className={listing.autoBoostApplied ? "text-purple-600 font-medium" : "text-orange-600 font-medium"}>
+                                    • {getRemainingTime(listing.sponsorEndAt)}
+                                  </span>
+                                )}
                               </span>
                             )}
                             {getStatusBadge(listing.status)}
@@ -667,38 +722,48 @@ export default function AgencyListingsPage() {
                         )}
 
                         {canSponsor && (
-                          <Button
-                            size="sm"
-                            variant={
-                              listing.isSponsored ? "outline" : "default"
-                            }
-                            onClick={() =>
-                              handleToggleSponsored(
-                                listing._id,
-                                listing.isSponsored
-                              )
-                            }
-                            disabled={actionLoading === listing._id}
-                            className={
-                              listing.isSponsored
-                                ? ""
-                                : "bg-orange-500 hover:bg-orange-600"
-                            }
-                          >
-                            {actionLoading === listing._id ? (
-                              <Loader2 className="w-4 h-4 animate-spin" />
-                            ) : listing.isSponsored ? (
-                              <>
-                                <ZapOff className="w-4 h-4 mr-1" />
-                                Arrêter CPC
-                              </>
+                          <>
+                            {/* ✅ Si auto-boost actif : afficher info, pas de bouton arrêter */}
+                            {listing.isSponsored && listing.autoBoostApplied ? (
+                              <span className="text-xs text-purple-600 flex items-center gap-1 px-2 py-1 bg-purple-50 rounded">
+                                <Zap className="w-3 h-3" />
+                                Boost PRO gratuit
+                              </span>
                             ) : (
-                              <>
-                                <Zap className="w-4 h-4 mr-1" />
-                                Sponsoriser
-                              </>
+                              <Button
+                                size="sm"
+                                variant={
+                                  listing.isSponsored ? "outline" : "default"
+                                }
+                                onClick={() =>
+                                  handleToggleSponsored(
+                                    listing._id,
+                                    listing.isSponsored
+                                  )
+                                }
+                                disabled={actionLoading === listing._id}
+                                className={
+                                  listing.isSponsored
+                                    ? ""
+                                    : "bg-orange-500 hover:bg-orange-600"
+                                }
+                              >
+                                {actionLoading === listing._id ? (
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                ) : listing.isSponsored ? (
+                                  <>
+                                    <ZapOff className="w-4 h-4 mr-1" />
+                                    Arrêter CPC
+                                  </>
+                                ) : (
+                                  <>
+                                    <Zap className="w-4 h-4 mr-1" />
+                                    Sponsoriser
+                                  </>
+                                )}
+                              </Button>
                             )}
-                          </Button>
+                          </>
                         )}
 
                         <Button size="sm" variant="outline" asChild>
@@ -760,13 +825,28 @@ export default function AgencyListingsPage() {
                       {cpcInfo.costPerClick.toFixed(2)}€
                     </span>
                   </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">Durée du sponsoring</span>
+                    <span className="font-semibold">
+                      {cpcInfo.maxDurationDays} jours
+                    </span>
+                  </div>
+                  {cpcInfo.cpcDiscount > 0 && (
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Réduction pack</span>
+                      <span className="font-semibold text-emerald-600">
+                        -{cpcInfo.cpcDiscount}%
+                      </span>
+                    </div>
+                  )}
                   <div className="border-t pt-3 mt-3">
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <Info className="w-4 h-4" />
                       <span>
                         Vous serez débité de {cpcInfo.costPerClick.toFixed(2)}€
-                        à chaque clic sur votre annonce. Le sponsoring sera
-                        automatiquement désactivé si votre budget est épuisé.
+                        à chaque clic sur votre annonce pendant {cpcInfo.maxDurationDays} jours. 
+                        Le sponsoring sera automatiquement désactivé si votre budget est épuisé 
+                        ou à la fin de la période.
                       </span>
                     </div>
                   </div>

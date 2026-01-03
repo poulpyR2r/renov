@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      portalUrl: portalSession.url,
+      url: portalSession.url,
     });
   } catch (error: any) {
     console.error("Error creating customer portal session:", error);

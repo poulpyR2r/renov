@@ -72,8 +72,11 @@ import { FavoriteButton } from "@/components/favorite-button";
 import { ListingViewTracker } from "@/components/listing-view-tracker";
 import { TrackedLink } from "@/components/tracked-link";
 import { ContactAgencyButton } from "@/components/contact-agency-button";
+import { PhoneContactButton } from "@/components/phone-contact-button";
+import { EmailContactButton } from "@/components/email-contact-button";
 import { ShareButton } from "@/components/share-button";
 import { getAgencyById } from "@/models/Agency";
+import { getPackConfig, PackType } from "@/lib/packs";
 import { auth } from "@/auth";
 import { FranceRenovModule } from "@/components/france-renov-module";
 import { ListingLocationMap } from "@/components/listing-location-map";
@@ -1312,16 +1315,33 @@ export default async function ListingDetailPage({
                                 </div>
                               )}
                               <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-1">
+                                <div className="flex items-center gap-2 mb-1 flex-wrap">
                                   <p className="font-semibold text-sm truncate">
                                     {agency.companyName}
                                   </p>
-                                  <Badge
-                                    variant="default"
-                                    className="text-xs px-2 py-0.5"
-                                  >
-                                    Pro
-                                  </Badge>
+                                  {/* Badge basé sur le pack de l'agence */}
+                                  {(() => {
+                                    const pack: PackType = agency.subscription?.pack || "FREE";
+                                    const packConfig = getPackConfig(pack);
+                                    const badge = packConfig.features.badge;
+                                    
+                                    if (badge) {
+                                      return (
+                                        <Badge
+                                          variant="default"
+                                          className={`text-xs px-2 py-0.5 ${
+                                            pack === "PREMIUM" || pack === "PRO"
+                                              ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0"
+                                              : "bg-blue-500 text-white"
+                                          }`}
+                                        >
+                                          <CheckCircle className="w-3 h-3 mr-1" />
+                                          {badge}
+                                        </Badge>
+                                      );
+                                    }
+                                    return null;
+                                  })()}
                                 </div>
                                 {agencyListingsCount > 0 && (
                                   <p className="text-xs text-muted-foreground">
@@ -1355,21 +1375,18 @@ export default async function ListingDetailPage({
                               />
                             )}
                             {(listing.contactPhone || agency.phone) && (
-                              <Button
-                                asChild
-                                size="lg"
-                                variant="outline"
+                              <PhoneContactButton
+                                listingId={listing._id.toString()}
+                                phone={listing.contactPhone || agency.phone}
                                 className="w-full rounded-lg h-11"
-                              >
-                                <a
-                                  href={`tel:${
-                                    listing.contactPhone || agency.phone
-                                  }`}
-                                >
-                                  <Phone className="w-4 h-4 mr-2" />
-                                  Voir le numéro
-                                </a>
-                              </Button>
+                              />
+                            )}
+                            {agency.email && (
+                              <EmailContactButton
+                                listingId={listing._id.toString()}
+                                email={agency.email}
+                                className="w-full rounded-lg h-11"
+                              />
                             )}
                           </div>
                         </div>

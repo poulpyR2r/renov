@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { getAgencyByOwnerId } from "@/models/Agency";
 import { getUserByEmail } from "@/models/User";
-import { getCpcCostForPlan } from "@/lib/stripe-config";
+import { getCpcCostForPack, getCpcMaxDurationDays, BASE_CPC_COST } from "@/lib/stripe-config";
+import { PackType, getPackConfig } from "@/lib/packs";
 
 export async function GET(
   request: NextRequest,
@@ -34,10 +35,14 @@ export async function GET(
       );
     }
 
+    // ✅ Utiliser le pack au lieu du plan
+    const pack: PackType = agency.subscription?.pack || "FREE";
+    const packConfig = getPackConfig(pack);
+    
     const balance = agency.cpc?.balance || 0;
-    const plan = agency.subscription?.plan || "free";
-    const baseCost = agency.cpc?.costPerClick || 0.5;
-    const costPerClick = getCpcCostForPlan(plan, baseCost);
+    const baseCost = agency.cpc?.costPerClick || BASE_CPC_COST;
+    const costPerClick = getCpcCostForPack(pack, baseCost);
+    const maxDurationDays = getCpcMaxDurationDays(pack);
     const hasEnoughCredits = balance >= costPerClick;
 
     return NextResponse.json({
@@ -45,8 +50,16 @@ export async function GET(
       hasEnoughCredits,
       balance,
       costPerClick,
+      baseCost,
+      // ✅ Infos sur le pack
+      pack,
+      packName: packConfig.name,
+      cpcDiscount: packConfig.cpcDiscount,
+      maxDurationDays,
+      // Estimation du nombre de clics possibles
+      estimatedClicks: balance > 0 ? Math.floor(balance / costPerClick) : 0,
       message: hasEnoughCredits
-        ? "Vous avez suffisamment de crédits"
+        ? `Vous avez suffisamment de crédits (${Math.floor(balance / costPerClick)} clics)`
         : "Crédits CPC insuffisants",
     });
   } catch (error) {

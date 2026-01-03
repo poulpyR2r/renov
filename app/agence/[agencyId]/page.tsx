@@ -17,12 +17,15 @@ import {
   Bed,
   Sparkles,
   ExternalLink,
+  CheckCircle,
+  Shield,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ListingCard } from "@/components/listing-card";
 import { getAgencyById } from "@/models/Agency";
 import { getListingModel } from "@/models/Listing";
+import { getPackConfig, PackType } from "@/lib/packs";
 import { ObjectId } from "mongodb";
 
 export const dynamic = "force-dynamic";
@@ -91,9 +94,33 @@ export default async function AgencyPublicPage({
 
                 {/* Info */}
                 <div className="flex-1 text-white">
-                  <h1 className="text-3xl font-bold mb-2">
-                    {agency.tradeName || agency.companyName}
-                  </h1>
+                  <div className="flex flex-wrap items-center gap-3 mb-2">
+                    <h1 className="text-3xl font-bold">
+                      {agency.tradeName || agency.companyName}
+                    </h1>
+                    {/* Badge basé sur le pack de l'agence */}
+                    {(() => {
+                      const pack: PackType = agency.subscription?.pack || "FREE";
+                      const packConfig = getPackConfig(pack);
+                      const badge = packConfig.features.badge;
+                      
+                      if (badge) {
+                        return (
+                          <Badge
+                            className={`text-sm px-3 py-1 ${
+                              pack === "PREMIUM" || pack === "PRO"
+                                ? "bg-gradient-to-r from-amber-400 to-orange-400 text-white border-0"
+                                : "bg-white/20 text-white border border-white/30"
+                            }`}
+                          >
+                            <CheckCircle className="w-4 h-4 mr-1" />
+                            {badge}
+                          </Badge>
+                        );
+                      }
+                      return null;
+                    })()}
+                  </div>
                   {agency.tradeName && (
                     <p className="text-white/80 text-sm mb-4">
                       {agency.companyName}

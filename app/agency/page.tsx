@@ -18,6 +18,8 @@ import {
   Heart,
   Settings,
   Receipt,
+  Lock,
+  MessageSquare,
 } from "lucide-react";
 import Link from "next/link";
 import { useAgencyRole } from "@/hooks/useAgencyRole";
@@ -29,15 +31,33 @@ interface DashboardData {
     companyName: string;
     status: string;
   };
-  subscription: {
-    plan: string;
-    maxListings: number;
-    endDate?: string;
+  // ✅ Nouveau format avec pack
+  pack: {
+    type: string;
+    name: string;
+    maxActiveListings: number;
+    currentActiveListings: number;
+    remainingListings: number;
+    cpcDiscount: number;
+    cpcMaxDurationDays: number;
+    badge: string | null;
+    visibleStats: {
+      views: boolean;
+      clicks: boolean;
+      contacts: boolean;
+      performancePerListing: boolean;
+      costPerContact: boolean;
+      globalPerformance: boolean;
+      performanceByZone: boolean;
+    };
   };
   cpc: {
     balance: number;
     clicksThisMonth: number;
     costPerClick: number;
+    baseCost: number;
+    discount: number;
+    maxDurationDays: number;
   };
   stats: {
     totalListings: number;
@@ -46,6 +66,8 @@ interface DashboardData {
     totalViews: number;
     totalClicks: number;
     totalFavorites: number;
+    totalContacts: number | null;
+    contactsLocked: boolean;
     viewsThisMonth: number;
     clicksThisMonth: number;
   };
@@ -116,11 +138,8 @@ export default function AgencyDashboardPage() {
       const result = await res.json();
       if (result.success) {
         setData(result.data);
-        // Mettre à jour le quota depuis les données du dashboard
-        const remaining =
-          result.data.subscription.maxListings -
-          result.data.stats.totalListings;
-        setListingsRemaining(remaining);
+        // Mettre à jour le quota depuis les données du dashboard (nouveau format pack)
+        setListingsRemaining(result.data.pack.remainingListings);
       }
     } catch (error) {
       console.error("Error fetching dashboard:", error);
@@ -128,30 +147,15 @@ export default function AgencyDashboardPage() {
     setIsLoading(false);
   };
 
-  const getPlanLabel = (plan: string) => {
-    switch (plan) {
-      case "free":
-        return "Gratuit";
-      case "starter":
-        return "Starter";
-      case "pro":
-        return "Pro";
-      case "enterprise":
-        return "Enterprise";
-      default:
-        return plan;
-    }
-  };
-
-  const getPlanColor = (plan: string) => {
-    switch (plan) {
-      case "free":
+  const getPackColor = (pack: string) => {
+    switch (pack) {
+      case "FREE":
         return "bg-gray-100 text-gray-700";
-      case "starter":
+      case "STARTER":
         return "bg-blue-100 text-blue-700";
-      case "pro":
+      case "PRO":
         return "bg-purple-100 text-purple-700";
-      case "enterprise":
+      case "PREMIUM":
         return "bg-gradient-to-r from-amber-400 to-orange-500 text-white";
       default:
         return "bg-gray-100 text-gray-700";
@@ -270,7 +274,7 @@ export default function AgencyDashboardPage() {
 
   // Calculer listingsRemaining depuis les données si disponible, sinon utiliser l'état
   const calculatedListingsRemaining = data
-    ? data.subscription.maxListings - data.stats.totalListings
+    ? data.pack.remainingListings
     : listingsRemaining ?? 0;
 
   return (
@@ -306,82 +310,108 @@ export default function AgencyDashboardPage() {
                   </div>
                   <div>
                     <div className="flex items-center gap-3 mb-1">
-                      <h3 className="text-xl font-bold">Votre abonnement</h3>
+                      <h3 className="text-xl font-bold">Votre pack</h3>
                       <span
-                        className={`px-3 py-1 rounded-full text-sm font-medium ${getPlanColor(
-                          data.subscription.plan
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${getPackColor(
+                          data.pack.type
                         )}`}
                       >
-                        {getPlanLabel(data.subscription.plan)}
+                        {data.pack.name}
                       </span>
+                      {data.pack.badge && (
+                        <span className="px-2 py-0.5 rounded text-xs bg-amber-100 text-amber-700">
+                          {data.pack.badge}
+                        </span>
+                      )}
                     </div>
                     <p className="text-muted-foreground">
-                      {data.subscription.maxListings} annonces incluses dans
-                      votre plan
+                      {data.pack.maxActiveListings === -1 
+                        ? "Annonces illimitées" 
+                        : `${data.pack.maxActiveListings} annonces incluses dans votre pack`}
+                      {data.pack.cpcDiscount > 0 && (
+                        <span className="ml-2 text-emerald-600">
+                          • -{data.pack.cpcDiscount}% sur le CPC
+                        </span>
+                      )}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="text-right">
-                    <p className="text-3xl font-bold text-orange-600">
-                      {data.stats.totalListings}{" "}
-                      <span className="text-lg font-normal text-muted-foreground">
-                        / {data.subscription.maxListings}
-                      </span>
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      annonces publiées
-                    </p>
+                    {data.pack.maxActiveListings === -1 ? (
+                      <>
+                        <p className="text-3xl font-bold text-orange-600">
+                          {data.pack.currentActiveListings}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          annonces actives (illimitées)
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-3xl font-bold text-orange-600">
+                          {data.pack.currentActiveListings}{" "}
+                          <span className="text-lg font-normal text-muted-foreground">
+                            / {data.pack.maxActiveListings}
+                          </span>
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          annonces actives
+                        </p>
+                      </>
+                    )}
                   </div>
                   <Button variant="default" asChild>
-                    <Link href="/agency/subscription">Changer de plan</Link>
+                    <Link href="/agency/subscription">Changer de pack</Link>
                   </Button>
                 </div>
               </div>
 
-              {/* Barre de progression */}
-              <div className="mt-4">
-                <div className="w-full h-3 bg-white/80 rounded-full overflow-hidden shadow-inner">
-                  <div
-                    className={`h-full rounded-full transition-all ${
-                      calculatedListingsRemaining <= 0
-                        ? "bg-red-500"
-                        : calculatedListingsRemaining <= 2
-                        ? "bg-amber-500"
-                        : "bg-gradient-to-r from-orange-400 to-amber-400"
-                    }`}
-                    style={{
-                      width: `${Math.min(
-                        (data.stats.totalListings /
-                          data.subscription.maxListings) *
-                          100,
-                        100
-                      )}%`,
-                    }}
-                  />
+              {/* Barre de progression (seulement si limite) */}
+              {data.pack.maxActiveListings !== -1 && (
+                <div className="mt-4">
+                  <div className="w-full h-3 bg-white/80 rounded-full overflow-hidden shadow-inner">
+                    <div
+                      className={`h-full rounded-full transition-all ${
+                        data.pack.remainingListings <= 0
+                          ? "bg-red-500"
+                          : data.pack.remainingListings <= 2
+                          ? "bg-amber-500"
+                          : "bg-gradient-to-r from-orange-400 to-amber-400"
+                      }`}
+                      style={{
+                        width: `${Math.min(
+                          (data.pack.currentActiveListings /
+                            data.pack.maxActiveListings) *
+                            100,
+                          100
+                        )}%`,
+                      }}
+                    />
+                  </div>
+                  <p className="text-sm mt-2 text-muted-foreground">
+                    {data.pack.remainingListings > 0 ? (
+                      <>
+                        Il vous reste{" "}
+                        <span className="font-semibold text-emerald-600">
+                          {data.pack.remainingListings} annonce(s)
+                        </span>{" "}
+                        à publier
+                      </>
+                    ) : (
+                      <span className="text-red-600 font-medium">
+                        Limite atteinte - Passez au pack supérieur pour publier
+                        plus
+                      </span>
+                    )}
+                  </p>
                 </div>
-                <p className="text-sm mt-2 text-muted-foreground">
-                  {calculatedListingsRemaining > 0 ? (
-                    <>
-                      Il vous reste{" "}
-                      <span className="font-semibold text-emerald-600">
-                        {calculatedListingsRemaining} annonce(s)
-                      </span>{" "}
-                      à publier
-                    </>
-                  ) : (
-                    <span className="text-red-600 font-medium">
-                      Limite atteinte - Passez au plan supérieur pour publier
-                      plus
-                    </span>
-                  )}
-                </p>
-              </div>
+              )}
             </CardContent>
           </Card>
 
           {/* Alerte limite atteinte */}
-          {calculatedListingsRemaining <= 0 && (
+          {data.pack.maxActiveListings !== -1 && data.pack.remainingListings <= 0 && (
             <div className="p-4 rounded-lg bg-red-50 border border-red-200 flex items-center gap-3">
               <AlertTriangle className="w-5 h-5 text-red-600" />
               <div className="flex-1">
@@ -389,11 +419,11 @@ export default function AgencyDashboardPage() {
                   Limite d'annonces atteinte
                 </p>
                 <p className="text-sm text-red-600">
-                  Passez à un plan supérieur pour publier plus d'annonces.
+                  Passez à un pack supérieur pour publier plus d'annonces.
                 </p>
               </div>
               <Button size="sm" asChild variant="outline">
-                <Link href="/agency/subscription">Changer de plan</Link>
+                <Link href="/agency/subscription">Changer de pack</Link>
               </Button>
             </div>
           )}
@@ -401,78 +431,184 @@ export default function AgencyDashboardPage() {
       )}
 
       {/* Stats cards - Statistiques importantes */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="border-0 shadow-md">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                <FileText className="w-5 h-5 text-blue-600" />
+      {/* Pour le pack FREE : seulement Annonces, Vues, Clics */}
+      {data.pack.type === "FREE" ? (
+        <div className="grid sm:grid-cols-3 gap-4">
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                  <FileText className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">
+                    {data.stats.activeListings}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Annonces actives
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl font-bold">
-                  {data.stats.activeListings}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Annonces actives
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
-        <Card className="border-0 shadow-md">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
-                <Eye className="w-5 h-5 text-purple-600" />
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                  <Eye className="w-5 h-5 text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{data.stats.totalViews}</p>
+                  <p className="text-sm text-muted-foreground">Vues totales</p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl font-bold">{data.stats.totalViews}</p>
-                <p className="text-sm text-muted-foreground">Vues totales</p>
+              <div className="mt-3 text-xs text-muted-foreground">
+                +{data.stats.viewsThisMonth} ce mois
               </div>
-            </div>
-            <div className="mt-3 text-xs text-muted-foreground">
-              +{data.stats.viewsThisMonth} ce mois
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
-        <Card className="border-0 shadow-md">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center">
-                <MousePointer className="w-5 h-5 text-emerald-600" />
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center">
+                  <MousePointer className="w-5 h-5 text-emerald-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{data.stats.totalClicks}</p>
+                  <p className="text-sm text-muted-foreground">Clics totaux</p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl font-bold">{data.stats.totalClicks}</p>
-                <p className="text-sm text-muted-foreground">Clics totaux</p>
+              <div className="mt-3 text-xs text-muted-foreground">
+                +{data.stats.clicksThisMonth} ce mois
               </div>
-            </div>
-            <div className="mt-3 text-xs text-muted-foreground">
-              +{data.stats.clicksThisMonth} ce mois
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
+      ) : (
+        /* Pour les autres packs : affichage complet avec cadenas pour les fonctionnalités non disponibles */
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                  <FileText className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">
+                    {data.stats.activeListings}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Annonces actives
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-        <Card className="border-0 shadow-md">
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                  <Eye className="w-5 h-5 text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{data.stats.totalViews}</p>
+                  <p className="text-sm text-muted-foreground">Vues totales</p>
+                </div>
+              </div>
+              <div className="mt-3 text-xs text-muted-foreground">
+                +{data.stats.viewsThisMonth} ce mois
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center">
+                  <MousePointer className="w-5 h-5 text-emerald-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{data.stats.totalClicks}</p>
+                  <p className="text-sm text-muted-foreground">Clics totaux</p>
+                </div>
+              </div>
+              <div className="mt-3 text-xs text-muted-foreground">
+                +{data.stats.clicksThisMonth} ce mois
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* ✅ Carte Contacts - Bloquée pour pack FREE */}
+          <Card className={`border-0 shadow-md ${data.stats.contactsLocked ? "bg-muted/50" : ""}`}>
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${data.stats.contactsLocked ? "bg-gray-100" : "bg-teal-100"}`}>
+                  {data.stats.contactsLocked ? (
+                    <Lock className="w-5 h-5 text-gray-400" />
+                  ) : (
+                    <MessageSquare className="w-5 h-5 text-teal-600" />
+                  )}
+                </div>
+                <div>
+                  {data.stats.contactsLocked ? (
+                    <>
+                      <p className="text-2xl font-bold text-gray-400">—</p>
+                      <p className="text-sm text-muted-foreground">Contacts reçus</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-2xl font-bold">{data.stats.totalContacts}</p>
+                      <p className="text-sm text-muted-foreground">Contacts reçus</p>
+                    </>
+                  )}
+                </div>
+              </div>
+              {data.stats.contactsLocked ? (
+                <div className="mt-3">
+                  <Link 
+                    href="/agency/subscription" 
+                    className="text-xs text-primary hover:underline flex items-center gap-1"
+                  >
+                    <Lock className="w-3 h-3" />
+                    Passez au pack Starter pour voir
+                  </Link>
+                </div>
+              ) : (
+                <div className="mt-3 text-xs text-muted-foreground">
+                  Demandes de contact
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Message d'upgrade pour pack FREE */}
+      {data.pack.type === "FREE" && (
+        <Card className="border-0 shadow-sm bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30">
           <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-pink-100 flex items-center justify-center">
-                <Heart className="w-5 h-5 text-pink-600" />
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Lock className="w-5 h-5 text-primary" />
+                <div>
+                  <p className="font-medium text-sm">
+                    Débloquez plus de statistiques
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Favoris, contacts, performance par annonce... disponibles avec le pack Starter
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl font-bold">
-                  {data.stats.totalFavorites}
-                </p>
-                <p className="text-sm text-muted-foreground">Favoris totaux</p>
-              </div>
-            </div>
-            <div className="mt-3 text-xs text-muted-foreground">
-              Annonces sauvegardées
+              <Button size="sm" asChild>
+                <Link href="/agency/subscription">Voir les packs</Link>
+              </Button>
             </div>
           </CardContent>
         </Card>
-      </div>
+      )}
 
       {/* Recent listings */}
       <Card className="border-0 shadow-md">
@@ -547,15 +683,17 @@ export default function AgencyDashboardPage() {
                       <MousePointer className="w-4 h-4" />
                       <span className="font-medium">{listing.clicks || 0}</span>
                     </span>
-                    <span
-                      className="flex items-center gap-1 text-pink-600"
-                      title="Favoris"
-                    >
-                      <Heart className="w-4 h-4" />
-                      <span className="font-medium">
-                        {listing.favorites || 0}
+                    {data.pack.type !== "FREE" && (
+                      <span
+                        className="flex items-center gap-1 text-pink-600"
+                        title="Favoris"
+                      >
+                        <Heart className="w-4 h-4" />
+                        <span className="font-medium">
+                          {listing.favorites || 0}
+                        </span>
                       </span>
-                    </span>
+                    )}
                   </div>
                 </div>
               ))}
@@ -565,7 +703,7 @@ export default function AgencyDashboardPage() {
       </Card>
 
       {/* Section CPC - Plus discrète (MANAGER + ADMIN seulement) */}
-      {canAccessBilling && data.stats.sponsoredListings > 0 && (
+      {canAccessBilling && (
         <Card className="border-0 shadow-sm bg-muted/30">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
@@ -573,11 +711,20 @@ export default function AgencyDashboardPage() {
                 <Zap className="w-5 h-5 text-orange-500" />
                 <div>
                   <p className="font-medium text-sm">
-                    {data.stats.sponsoredListings} annonce(s) sponsorisée(s)
+                    {data.stats.sponsoredListings > 0 
+                      ? `${data.stats.sponsoredListings} annonce(s) sponsorisée(s)`
+                      : "Sponsorisez vos annonces"
+                    }
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    Budget restant: {data.cpc.balance.toFixed(2)}€ • Coût:{" "}
+                    Budget: {data.cpc.balance.toFixed(2)}€ • Coût:{" "}
                     {data.cpc.costPerClick.toFixed(2)}€/clic
+                    {data.cpc.discount > 0 && (
+                      <span className="text-emerald-600 ml-1">
+                        (-{data.cpc.discount}%)
+                      </span>
+                    )}
+                    <span className="ml-2">• Max {data.cpc.maxDurationDays}j</span>
                   </p>
                 </div>
               </div>

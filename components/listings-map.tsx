@@ -67,11 +67,18 @@ interface Listing {
       energyClass?: string;
     };
   };
+  // ✅ Map highlight pour PRO/PREMIUM
+  mapHighlight?: boolean;
+  agencyPack?: string;
+  agencyBadge?: string;
+  isSponsored?: boolean;
 }
 
 interface GeocodedListing extends Listing {
   coords: { lat: number; lng: number };
   isApproximate: boolean;
+  mapHighlight?: boolean;
+  isSponsored?: boolean;
 }
 
 interface FilterState {
@@ -499,6 +506,55 @@ export function ListingsMap({
         width: 12px;
         height: 12px;
       }
+      /* ✅ Marqueur mis en avant PRO/PREMIUM */
+      .marker-pin-highlight {
+        width: 42px;
+        height: 42px;
+        background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5), 0 0 20px rgba(245, 158, 11, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+        position: relative;
+        animation: pulse-highlight 2s ease-in-out infinite;
+      }
+      .marker-pin-highlight::after {
+        content: '★';
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 18px;
+        height: 18px;
+        background: #fbbf24;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        color: #fff;
+        transform: rotate(45deg);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+      .marker-pin-highlight:hover {
+        transform: rotate(-45deg) scale(1.15);
+        box-shadow: 0 6px 25px rgba(239, 68, 68, 0.6), 0 0 30px rgba(245, 158, 11, 0.5);
+      }
+      .marker-pin-highlight svg {
+        width: 18px;
+        height: 18px;
+        transform: rotate(45deg);
+      }
+      @keyframes pulse-highlight {
+        0%, 100% {
+          box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5), 0 0 20px rgba(245, 158, 11, 0.4);
+        }
+        50% {
+          box-shadow: 0 4px 25px rgba(239, 68, 68, 0.7), 0 0 35px rgba(245, 158, 11, 0.6);
+        }
+      }
       .leaflet-container {
         font-family: inherit;
         background: #f5f5f5;
@@ -657,6 +713,22 @@ export function ListingsMap({
       popupAnchor: [0, -36],
     });
 
+    // ✅ Icône mise en avant PRO/PREMIUM
+    const highlightIcon = L.divIcon({
+      className: "custom-map-marker",
+      html: `
+        <div class="marker-pin-highlight">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+      `,
+      iconSize: [42, 42],
+      iconAnchor: [21, 42],
+      popupAnchor: [0, -42],
+    });
+
     const zoneIcon = L.divIcon({
       className: "custom-map-marker",
       html: `
@@ -702,8 +774,11 @@ export function ListingsMap({
 
         markersRef.current.push(marker);
       } else {
+        // ✅ Utiliser le marqueur mis en avant pour PRO/PREMIUM ou sponsorisé
+        const shouldHighlight = listing.mapHighlight || listing.isSponsored;
         const marker = L.marker([listing.coords.lat, listing.coords.lng], {
-          icon: preciseIcon,
+          icon: shouldHighlight ? highlightIcon : preciseIcon,
+          zIndexOffset: shouldHighlight ? 1000 : 0, // Les marqueurs mis en avant au-dessus
         }).addTo(leafletMapRef.current);
 
         marker.on("click", () => {

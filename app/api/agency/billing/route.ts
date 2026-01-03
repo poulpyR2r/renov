@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAgencyRole } from "@/lib/agency-rbac";
-import { getAgencyById } from "@/models/Agency";
-import { getListingModel } from "@/models/Listing";
-import { getCpcCostForPlan } from "@/lib/stripe-config";
+import { getAgencyById, getAgencyActiveListingsCount } from "@/models/Agency";
+import { getPackConfig, PackType } from "@/lib/packs";
+import { getCpcParams } from "@/lib/pack-permissions";
+import { getAgencyContactsCount } from "@/models/Contact";
 
 export async function GET(request: NextRequest) {
   try {
@@ -25,38 +26,62 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Get current listings count - chercher par ObjectId ou string
-    const Listing = await getListingModel();
-    const agencyIdStr = agency._id?.toString();
-    const currentListings = await Listing.countDocuments({
-      $or: [{ agencyId: agency._id }, { agencyId: agencyIdStr }],
-    } as any);
+    // Get current active listings count
+    const agencyIdStr = agency._id?.toString() || "";
+    const currentListings = await getAgencyActiveListingsCount(agencyIdStr);
+
+    // Get pack configuration
+    const pack = (agency.subscription?.pack as PackType) || "FREE";
+    const packConfig = getPackConfig(pack);
+    const cpcParams = getCpcParams(pack, 0.5);
+
+    // Get contacts count (only for packs that can see it)
+    let contactsCount = 0;
+    if (packConfig.stats.contacts) {
+      const startOfMonth = new Date();
+      startOfMonth.setDate(1);
+      startOfMonth.setHours(0, 0, 0, 0);
+      contactsCount = await getAgencyContactsCount(agencyIdStr, startOfMonth);
+    }
 
     return NextResponse.json({
       success: true,
       data: {
         subscription: {
-          plan: agency.subscription?.plan || "free",
-          maxListings: agency.subscription?.maxListings || 5,
+          pack,
+          packName: packConfig.name,
+          maxListings: packConfig.maxActiveListings,
           startDate: agency.subscription?.startDate || agency.createdAt,
           endDate: agency.subscription?.endDate,
           autoRenew: agency.subscription?.autoRenew || false,
-          stripeCustomerId: agency.stripeCustomerId,
-          stripeSubscriptionId: agency.stripeSubscriptionId,
-          stripeSubscriptionStatus: agency.stripeSubscriptionStatus,
-          stripeSubscriptionCurrentPeriodEnd: agency.stripeSubscriptionCurrentPeriodEnd,
         },
+        // Stripe info
+        stripeCustomerId: agency.stripeCustomerId,
+        stripeSubscriptionId: agency.stripeSubscriptionId,
+        stripeSubscriptionStatus: agency.stripeSubscriptionStatus,
+        stripeSubscriptionCurrentPeriodEnd: agency.stripeSubscriptionCurrentPeriodEnd,
+        // CPC info
         cpc: {
           balance: agency.cpc?.balance || 0,
           totalSpent: agency.cpc?.totalSpent || 0,
-          costPerClick: getCpcCostForPlan(
-            agency.subscription?.plan || "free",
-            agency.cpc?.costPerClick || 0.5
-          ),
+          costPerClick: cpcParams.pricePerClick,
+          discount: cpcParams.discount,
+          maxDurationDays: cpcParams.maxDurationDays,
           clicksThisMonth: agency.cpc?.clicksThisMonth || 0,
           lastRechargeAt: agency.cpc?.lastRechargeAt,
         },
+        // Pack features
+        packFeatures: {
+          mapHighlight: packConfig.mapHighlight,
+          autoBoost: packConfig.autoBoost,
+          badge: packConfig.features.badge,
+          prioritySupport: packConfig.features.prioritySupport,
+          canViewContacts: packConfig.stats.contacts,
+          canViewAdvancedStats: packConfig.stats.performancePerListing,
+        },
+        // Stats
         currentListings,
+        contactsThisMonth: packConfig.stats.contacts ? contactsCount : null,
       },
     });
   } catch (error) {

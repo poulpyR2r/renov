@@ -1,5 +1,6 @@
 import { dbConnect } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
+import { PackType, getPackConfig } from "@/lib/packs";
 
 export type AgencyStatus = "pending" | "verified" | "rejected" | "suspended";
 
@@ -81,13 +82,19 @@ export interface IAgency {
     | "trialing";
   stripeSubscriptionCurrentPeriodEnd?: Date; // Date de fin de période
 
-  // Abonnement
+  // Abonnement / Pack
   subscription: {
-    plan: "free" | "starter" | "pro" | "enterprise";
-    maxListings: number; // Nombre max d'annonces selon le plan
+    pack: PackType; // FREE, STARTER, PRO, PREMIUM
     startDate: Date;
     endDate?: Date; // null = illimité
     autoRenew: boolean;
+    // Historique des changements de pack
+    history?: Array<{
+      pack: PackType;
+      startDate: Date;
+      endDate: Date;
+      reason?: string;
+    }>;
   };
 
   // Budget CPC (Cost Per Click)
@@ -165,15 +172,14 @@ export async function createAgency(
     listingsCount: 0,
     totalViews: 0,
     subscription: {
-      plan: "free",
-      maxListings: 5, // 5 annonces gratuites
+      pack: "FREE",
       startDate: new Date(),
       autoRenew: false,
     },
     cpc: {
       balance: 0,
       totalSpent: 0,
-      costPerClick: 0.5, // 50 centimes par clic
+      costPerClick: 0.5, // 50 centimes par clic de base (sera ajusté selon le pack)
       clicksThisMonth: 0,
     },
     createdAt: new Date(),
@@ -298,6 +304,106 @@ export async function decrementAgencyListings(agencyId: string): Promise<void> {
     { _id: new ObjectId(agencyId) },
     { $inc: { listingsCount: -1 } }
   );
+}
+
+/**
+ * Obtenir le pack actuel d'une agence
+ */
+export async function getAgencyPack(agencyId: string): Promise<PackType> {
+  const agency = await getAgencyById(agencyId);
+  return agency?.subscription?.pack || "FREE";
+}
+
+/**
+ * Mettre à jour le pack d'une agence
+ */
+export async function updateAgencyPack(
+  agencyId: string,
+  newPack: PackType,
+  reason?: string
+): Promise<boolean> {
+  const Agency = await getAgencyModel();
+  const agency = await getAgencyById(agencyId);
+  
+  if (!agency) return false;
+  
+  const oldPack = agency.subscription?.pack || "FREE";
+  const now = new Date();
+  
+  // Préparer l'historique
+  const historyEntry = {
+    pack: oldPack,
+    startDate: agency.subscription?.startDate || now,
+    endDate: now,
+    reason: reason || `Changement vers ${newPack}`,
+  };
+  
+  const result = await Agency.updateOne(
+    { _id: new ObjectId(agencyId) },
+    {
+      $set: {
+        "subscription.pack": newPack,
+        "subscription.startDate": now,
+        updatedAt: now,
+      },
+      $push: {
+        "subscription.history": historyEntry,
+      },
+    }
+  );
+  
+  return result.modifiedCount > 0;
+}
+
+/**
+ * Obtenir le nombre d'annonces actives d'une agence
+ */
+export async function getAgencyActiveListingsCount(agencyId: string): Promise<number> {
+  const db = await dbConnect();
+  const listings = db.collection("listings");
+  
+  return listings.countDocuments({
+    $or: [
+      { agencyId: new ObjectId(agencyId) },
+      { agencyId: agencyId },
+    ],
+    status: "active",
+  });
+}
+
+/**
+ * Vérifier si une agence peut créer une nouvelle annonce
+ */
+export async function canAgencyCreateListing(agencyId: string): Promise<{
+  allowed: boolean;
+  reason?: string;
+  currentCount: number;
+  maxAllowed: number;
+}> {
+  const agency = await getAgencyById(agencyId);
+  if (!agency) {
+    return { allowed: false, reason: "Agence non trouvée", currentCount: 0, maxAllowed: 0 };
+  }
+  
+  const pack = agency.subscription?.pack || "FREE";
+  const config = getPackConfig(pack);
+  const currentCount = await getAgencyActiveListingsCount(agencyId);
+  const maxAllowed = config.maxActiveListings;
+  
+  if (maxAllowed === -1) {
+    return { allowed: true, currentCount, maxAllowed: Infinity };
+  }
+  
+  if (currentCount >= maxAllowed) {
+    return {
+      allowed: false,
+      reason: `Limite d'annonces atteinte (${maxAllowed} max pour le pack ${config.name})`,
+      currentCount,
+      maxAllowed,
+    };
+  }
+  
+  return { allowed: true, currentCount, maxAllowed };
 }
 
 export async function debitAgencyCpc(

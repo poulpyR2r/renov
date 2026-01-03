@@ -8,12 +8,15 @@ import { toast } from "sonner";
 
 interface CpcData {
   subscription: {
-    plan: string;
+    pack: string;
+    packName: string;
   };
   cpc: {
     balance: number;
     totalSpent: number;
     costPerClick: number;
+    discount: number;
+    maxDurationDays: number;
     clicksThisMonth: number;
     lastRechargeAt?: string;
   };
@@ -162,14 +165,14 @@ export default function AgencyCpcPage() {
                   <p className="text-2xl font-bold">
                     {data.cpc.costPerClick.toFixed(2)}€
                   </p>
-                  {(data.subscription.plan === "pro" ||
-                    data.subscription.plan === "enterprise") && (
+                  {data.cpc.discount > 0 && (
                     <p className="text-xs text-emerald-600 mt-1">
-                      {data.subscription.plan === "pro" ? "-20%" : "-30%"} grâce
-                      à votre plan{" "}
-                      {data.subscription.plan === "pro" ? "Pro" : "Enterprise"}
+                      -{data.cpc.discount}% grâce à votre pack {data.subscription.packName}
                     </p>
                   )}
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Durée max: {data.cpc.maxDurationDays} jours
+                  </p>
                 </div>
                 <div className="p-4 rounded-lg bg-muted/50">
                   <p className="text-sm text-muted-foreground mb-1">

@@ -2,10 +2,11 @@ export const dynamic = "force-dynamic";
 
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { getAgencyByOwnerId, getAgencyModel } from "@/models/Agency";
+import { getAgencyByOwnerId } from "@/models/Agency";
 import { getUserByEmail } from "@/models/User";
 import { getListingModel, toggleListingSponsored } from "@/models/Listing";
-import { getCpcCostForPlan } from "@/lib/stripe-config";
+import { getCpcCostForPack, getCpcMaxDurationDays } from "@/lib/stripe-config";
+import { PackType, getPackConfig } from "@/lib/packs";
 import { ObjectId } from "mongodb";
 
 export async function POST(
@@ -37,7 +38,7 @@ export async function POST(
 
     const { listingId } = await params;
     const body = await request.json();
-    const { isSponsored } = body;
+    const { isSponsored, duration } = body; // duration en jours (optionnel)
 
     if (!ObjectId.isValid(listingId)) {
       return NextResponse.json({ error: "ID invalide" }, { status: 400 });
@@ -45,7 +46,7 @@ export async function POST(
 
     const Listing = await getListingModel();
 
-    // Verify listing belongs to agency - check both ObjectId and string formats
+    // Verify listing belongs to agency
     const listing = await Listing.findOne({
       _id: new ObjectId(listingId),
       $or: [{ agencyId: agency._id }, { agencyId: agency._id?.toString() }],
@@ -58,27 +59,61 @@ export async function POST(
       );
     }
 
-    // Check if enabling sponsoring and has budget
+    // ✅ Utiliser le pack au lieu du plan
+    const pack: PackType = agency.subscription?.pack || "FREE";
+    const packConfig = getPackConfig(pack);
+
+    // Check if enabling sponsoring
     if (isSponsored) {
-      const plan = agency.subscription?.plan || "free";
       const baseCost = agency.cpc?.costPerClick || 0.5;
-      const costPerClick = getCpcCostForPlan(plan, baseCost);
+      const costPerClick = getCpcCostForPack(pack, baseCost);
       
+      // ✅ Vérifier le budget
       if (!agency.cpc || agency.cpc.balance < costPerClick) {
         return NextResponse.json(
           { error: "Budget CPC insuffisant. Veuillez recharger votre compte." },
           { status: 400 }
         );
       }
+
+      // ✅ Vérifier et appliquer la durée max selon le pack
+      const maxDurationDays = getCpcMaxDurationDays(pack);
+      const requestedDuration = duration || maxDurationDays;
+      const finalDuration = Math.min(requestedDuration, maxDurationDays);
+
+      // Calculer les dates de sponsoring
+      const sponsoredAt = new Date();
+      const sponsoredUntil = new Date(sponsoredAt.getTime() + finalDuration * 24 * 60 * 60 * 1000);
+
+      await Listing.updateOne(
+        { _id: new ObjectId(listingId) },
+        {
+          $set: {
+            isSponsored: true,
+            sponsoredAt,
+            sponsoredUntil,
+            sponsorPack: pack,
+            updatedAt: new Date(),
+          },
+        }
+      );
+
+      return NextResponse.json({
+        success: true,
+        message: `Annonce sponsorisée pour ${finalDuration} jour(s)`,
+        sponsorEndAt: sponsoredUntil,
+        maxDurationDays,
+        costPerClick,
+        cpcDiscount: packConfig.cpcDiscount,
+      });
     }
 
-    await toggleListingSponsored(listingId, isSponsored);
+    // Désactiver le sponsoring
+    await toggleListingSponsored(listingId, false);
 
     return NextResponse.json({
       success: true,
-      message: isSponsored
-        ? "Annonce sponsorisée avec succès"
-        : "Sponsoring désactivé",
+      message: "Sponsoring désactivé",
     });
   } catch (error) {
     console.error("Error updating listing sponsor:", error);

@@ -215,7 +215,7 @@ export default function SubmitPage() {
       postalCode: string;
       department: string;
       address: string;
-      coordinates?: { lat: number; lng: number };
+      coordinates?: { lat: number; lng: number }; // ✅ Coordonnées GPS de l'API BAN
     }>
   >([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -246,10 +246,9 @@ export default function SubmitPage() {
     city: "",
     postalCode: "",
     department: "",
+    coordinates: null as { lat: number; lng: number } | null, // ✅ Coordonnées GPS
     contactPhone: "",
     images: [] as string[],
-    acceptTerms: false,
-    acceptDataProcessing: false,
     // Prix & Honoraires
     feesIncluded: false,
     feesAmount: "",
@@ -378,10 +377,6 @@ export default function SubmitPage() {
       toast.error("Le niveau de rénovation est obligatoire");
       return;
     }
-    if (!formData.acceptTerms || !formData.acceptDataProcessing) {
-      toast.error("Veuillez accepter les conditions d'utilisation");
-      return;
-    }
     if (!formData.agencyCertified) {
       toast.error("Vous devez certifier l'exactitude des informations");
       return;
@@ -466,6 +461,7 @@ export default function SubmitPage() {
               postalCode: formData.postalCode,
               department: formData.department,
               address: formData.address,
+              coordinates: formData.coordinates || undefined, // ✅ Coordonnées GPS
             },
             images: formData.images,
           }),
@@ -496,6 +492,7 @@ export default function SubmitPage() {
               postalCode: formData.postalCode,
               department: formData.department,
               address: formData.address,
+              coordinates: formData.coordinates || undefined, // ✅ Coordonnées GPS
             },
             agencyId: session?.user?.agencyId,
             // Prix & Honoraires
@@ -920,11 +917,16 @@ export default function SubmitPage() {
     postalCode: string;
     department: string;
     address: string;
+    coordinates?: { lat: number; lng: number };
   }) => {
     updateField("city", suggestion.city);
     updateField("postalCode", suggestion.postalCode);
     updateField("department", suggestion.department);
     updateField("address", suggestion.address);
+    // ✅ Sauvegarder les coordonnées GPS pour positionnement précis sur la carte
+    if (suggestion.coordinates) {
+      updateField("coordinates", suggestion.coordinates);
+    }
     setAddressQuery(suggestion.label);
     setShowSuggestions(false);
   };
@@ -1102,10 +1104,9 @@ export default function SubmitPage() {
               city: listing.location?.city || "",
               postalCode: listing.location?.postalCode || "",
               department: listing.location?.department || "",
+              coordinates: listing.location?.coordinates || null, // ✅ Charger les coordonnées GPS
               contactPhone: listing.contactPhone || "",
               images: listing.images || [],
-              acceptTerms: true,
-              acceptDataProcessing: true,
               // Prix & Honoraires
               feesIncluded: listing.fees?.included || false,
               feesAmount: listing.fees?.amount?.toString() || "",
@@ -1677,6 +1678,7 @@ export default function SubmitPage() {
                           value={formData.city}
                           onChange={(e) => {
                             updateField("city", e.target.value);
+                            updateField("coordinates", null); // ✅ Reset les coordonnées si modifié manuellement
                             setAddressQuery("");
                           }}
                         />
@@ -1689,6 +1691,7 @@ export default function SubmitPage() {
                           value={formData.postalCode}
                           onChange={(e) => {
                             updateField("postalCode", e.target.value);
+                            updateField("coordinates", null); // ✅ Reset les coordonnées si modifié manuellement
                             setAddressQuery("");
                           }}
                         />
@@ -1703,6 +1706,7 @@ export default function SubmitPage() {
                         value={formData.address}
                         onChange={(e) => {
                           updateField("address", e.target.value);
+                          updateField("coordinates", null); // ✅ Reset les coordonnées si modifié manuellement
                           setAddressQuery("");
                         }}
                       />
@@ -1906,8 +1910,8 @@ export default function SubmitPage() {
                     </div>
                     <h2 className="font-semibold">Diagnostics immobiliers</h2>
                   </div>
-                  <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
-                    <p className="text-sm text-blue-800 dark:text-blue-200">
+                  <div className="p-4 rounded-lg bg-blue-50  border border-blue-800">
+                    <p className="text-sm text-blue-800 ">
                       Les diagnostics immobiliers sont obligatoires pour la
                       vente d'un bien immobilier en France.
                     </p>
@@ -2617,7 +2621,7 @@ export default function SubmitPage() {
 
                   {/* Informations agence */}
                   {agencyInfo && (
-                    <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 space-y-2">
+                    <div className="p-4 rounded-lg bg-blue-50  border border-blue-200 dark:border-blue-800 space-y-2">
                       <h3 className="font-medium flex items-center gap-2">
                         <Info className="w-4 h-4" />
                         Informations agence (non modifiables)
@@ -2666,42 +2670,6 @@ export default function SubmitPage() {
                   )}
 
                   <div className="space-y-3">
-                    <label className="flex items-start gap-3 cursor-pointer p-3 rounded-lg hover:bg-muted/50">
-                      <input
-                        type="checkbox"
-                        checked={formData.acceptTerms}
-                        onChange={(e) =>
-                          updateField("acceptTerms", e.target.checked)
-                        }
-                        className="mt-1 rounded"
-                      />
-                      <span className="text-sm">
-                        J'accepte les{" "}
-                        <Link
-                          href="/cgu"
-                          className="text-primary hover:underline"
-                          target="_blank"
-                        >
-                          conditions d'utilisation
-                        </Link>{" "}
-                        *
-                      </span>
-                    </label>
-
-                    <label className="flex items-start gap-3 cursor-pointer p-3 rounded-lg hover:bg-muted/50">
-                      <input
-                        type="checkbox"
-                        checked={formData.acceptDataProcessing}
-                        onChange={(e) =>
-                          updateField("acceptDataProcessing", e.target.checked)
-                        }
-                        className="mt-1 rounded"
-                      />
-                      <span className="text-sm">
-                        J'accepte le traitement des données (RGPD) *
-                      </span>
-                    </label>
-
                     <label className="flex items-start gap-3 cursor-pointer p-3 rounded-lg hover:bg-muted/50 border-2 border-primary/20">
                       <input
                         type="checkbox"
@@ -2730,12 +2698,7 @@ export default function SubmitPage() {
                     </Button>
                     <Button
                       type="submit"
-                      disabled={
-                        loading ||
-                        !formData.acceptTerms ||
-                        !formData.acceptDataProcessing ||
-                        !formData.agencyCertified
-                      }
+                      disabled={loading || !formData.agencyCertified}
                       className="gap-2"
                     >
                       {loading ? (

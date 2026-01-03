@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { incrementListingClicks, getListingModel } from "@/models/Listing";
 import { getAgencyById, debitAgencyCpc } from "@/models/Agency";
-import { getCpcCostForPlan } from "@/lib/stripe-config";
+import { getCpcCostForPack, BASE_CPC_COST } from "@/lib/stripe-config";
+import { PackType } from "@/lib/packs";
 import { ObjectId } from "mongodb";
 
 export async function POST(
@@ -18,7 +19,6 @@ export async function POST(
       );
     }
 
-    // Vérifier que l'annonce existe et appartient à une agence
     const Listing = await getListingModel();
     const listing = await Listing.findOne({ _id: new ObjectId(listingId) });
 
@@ -36,62 +36,76 @@ export async function POST(
         `[CPC] Clic tracké pour annonce ${listingId}, agencyId: ${listing.agencyId}`
       );
 
-      // Si l'annonce est sponsorisée, débiter le budget CPC
-      if (listing.isSponsored) {
+      // ✅ Vérifier si l'annonce est sponsorisée ET si la durée n'est pas expirée
+      const now = new Date();
+      const isStillSponsored = listing.isSponsored && 
+        (!listing.sponsoredUntil || new Date(listing.sponsoredUntil) > now);
+
+      if (listing.isSponsored && !isStillSponsored) {
+        // ✅ Désactiver automatiquement le sponsoring expiré
+        await Listing.updateOne(
+          { _id: new ObjectId(listingId) },
+          { $set: { isSponsored: false, updatedAt: now } }
+        );
+        console.log(`[CPC] Sponsoring expiré pour l'annonce ${listingId}`);
+      }
+
+      if (isStillSponsored) {
         console.log(`[CPC] Annonce sponsorisée détectée`);
 
-        if (!listing.agencyId) {
-          console.error(
-            `[CPC] Erreur: agencyId manquant pour l'annonce ${listingId}`
+        // ✅ Vérifier si c'est un AUTO-BOOST GRATUIT (PRO/PREMIUM)
+        if (listing.autoBoostApplied) {
+          console.log(`[CPC] Auto-boost gratuit détecté - pas de débit CPC`);
+          return NextResponse.json({
+            success: true,
+            message: "Clic comptabilisé (auto-boost gratuit)",
+            clicks: (listing.clicks || 0) + 1,
+            cpcDebited: false,
+            autoBoost: true,
+          });
+        }
+
+        // ✅ Sinon c'est un CPC payant, on débite
+        const agencyIdStr = listing.agencyId.toString
+          ? listing.agencyId.toString()
+          : String(listing.agencyId);
+
+        const agency = await getAgencyById(agencyIdStr);
+
+        if (agency && agency.cpc) {
+          // ✅ Utiliser le pack au lieu du plan
+          const pack: PackType = agency.subscription?.pack || "FREE";
+          const baseCost = agency.cpc.costPerClick || BASE_CPC_COST;
+          const costPerClick = getCpcCostForPack(pack, baseCost);
+          console.log(
+            `[CPC] Budget: ${agency.cpc.balance}€, pack: ${pack}, coût: ${costPerClick}€`
           );
-        } else {
-          const agencyIdStr = listing.agencyId.toString
-            ? listing.agencyId.toString()
-            : String(listing.agencyId);
-          console.log(`[CPC] agencyId converti: ${agencyIdStr}`);
+          
+          const debitResult = await debitAgencyCpc(agencyIdStr, costPerClick);
 
-          const agency = await getAgencyById(agencyIdStr);
-          console.log(`[CPC] Agence trouvée:`, agency ? "Oui" : "Non");
-
-          if (agency && agency.cpc) {
-            // Calculer le coût CPC avec réduction selon le plan
-            const plan = agency.subscription?.plan || "free";
-            const baseCost = agency.cpc.costPerClick || 0.5;
-            const costPerClick = getCpcCostForPlan(plan, baseCost);
-            console.log(
-              `[CPC] Budget avant débit: ${agency.cpc.balance}€, coût de base: ${baseCost}€, plan: ${plan}, coût réel: ${costPerClick}€`
+          if (!debitResult.success) {
+            // Budget épuisé - désactiver le sponsoring
+            await Listing.updateOne(
+              { _id: new ObjectId(listingId) },
+              { $set: { isSponsored: false, updatedAt: now } }
             );
-            const debitResult = await debitAgencyCpc(agencyIdStr, costPerClick);
-            console.log(`[CPC] Résultat débit:`, debitResult);
-
-            if (!debitResult.success) {
-              // Si le budget est épuisé, désactiver le sponsoring
-              const Listing = await getListingModel();
-              await Listing.updateOne(
-                { _id: new ObjectId(listingId) },
-                { $set: { isSponsored: false, updatedAt: new Date() } }
-              );
-
-              return NextResponse.json({
-                success: true,
-                message:
-                  "Clic comptabilisé, mais budget CPC épuisé - sponsoring désactivé",
-                clicks: (listing.clicks || 0) + 1,
-                cpcDebited: false,
-                budgetExhausted: true,
-              });
-            }
 
             return NextResponse.json({
               success: true,
-              message: "Clic comptabilisé et budget CPC débité",
+              message: "Clic comptabilisé, budget CPC épuisé - sponsoring désactivé",
               clicks: (listing.clicks || 0) + 1,
-              cpcDebited: true,
-              newBalance: debitResult.newBalance,
+              cpcDebited: false,
+              budgetExhausted: true,
             });
-          } else {
-            console.log(`[CPC] Agence non trouvée ou pas de CPC configuré`);
           }
+
+          return NextResponse.json({
+            success: true,
+            message: "Clic comptabilisé et budget CPC débité",
+            clicks: (listing.clicks || 0) + 1,
+            cpcDebited: true,
+            newBalance: debitResult.newBalance,
+          });
         }
       }
 

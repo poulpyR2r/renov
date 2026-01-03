@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe-config";
 import { getAgencyModel } from "@/models/Agency";
 import { createCpcTransaction } from "@/models/CpcTransaction";
-import { PLAN_MAX_LISTINGS } from "@/lib/stripe-config";
 import { ObjectId } from "mongodb";
 import Stripe from "stripe";
+import { PackType, getPackConfig } from "@/lib/packs";
 
 // ⚠️ IMPORTANT : Stripe a besoin du raw body pour vérifier la signature
 // Dans Next.js App Router, on doit désactiver le body parsing
@@ -197,10 +197,11 @@ async function handleSubscriptionCreated(
   Agency: any
 ) {
   const agencyId = session.metadata?.agencyId;
-  const plan = session.metadata?.plan as "starter" | "pro" | "enterprise";
+  // Support les deux formats : nouveau (pack) et ancien (plan)
+  const pack = (session.metadata?.pack || session.metadata?.plan?.toUpperCase()) as PackType;
 
-  if (!agencyId || !plan) {
-    console.error("Missing agencyId or plan in session metadata");
+  if (!agencyId || !pack) {
+    console.error("Missing agencyId or pack in session metadata");
     return;
   }
 
@@ -212,7 +213,7 @@ async function handleSubscriptionCreated(
   }
 
   const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-  await updateAgencySubscription(agencyId, subscription, plan, Agency);
+  await updateAgencySubscription(agencyId, subscription, pack, Agency);
 }
 
 // Handler pour nouvelle souscription (depuis customer.subscription.created)
@@ -221,14 +222,14 @@ async function handleSubscriptionCreatedFromSubscription(
   Agency: any
 ) {
   const agencyId = subscription.metadata?.agencyId;
-  const plan = subscription.metadata?.plan as "starter" | "pro" | "enterprise";
+  const pack = (subscription.metadata?.pack || subscription.metadata?.plan?.toUpperCase()) as PackType;
 
-  if (!agencyId || !plan) {
-    console.error("Missing agencyId or plan in subscription metadata");
+  if (!agencyId || !pack) {
+    console.error("Missing agencyId or pack in subscription metadata");
     return;
   }
 
-  await updateAgencySubscription(agencyId, subscription, plan, Agency);
+  await updateAgencySubscription(agencyId, subscription, pack, Agency);
 }
 
 // Handler pour mise à jour d'abonnement
@@ -237,7 +238,7 @@ async function handleSubscriptionUpdated(
   Agency: any
 ) {
   const agencyId = subscription.metadata?.agencyId;
-  const plan = subscription.metadata?.plan as "starter" | "pro" | "enterprise";
+  const pack = (subscription.metadata?.pack || subscription.metadata?.plan?.toUpperCase()) as PackType;
 
   if (!agencyId) {
     // Essayer de trouver l'agence par stripeSubscriptionId
@@ -249,13 +250,13 @@ async function handleSubscriptionUpdated(
     await updateAgencySubscription(
       agency._id.toString(),
       subscription,
-      plan || (agency.subscription?.plan as any),
+      pack || (agency.subscription?.pack as PackType),
       Agency
     );
     return;
   }
 
-  await updateAgencySubscription(agencyId, subscription, plan, Agency);
+  await updateAgencySubscription(agencyId, subscription, pack, Agency);
 }
 
 // Handler pour annulation d'abonnement
@@ -270,13 +271,12 @@ async function handleSubscriptionDeleted(
     return;
   }
 
-  // Passer au plan gratuit
+  // Passer au pack FREE
   await Agency.updateOne(
     { _id: agency._id },
     {
       $set: {
-        "subscription.plan": "free",
-        "subscription.maxListings": PLAN_MAX_LISTINGS.free,
+        "subscription.pack": "FREE",
         "subscription.autoRenew": false,
         "subscription.endDate": new Date(),
         stripeSubscriptionId: null,
@@ -284,6 +284,14 @@ async function handleSubscriptionDeleted(
         stripeSubscriptionStatus: "canceled",
         stripeSubscriptionCurrentPeriodEnd: null,
         updatedAt: new Date(),
+      },
+      $push: {
+        "subscription.history": {
+          pack: agency.subscription?.pack || "FREE",
+          startDate: agency.subscription?.startDate || new Date(),
+          endDate: new Date(),
+          reason: "Abonnement annulé",
+        },
       },
     }
   );
@@ -400,29 +408,47 @@ async function handlePaymentIntentSucceeded(
 async function updateAgencySubscription(
   agencyId: string,
   subscription: Stripe.Subscription,
-  plan: "starter" | "pro" | "enterprise",
+  pack: PackType,
   Agency: any
 ) {
   const priceId = subscription.items.data[0]?.price.id;
   const status = subscription.status;
   const currentPeriodEnd = new Date(subscription.current_period_end * 1000);
+  const currentPeriodStart = new Date(subscription.current_period_start * 1000);
+
+  // Récupérer l'agence pour l'historique
+  const agency = await Agency.findOne({ _id: new ObjectId(agencyId) });
+  const oldPack = agency?.subscription?.pack || "FREE";
+
+  const updateOp: any = {
+    $set: {
+      stripeSubscriptionId: subscription.id,
+      stripePriceId: priceId,
+      stripeSubscriptionStatus: status as any,
+      stripeSubscriptionCurrentPeriodEnd: currentPeriodEnd,
+      "subscription.pack": pack,
+      "subscription.startDate": currentPeriodStart,
+      "subscription.autoRenew": true,
+      updatedAt: new Date(),
+    },
+  };
+
+  // Ajouter à l'historique si le pack change
+  if (oldPack !== pack) {
+    updateOp.$push = {
+      "subscription.history": {
+        pack: oldPack,
+        startDate: agency?.subscription?.startDate || currentPeriodStart,
+        endDate: new Date(),
+        reason: `Upgrade vers ${pack}`,
+      },
+    };
+  }
 
   await Agency.updateOne(
     { _id: new ObjectId(agencyId) },
-    {
-      $set: {
-        stripeSubscriptionId: subscription.id,
-        stripePriceId: priceId,
-        stripeSubscriptionStatus: status as any,
-        stripeSubscriptionCurrentPeriodEnd: currentPeriodEnd,
-        "subscription.plan": plan,
-        "subscription.maxListings": PLAN_MAX_LISTINGS[plan],
-        "subscription.startDate": new Date(subscription.current_period_start * 1000),
-        "subscription.autoRenew": true,
-        updatedAt: new Date(),
-      },
-    }
+    updateOp
   );
 
-  console.log(`Subscription updated for agency ${agencyId}: plan=${plan}, status=${status}`);
+  console.log(`Subscription updated for agency ${agencyId}: pack=${pack}, status=${status}`);
 }

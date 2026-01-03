@@ -3,9 +3,10 @@ import { getListingModel } from "@/models/Listing";
 import { detectRenovationNeed } from "@/lib/renovation-detector";
 import { generateFingerprint } from "@/lib/deduplication";
 import { auth } from "@/auth";
-import { getAgencyById, incrementAgencyListings } from "@/models/Agency";
+import { getAgencyById, incrementAgencyListings, canAgencyCreateListing } from "@/models/Agency";
 import { getUserByEmail } from "@/models/User";
 import { getUserAgencyRole } from "@/models/AgencyMembership";
+import { getPackConfig } from "@/lib/packs";
 
 export async function POST(request: NextRequest) {
   try {
@@ -46,6 +47,28 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // ✅ VÉRIFICATION LIMITE D'ANNONCES SELON LE PACK
+    if (body.agencyId) {
+      const canCreate = await canAgencyCreateListing(body.agencyId);
+      if (!canCreate.allowed) {
+        const agency = await getAgencyById(body.agencyId);
+        const pack = agency?.subscription?.pack || "FREE";
+        const config = getPackConfig(pack);
+        return NextResponse.json(
+          { 
+            error: canCreate.reason,
+            code: "LISTING_LIMIT_REACHED",
+            currentCount: canCreate.currentCount,
+            maxAllowed: canCreate.maxAllowed,
+            currentPack: pack,
+            upgradeTo: pack === "FREE" ? "STARTER" : pack === "STARTER" ? "PRO" : pack === "PRO" ? "PREMIUM" : null,
+          },
+          { status: 403 }
+        );
+      }
+    }
+    
     const {
       title,
       description,
@@ -62,8 +85,6 @@ export async function POST(request: NextRequest) {
       externalUrl,
       contactPhone,
       hidePhone,
-      acceptTerms,
-      acceptDataProcessing,
       submittedBy,
       submitterEmail,
       images,
@@ -128,12 +149,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Validation des conditions légales
-    if (!acceptTerms || !acceptDataProcessing) {
-      return NextResponse.json(
-        { error: "Veuillez accepter toutes les conditions requises" },
-        { status: 400 }
-      );
-    }
     if (!agencyCertification?.certified) {
       return NextResponse.json(
         { error: "Vous devez certifier l'exactitude des informations" },
@@ -173,16 +188,46 @@ export async function POST(request: NextRequest) {
 
     // Récupérer les informations agence si non fournies
     let finalAgencyInfo = agencyInfo;
-    if (!finalAgencyInfo && agencyId) {
+    let agencyPack = "FREE";
+    let autoBoostData: {
+      isSponsored: boolean;
+      sponsoredAt?: Date;
+      sponsoredUntil?: Date;
+      autoBoostApplied?: boolean;
+      autoBoostRecurrent?: boolean;
+    } = { isSponsored: false };
+
+    if (agencyId) {
       const agency = await getAgencyById(agencyId);
       if (agency) {
-        finalAgencyInfo = {
-          companyName: agency.companyName,
-          cardNumber: agency.professionalCard?.number || "",
-          cardPrefecture: agency.professionalCard?.prefecture || "",
-          rcpProvider: agency.insurance?.provider,
-          rcpPolicyNumber: agency.insurance?.policyNumber,
-        };
+        if (!finalAgencyInfo) {
+          finalAgencyInfo = {
+            companyName: agency.companyName,
+            cardNumber: agency.professionalCard?.number || "",
+            cardPrefecture: agency.professionalCard?.prefecture || "",
+            rcpProvider: agency.insurance?.provider,
+            rcpPolicyNumber: agency.insurance?.policyNumber,
+          };
+        }
+        
+        // ✅ AUTO-BOOST PRO/PREMIUM : Boost automatique de 48h pour les nouvelles annonces
+        agencyPack = agency.subscription?.pack || "FREE";
+        const packConfig = getPackConfig(agencyPack);
+        
+        if (packConfig.autoBoost && packConfig.autoBoostDuration) {
+          const boostEndDate = new Date();
+          boostEndDate.setHours(boostEndDate.getHours() + packConfig.autoBoostDuration);
+          
+          autoBoostData = {
+            isSponsored: true,
+            sponsoredAt: new Date(),
+            sponsoredUntil: boostEndDate,
+            autoBoostApplied: true, // Marquer comme boost automatique (gratuit, pas de CPC)
+            autoBoostRecurrent: packConfig.autoBoostRecurrent || false,
+          };
+          
+          console.log(`[AUTO-BOOST] Pack ${agencyPack}: Auto-boost ${packConfig.autoBoostDuration}h applied for new listing`);
+        }
       }
     }
 
@@ -247,8 +292,8 @@ export async function POST(request: NextRequest) {
       // Certification agence
       agencyCertification: agencyCertification || undefined,
 
-      // Sponsoring
-      isSponsored: false,
+      // Sponsoring & Auto-Boost
+      ...autoBoostData,
       views: 0,
       clicks: 0,
 
@@ -274,8 +319,6 @@ export async function POST(request: NextRequest) {
         submitterName: session.user.name,
         sellerType: "agence",
         contactPhone: hidePhone ? null : contactPhone,
-        acceptedTermsAt: new Date(),
-        acceptedDataProcessingAt: new Date(),
         ipAddress: request.headers.get("x-forwarded-for") || "unknown",
         userAgent: request.headers.get("user-agent") || "unknown",
       },

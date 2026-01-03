@@ -3,6 +3,9 @@ export const revalidate = 0;
 
 import { type NextRequest, NextResponse } from "next/server";
 import { getListingModel } from "@/models/Listing";
+import { getAgencyModel } from "@/models/Agency";
+import { PackType, getPackConfig } from "@/lib/packs";
+import { ObjectId } from "mongodb";
 
 export async function GET(request: NextRequest) {
   try {
@@ -200,6 +203,33 @@ export async function GET(request: NextRequest) {
 
     let listings = rawListings as any[];
 
+    // ✅ Enrichir les annonces avec les infos de pack pour le tri par priorité
+    const Agency = await getAgencyModel();
+    const agencyIds = [...new Set(listings
+      .filter(l => l.agencyId)
+      .map(l => l.agencyId.toString ? l.agencyId.toString() : String(l.agencyId))
+    )];
+    
+    // Récupérer les agences en une seule requête
+    const agencies = await Agency.find({
+      _id: { $in: agencyIds.map(id => new ObjectId(id)) }
+    }).toArray();
+    
+    const agencyPackMap = new Map<string, number>();
+    agencies.forEach(agency => {
+      const pack: PackType = agency.subscription?.pack || "FREE";
+      const config = getPackConfig(pack);
+      agencyPackMap.set(agency._id!.toString(), config.displayPriority);
+    });
+
+    // ✅ Fonction pour obtenir la priorité de tri d'une annonce
+    const getListingPriority = (listing: any) => {
+      const agencyIdStr = listing.agencyId?.toString ? listing.agencyId.toString() : String(listing.agencyId || "");
+      const packPriority = agencyPackMap.get(agencyIdStr) || 0;
+      const sponsoredBonus = listing.isSponsored ? 100 : 0; // Les sponsorisés sont toujours en premier
+      return sponsoredBonus + packPriority;
+    };
+
     if (centerLat != null && centerLng != null && radiusKm != null) {
       const toRad = (deg: number) => (deg * Math.PI) / 180;
       const R = 6371; // km
@@ -208,7 +238,7 @@ export async function GET(request: NextRequest) {
           const lat = l?.location?.coordinates?.lat;
           const lng = l?.location?.coordinates?.lng;
           if (typeof lat !== "number" || typeof lng !== "number")
-            return { l, d: Number.POSITIVE_INFINITY };
+            return { l, d: Number.POSITIVE_INFINITY, priority: getListingPriority(l) };
           const dLat = toRad(lat - centerLat);
           const dLng = toRad(lng - centerLng);
           const a =
@@ -219,26 +249,48 @@ export async function GET(request: NextRequest) {
               Math.sin(dLng / 2);
           const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
           const distance = R * c;
-          return { l, d: distance };
+          return { l, d: distance, priority: getListingPriority(l) };
         })
         .filter((x) => x.d <= radiusKm)
         .sort((a, b) => {
-          // Prioriser les annonces sponsorisées (seulement si isSponsored === true)
-          const aSponsored = a.l.isSponsored === true;
-          const bSponsored = b.l.isSponsored === true;
-          
-          if (aSponsored !== bSponsored) {
-            // Si a est sponsorisée et b ne l'est pas, a vient en premier
-            if (aSponsored && !bSponsored) return -1;
-            // Si b est sponsorisée et a ne l'est pas, b vient en premier
-            if (bSponsored && !aSponsored) return 1;
+          // ✅ Tri par priorité (pack + sponsorisé), puis par distance
+          if (a.priority !== b.priority) {
+            return b.priority - a.priority; // Plus haute priorité en premier
           }
-          // Puis par distance
           return a.d - b.d;
         })
         .slice(skip, skip + limit)
         .map((x) => x.l);
+    } else {
+      // ✅ Post-tri pour appliquer la priorité de pack (la DB ne peut pas faire ce tri)
+      listings = listings
+        .map(l => ({ l, priority: getListingPriority(l) }))
+        .sort((a, b) => {
+          // Priorité décroissante
+          if (a.priority !== b.priority) {
+            return b.priority - a.priority;
+          }
+          return 0; // Garder l'ordre de la DB pour le reste
+        })
+        .map(x => x.l);
     }
+
+    // ✅ Ajouter le badge agence et mapHighlight si disponible
+    listings = listings.map(listing => {
+      const agencyIdStr = listing.agencyId?.toString ? listing.agencyId.toString() : String(listing.agencyId || "");
+      const agency = agencies.find(a => a._id?.toString() === agencyIdStr);
+      if (agency) {
+        const pack: PackType = agency.subscription?.pack || "FREE";
+        const config = getPackConfig(pack);
+        return {
+          ...listing,
+          agencyBadge: config.features.badge,
+          agencyPack: pack,
+          mapHighlight: config.mapHighlight, // ✅ Pour mise en avant sur la carte (PRO/PREMIUM)
+        };
+      }
+      return listing;
+    });
 
     return NextResponse.json({
       listings,
