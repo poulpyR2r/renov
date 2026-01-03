@@ -1,0 +1,78 @@
+# ============================================
+# DOCKERIGNORE - Maisons à Rénover
+# Fichiers à exclure du contexte de build Docker
+# ============================================
+
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Next.js
+.next
+out
+build
+
+# Testing
+coverage
+.nyc_output
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment files (sécurité)
+.env
+.env.*
+!.env.example
+env.prod.example
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Documentation
+*.md
+docs
+GUIDE_UTILISATION.md
+README.md
+STRIPE_*.md
+INTEGRATION_EXAMPLES.md
+
+# Scripts de développement
+scripts/
+*.bat
+*.sh
+
+# Fichiers de test/données
+*.json
+!package.json
+!package-lock.json
+!components.json
+!tsconfig.json
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp
+temp
+.cache
+
+# Insomnia/Postman
+insomnia*.json
+postman*.json

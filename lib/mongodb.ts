@@ -5,7 +5,10 @@ declare global {
 }
 
 const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/renov";
+  process.env.MONGODB_URI || "mongodb://localhost:27017/maisonsarenover";
+
+// Nom de la base de données (configurable via env)
+const DB_NAME = process.env.MONGODB_DB_NAME || "maisonsarenover";
 
 let cached = global._mongoClientPromise;
 
@@ -25,5 +28,5 @@ export async function dbConnect(): Promise<Db> {
   }
 
   const client = await cached;
-  return client.db("renovscout");
+  return client.db(DB_NAME);
 }

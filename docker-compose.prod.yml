@@ -1,0 +1,154 @@
+# ============================================
+# DOCKER COMPOSE PRODUCTION - Maisons à Rénover
+# Traefik + Next.js + MongoDB
+# ============================================
+# 
+# IMPORTANT: Ce fichier est prêt pour la production.
+# Assurez-vous d'avoir créé le fichier .env.prod avant de démarrer.
+#
+# Commandes:
+#   docker compose -f docker-compose.prod.yml build
+#   docker compose -f docker-compose.prod.yml up -d
+#   docker compose -f docker-compose.prod.yml logs -f --tail=200
+#
+# ============================================
+
+services:
+  # ==========================================
+  # MongoDB - Base de données
+  # ==========================================
+  db:
+    image: mongo:7
+    container_name: maisonsarenover-mongodb
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=maisonsarenover_prod
+    volumes:
+      - db_data:/data/db
+    networks:
+      - internal
+    # ⚠️ PAS DE PORTS EXPOSÉS - MongoDB reste interne uniquement
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # ==========================================
+  # Application Next.js (Frontend + API)
+  # ==========================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: maisonsarenover-app
+    restart: unless-stopped
+    env_file: .env.prod
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      # MongoDB interne Docker
+      - MONGODB_URI=mongodb://db:27017/maisonsarenover_prod
+      - MONGODB_DB_NAME=maisonsarenover_prod
+      # URLs de production
+      - NEXT_PUBLIC_APP_URL=https://maisons-a-renover.fr
+      - NEXTAUTH_URL=https://maisons-a-renover.fr
+    depends_on:
+      db:
+        condition: service_healthy
+    labels:
+      # ==========================================
+      # Traefik - Configuration
+      # ==========================================
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+      
+      # ==========================================
+      # Router principal (HTTPS) - maisons-a-renover.fr + www
+      # ==========================================
+      - "traefik.http.routers.maisonsarenover-app.rule=Host(`maisons-a-renover.fr`) || Host(`www.maisons-a-renover.fr`)"
+      - "traefik.http.routers.maisonsarenover-app.entrypoints=websecure"
+      - "traefik.http.routers.maisonsarenover-app.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.maisonsarenover-app.service=maisonsarenover-app"
+      
+      # ==========================================
+      # Router API (HTTPS) - api.maisons-a-renover.fr
+      # Pointe vers le même service (Next.js gère les routes /api/*)
+      # ==========================================
+      - "traefik.http.routers.maisonsarenover-api.rule=Host(`api.maisons-a-renover.fr`)"
+      - "traefik.http.routers.maisonsarenover-api.entrypoints=websecure"
+      - "traefik.http.routers.maisonsarenover-api.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.maisonsarenover-api.service=maisonsarenover-app"
+      
+      # ==========================================
+      # Service - Port interne
+      # ==========================================
+      - "traefik.http.services.maisonsarenover-app.loadbalancer.server.port=3000"
+      
+      # ==========================================
+      # Redirection HTTP -> HTTPS (domaine principal)
+      # ==========================================
+      - "traefik.http.routers.maisonsarenover-app-redirect.rule=Host(`maisons-a-renover.fr`) || Host(`www.maisons-a-renover.fr`)"
+      - "traefik.http.routers.maisonsarenover-app-redirect.entrypoints=web"
+      - "traefik.http.routers.maisonsarenover-app-redirect.middlewares=maisonsarenover-redirect-https"
+      
+      # ==========================================
+      # Redirection HTTP -> HTTPS (API)
+      # ==========================================
+      - "traefik.http.routers.maisonsarenover-api-redirect.rule=Host(`api.maisons-a-renover.fr`)"
+      - "traefik.http.routers.maisonsarenover-api-redirect.entrypoints=web"
+      - "traefik.http.routers.maisonsarenover-api-redirect.middlewares=maisonsarenover-redirect-https"
+      
+      # ==========================================
+      # Middleware - Redirection HTTPS
+      # ==========================================
+      - "traefik.http.middlewares.maisonsarenover-redirect-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.maisonsarenover-redirect-https.redirectscheme.permanent=true"
+      
+      # ==========================================
+      # Middleware - Redirection www -> non-www (optionnel)
+      # Décommentez si vous voulez rediriger www vers non-www
+      # ==========================================
+      # - "traefik.http.middlewares.maisonsarenover-www-redirect.redirectregex.regex=^https://www\\.maisons-a-renover\\.fr/(.*)"
+      # - "traefik.http.middlewares.maisonsarenover-www-redirect.redirectregex.replacement=https://maisons-a-renover.fr/$${1}"
+      # - "traefik.http.middlewares.maisonsarenover-www-redirect.redirectregex.permanent=true"
+      # - "traefik.http.routers.maisonsarenover-app.middlewares=maisonsarenover-www-redirect"
+      
+      # ==========================================
+      # Headers de sécurité (via Traefik)
+      # ==========================================
+      - "traefik.http.middlewares.maisonsarenover-security.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.maisonsarenover-security.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.maisonsarenover-security.headers.forceSTSHeader=true"
+      
+    networks:
+      - traefik
+      - internal
+    
+    # Healthcheck intégré
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# ==========================================
+# Volumes persistants
+# ==========================================
+volumes:
+  db_data:
+    driver: local
+
+# ==========================================
+# Networks
+# ==========================================
+networks:
+  # Réseau externe Traefik (doit exister sur le serveur)
+  traefik:
+    external: true
+  
+  # Réseau interne pour communication DB <-> App
+  internal:
+    driver: bridge
