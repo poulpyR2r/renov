@@ -69,7 +69,7 @@ services:
       # ==========================================
       - "traefik.http.routers.maisonsarenover-app.rule=Host(`maisons-a-renover.fr`) || Host(`www.maisons-a-renover.fr`)"
       - "traefik.http.routers.maisonsarenover-app.entrypoints=websecure"
-      - "traefik.http.routers.maisonsarenover-app.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.maisonsarenover-app.tls.certresolver=le"
       - "traefik.http.routers.maisonsarenover-app.service=maisonsarenover-app"
       
       # ==========================================
@@ -78,7 +78,7 @@ services:
       # ==========================================
       - "traefik.http.routers.maisonsarenover-api.rule=Host(`api.maisons-a-renover.fr`)"
       - "traefik.http.routers.maisonsarenover-api.entrypoints=websecure"
-      - "traefik.http.routers.maisonsarenover-api.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.maisonsarenover-api.tls.certresolver=le"
       - "traefik.http.routers.maisonsarenover-api.service=maisonsarenover-app"
       
       # ==========================================
